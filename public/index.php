@@ -3,7 +3,7 @@
 namespace Rankster;
 
 use Rankster\Web\Index;
-use Yaoi\Twbs\Runner;
+use Rankster\Twbs\Runner;
 
 trigger_error($_SERVER['REQUEST_URI']);
 
