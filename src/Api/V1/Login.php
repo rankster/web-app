@@ -2,6 +2,7 @@
 
 namespace Rankster\Api\V1;
 
+use Facebook\FacebookRequest;
 use Rankster\Entity\User;
 use Rankster\Service\Facebook;
 use Yaoi\Command;
