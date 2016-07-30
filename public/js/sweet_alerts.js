@@ -188,9 +188,12 @@ function sendCreateMatchForm() {
 
         var url = "/match/create"; // the script where you handle the form input.
 
-        $.post(url, {data: 'tet'});
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#create-match").serialize()
+        });
 
-        return false;
     });
 
     switch($( "input:radio[name=result]:checked" ).val()) {
