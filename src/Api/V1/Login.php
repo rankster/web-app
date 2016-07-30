@@ -27,6 +27,12 @@ class Login extends Command
             if (!$accessToken) {
                 $accessToken = $fbLogin->callback();
             }
+
+            $fb = Facebook::getInstance()->getSDK();
+            $response = $fb->get('/me/friends', $accessToken);
+            print_r($response);
+            exit;
+
             $user = new Facebook\User($accessToken);
             $data = $user->getData('me', ['picture', 'name', 'email']);
             $data->getPicture()->getUrl();
