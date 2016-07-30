@@ -43,6 +43,7 @@ class Create extends Command
         $match = new Match();
         $match->user1Id = $_SESSION['user_id'];
         $match->user2Id = $this->opponentId;
+        $match->gameId = $this->gameId;
 
         $rank1 = Rank::findOrCreateByUserGame($match->user1Id, $this->gameId);
         $rank2 = Rank::findOrCreateByUserGame($match->user2Id, $this->gameId);
