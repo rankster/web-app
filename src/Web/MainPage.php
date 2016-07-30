@@ -19,7 +19,7 @@ class MainPage extends Command
         if (isset($_SESSION['logged_in_redirect'])) {
             unset($_SESSION['logged_in_redirect']);
             $this->response->success("Successfully logged in !");
-            $this->response->addContent('<script>setTimeout(function(){$(".alert-success").hide();}, 3000)</script>');
+            $this->response->addContent('<script>setTimeout(function(){$(".alert-success").hide(500);}, 3000)</script>');
       }
         $this->response->addContent(Output::process('MainPage_tables'));
     }
