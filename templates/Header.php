@@ -7,8 +7,8 @@
         <div class="wid-u-info">
           <h4 class="m-t-0 m-b-5"><?php echo $_SESSION['user_name']; ?></h4>
           <p class="text-muted m-b-5 font-13"><?php echo $_SESSION['user_email']; ?></p>
-          <small class="text-success"><b>Rookie</b></small><br />
-          <small class="text-danger" style="padding-left:130px"><b><a href="/logout">Disconnect</a></b></small>
+          <small class="text-success"><b>Rookie</b></small>
+          <a href="/logout" class="btn btn-default btn-xs" style="float:right">Logout</a>
         </div>
       </div>
     </div>
