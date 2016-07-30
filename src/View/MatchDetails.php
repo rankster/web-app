@@ -44,7 +44,8 @@ class MatchDetails extends Hardcoded
         $user1Plate = (string)UserPlate::create($user1, $user1Info);
         $user2Plate = (string)UserPlate::create($user2, $user2Info);
 
-        $fbShare = (string)FbShare::create();
+        //$fbShare = (string)FbShare::create();
+        $fbLike = (string)FbLike::create();
 
         echo <<<HTML
 <div class="row">
@@ -55,7 +56,10 @@ class MatchDetails extends Hardcoded
 {$user2Plate}
 </div>
 
-$fbShare
+<div class="row">
+$fbLike
+</div>
+
 HTML;
     }
 

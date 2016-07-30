@@ -2,7 +2,7 @@
 
 namespace Rankster\Web\Match;
 
-use Rankster\Entity\Match as CreateEntity;
+use Rankster\Entity\Match as MatchEntity;
 use Rankster\Entity\Rank as RankEntity;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
@@ -40,7 +40,7 @@ class Create extends Command
 
         //$this->response->addContent('<pre>' . print_r($_SESSION, 1) . '</pre>');
 
-        $match = new Match();
+        $match = new MatchEntity();
         $match->user1Id = $_SESSION['user_id'];
         $match->user2Id = $this->opponentId;
         $match->gameId = $this->gameId;
