@@ -27,8 +27,8 @@ class Runner extends BaseClass
             $io->getCommand()->performAction();
         }
         catch (\Exception $exception) {
-            var_dump($exception);
             $response->error($exception->getMessage());
+            $response->error($exception->getTraceAsString());
         }
 
         $layout->render();

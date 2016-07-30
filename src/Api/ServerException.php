@@ -1,6 +1,6 @@
 <?php
 
-namespace Helloelo\Api;
+namespace Rankster\Api;
 
 class ServerException extends \Exception
 {

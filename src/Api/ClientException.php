@@ -1,6 +1,6 @@
 <?php
 
-namespace Helloelo\Api;
+namespace Rankster\Api;
 
 class ClientException extends \Exception
 {

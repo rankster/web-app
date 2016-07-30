@@ -3,7 +3,6 @@
 namespace Rankster\Api;
 
 
-use Helloelo\Api\ClientException;
 use Rankster\Command\AuthRequired;
 use Rankster\Api\V1\SubmitScore;
 use Rankster\Api\V1\Update;
