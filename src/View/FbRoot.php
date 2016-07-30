@@ -2,7 +2,6 @@
 
 namespace Rankster\View;
 
-
 use Yaoi\View\Hardcoded;
 
 class FbRoot extends Hardcoded
@@ -28,7 +27,5 @@ class FbRoot extends Hardcoded
 }(document, 'script', 'facebook-jssdk'));</script>
 
 HTML;
-
-        // TODO: Implement render() method.
     }
 }

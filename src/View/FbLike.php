@@ -11,15 +11,9 @@ class FbLike extends Hardcoded
     {
         echo FbRoot::create();
 
-        $url = 'http://rankster.penix.tk' . $_SERVER['REQUEST_URI'];
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         echo <<<HTML
-<!-- Your like button code -->
-	<div class="fb-like" 
-		data-href="{$url}" 
-		data-layout="standard" 
-		data-action="like" 
-		data-show-faces="true">
-	</div>
+<div class="fb-like" data-href="{$url}" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
 HTML;
     }
 

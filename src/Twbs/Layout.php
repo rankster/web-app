@@ -3,6 +3,7 @@
 namespace Rankster\Twbs;
 
 
+use Rankster\View\FbLike;
 use Yaoi\View\Hardcoded;
 use Yaoi\View\Renderer;
 use Yaoi\View\Stack;
@@ -36,7 +37,10 @@ class Layout extends Hardcoded
 
     public function render()
     {
-?>
+
+        $fbLike = (string)FbLike::create();
+
+        ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -82,21 +86,8 @@ class Layout extends Hardcoded
       <h1><a href="/"><img src="http://i.imgur.com/mQtR9aL.png" width="150" /></a></h1>
       <?php echo $this->main ?>
 
-      <!-- Load Facebook SDK for JavaScript -->
-      <div id="fb-root"></div>
-      <script>(function (d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s);
-              js.id = id;
-              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
-              fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));</script>
-
-      <!-- Your share button code -->
-      <div class="fb-share-button"
-           data-href="http://rankster.penix.tk<?=$_SERVER['REQUEST_URI']?>"
-           data-layout="button_count">
+      <div class="row">
+          <?=$fbLike?>
       </div>
   </div>
 
