@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "71ae0ece7e766682206b2372727ff865",
-    "content-hash": "00cef11742c0ddfa1ed35820b63d5651",
+    "hash": "ce2b0ee676f8ebdec091ccdc0d359aa2",
+    "content-hash": "5f557591b03915e253fd75f32be19bc1",
     "packages": [
         {
             "name": "facebook/php-sdk-v4",
@@ -66,16 +66,16 @@
         },
         {
             "name": "php-yaoi/php-yaoi",
-            "version": "v1.0.21",
+            "version": "v1.0.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-yaoi/php-yaoi.git",
-                "reference": "1b9a8c85953e55b451f6c03e59e77fbae09d4b65"
+                "reference": "de40176931c9dcc39ec386476757ad444886acea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-yaoi/php-yaoi/zipball/1b9a8c85953e55b451f6c03e59e77fbae09d4b65",
-                "reference": "1b9a8c85953e55b451f6c03e59e77fbae09d4b65",
+                "url": "https://api.github.com/repos/php-yaoi/php-yaoi/zipball/de40176931c9dcc39ec386476757ad444886acea",
+                "reference": "de40176931c9dcc39ec386476757ad444886acea",
                 "shasum": ""
             },
             "require": {
@@ -113,7 +113,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-05-10 09:12:18"
+            "time": "2016-07-30 10:05:18"
         }
     ],
     "packages-dev": [],

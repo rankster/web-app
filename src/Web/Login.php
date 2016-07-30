@@ -20,6 +20,7 @@ class Login extends Command
 
     public function performAction()
     {
+        session_start();
         $fbLogin = new FacebookLogin();
         $url = $fbLogin->getLoginUrl();
         echo '<a href="' . $url . '">' . $url . '</a>'; exit;

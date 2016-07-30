@@ -20,11 +20,15 @@ class Login extends Command
 
     public function performAction()
     {
+        session_start();
         $fbLogin = new Facebook\Login();
         try {
-            $accessToken = $fbLogin->callback();
+            $accessToken = $fbLogin->getStoredAccessToken();
+            if (!$accessToken) {
+                $accessToken = $fbLogin->callback();
+            }
             $user = new Facebook\User($accessToken);
-            $data = $user->getData();
+            $data = $user->getData('me', ['picture', 'name', 'email']);
             var_dump($data);
         } catch (\Exception $e) {
             return ['ok' => false, 'error' => $e->getMessage()];

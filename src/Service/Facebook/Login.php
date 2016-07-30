@@ -15,7 +15,7 @@ class Login extends Service
         $fb = Facebook::getInstance()->getSDK();
         $helper = $fb->getRedirectLoginHelper();
         $permissions = ['email'];
-var_dump(Facebook::getInstance()->getCallbackUri());
+
         return $helper->getLoginUrl(Facebook::getInstance()->getCallbackUri(), $permissions);
     }
 
@@ -60,6 +60,17 @@ var_dump(Facebook::getInstance()->getCallbackUri());
             }
         }
 
+        $_SESSION['fb_access_token'] = (string) $accessToken;
+
         return (string) $accessToken;
+    }
+
+    public function getStoredAccessToken()
+    {
+        if (isset($_SESSION['fb_access_token'])) {
+            return $_SESSION['fb_access_token'];
+        }
+
+        return null;
     }
 }
