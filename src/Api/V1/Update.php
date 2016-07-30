@@ -21,7 +21,9 @@ class Update extends Command
     {
         $path = __DIR__ . '/../../..';
         $path = realpath($path);
-        system("cd $path; git pull; bin/tool migrate;");
+        header("Content-Type: text/plain");
+        system("cd $path; git pull; composer install; bin/tool migrate;");
+        exit();
     }
 
 
