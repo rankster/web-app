@@ -4,6 +4,7 @@ namespace Rankster\Entity;
 
 use Alcalyn\Elo\EloSystem;
 use Yaoi\Database\Definition\Column;
+use Yaoi\Database\Definition\Index;
 use Yaoi\Database\Entity;
 
 require_once __DIR__ . '/../../vendor/alcalyn/elo/src/Exception/EloCoefficientException.php';
@@ -33,9 +34,13 @@ class Rank extends Entity
         $columns->matches = Column::INTEGER;
     }
 
+    /**
+     * @param \Yaoi\Database\Definition\Table $table
+     * @param \stdClass|static $columns
+     */
     static function setUpTable(\Yaoi\Database\Definition\Table $table, $columns)
     {
-        $table->setSchemaName('rank');
+        $table->setSchemaName('rank')->addIndex(Index::TYPE_UNIQUE, $columns->gameId, $columns->userId);
     }
 
     public function draw(Rank $opponent)
