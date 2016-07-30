@@ -2,6 +2,7 @@
 
 namespace Rankster\Command;
 
+use Rankster\Entity\Session;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 use Yaoi\Database\Definition\Table;
@@ -25,7 +26,7 @@ class Migrate extends Command
         /** @var Table[] $tables */
         $tables = array(
             // put your tables here
-            //Entity::table(),
+            Session::table(),
         );
 
         $log = new Log('colored-stdout');
