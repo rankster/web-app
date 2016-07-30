@@ -8,8 +8,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="gameRequestModalLabel">New Game Request</h4>
             </div>
-            <div class="modal-body">
-                <form>
+            <form action="/match/create" method="post">
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="game" class="control-label">Game:</label>
                         <select style="width: 100%" id="game" tabindex="-1"></select>
@@ -18,13 +18,26 @@
                         <label for="recipient-name" class="control-label">Opponent:</label>
                         <select style="width: 100%" id="recipient-name" tabindex=""></select>
                     </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send Request</button>
-            </div>
+                    <div class="form-group">
+                        <label class="control-label">Result:</label>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary active">
+                                <input type="radio" name="result" id="option1" autocomplete="off" value="win" checked>WIN
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="result" id="option2" autocomplete="off" value="lose"> LOSE
+                            </label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="result" id="option3" autocomplete="off" value="draw"> DRAW
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Send Request</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
