@@ -9,6 +9,8 @@ use Yaoi\Database\Entity;
 
 class Rank extends Entity
 {
+    const DEFAULT_RANK = 1200;
+
     public $id;
     public $gameId;
     public $userId;
@@ -49,5 +51,26 @@ class Rank extends Entity
 
         $this->rank = $updatedElos[0];
         $loser->rank = $updatedElos[1];
+    }
+
+
+    public static function findOrCreateByUserGame($userId, $gameId) {
+        $rank = new Rank();
+        $rank->userId = $userId;
+        $rank->gameId = $gameId;
+        if ($saved = $rank->findSaved()) {
+            return $saved;
+        } else {
+            $rank->rank = self::DEFAULT_RANK;
+        }
+
+        $rank->save();
+        return $rank;
+    }
+
+    public function save()
+    {
+        $this->lastUpdateTime = time();
+        parent::save();
     }
 }
