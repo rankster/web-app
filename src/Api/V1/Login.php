@@ -28,7 +28,7 @@ class Login extends Command
                 $accessToken = $fbLogin->callback();
             }
             $user = new Facebook\User($accessToken);
-            $data = $user->getData();
+            $data = $user->getData('me', ['picture', 'name', 'email']);
             var_dump($data);
         } catch (\Exception $e) {
             return ['ok' => false, 'error' => $e->getMessage()];
