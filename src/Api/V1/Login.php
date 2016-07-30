@@ -30,11 +30,9 @@ class Login extends Command
             }
 
             $user = new Facebook\User($accessToken);
-
-            $user->getUserList();
+            $data = $user->getData('me', ['picture', 'name', 'email', 'friends.id']);
+            print_r($data);
             exit;
-
-            $data = $user->getData('me', ['picture', 'name', 'email']);
             $data->getPicture()->getUrl();
             $userEntity = new User();
             $userEntity->facebookId = $data->getId();
