@@ -25,6 +25,9 @@
 
   <div class="col-sm-6 col-lg-3">
   <div class="widget-simple-chart text-right card-box">
+
+    <button href="#game-req" rel="modal:open" class="btn-big btn-warning waves-effect waves-light m-b-5"> <i class="fa fa-rocket m-r-5"></i> <span>Submit Results!</span> </button>
+
     <p><a href="#game-req" rel="modal:open">Game Submit result</a></p>
     </div>
   </div>

@@ -1,5 +1,4 @@
 <div id="game-req" style="display:none">
-    <!-- div class="modal fade" id="game-request" tabindex="-1" role="dialog" aria-labelledby="gameRequestModalLabel" -->
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
