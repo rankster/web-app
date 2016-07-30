@@ -10,11 +10,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="game" class="control-label">Game:</label>
-                        <select style="width: 100%" id="game" tabindex="-1" name="gameId"></select>
+                        <select style="width: 100%" id="game" tabindex="-1" name="game_id"></select>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Opponent:</label>
-                        <select style="width: 100%" id="recipient-name" tabindex="" name="opponentId"></select>
+                        <select style="width: 100%" id="recipient-name" tabindex="" name="opponent_id"></select>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Result:</label>

@@ -21,6 +21,7 @@ class Match extends Command
     {
         $options->action = Command\Option::create()
             ->addToEnum(Create::definition())
+            ->addToEnum(Details::definition())
             ->setIsUnnamed()
             ->setIsRequired();
 
