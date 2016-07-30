@@ -51,6 +51,8 @@ class Layout extends Hardcoded
 
       <!-- Optional theme -->
       <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+      <link rel="stylesheet" href="/css/select2.min.css">
+      <link rel="stylesheet" href="/css/select2-bootstrap.css">
 
         <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/bootstrap-sweetalert/sweet-alert.css " rel="stylesheet" type="text/css">
         <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/jquery-circliful/css/jquery.circliful.css" rel="stylesheet" type="text/css" />
