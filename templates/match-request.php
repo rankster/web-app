@@ -58,7 +58,7 @@
                 cache: true
             },
             escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-            minimumInputLength: 2,
+            //minimumInputLength: 2,
             templateResult: formatGame, // omitted for brevity, see the source of this page
             templateSelection: formatGameSelection // omitted for brevity, see the source of this page
         });
@@ -91,7 +91,7 @@
                 cache: true
             },
             escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-            minimumInputLength: 2,
+            //minimumInputLength: 2,
             templateResult: formatParticipant, // omitted for brevity, see the source of this page
             templateSelection: formatParticipantSelection // omitted for brevity, see the source of this page
         });
