@@ -4,6 +4,7 @@ namespace Rankster\Entity;
 
 use Alcalyn\Elo\EloSystem;
 use Yaoi\Database\Definition\Column;
+use Yaoi\Database\Definition\Index;
 use Yaoi\Database\Entity;
 
 require_once __DIR__ . '/../../vendor/alcalyn/elo/src/Exception/EloCoefficientException.php';
@@ -18,6 +19,7 @@ class Rank extends Entity
     public $userId;
     public $rank;
     public $lastUpdateTime;
+    public $matches = 0;
 
     /**
      * @param \stdClass|static $columns
@@ -29,11 +31,16 @@ class Rank extends Entity
         $columns->userId = User::columns()->id;
         $columns->rank = Column::INTEGER;
         $columns->lastUpdateTime = Column::INTEGER;
+        $columns->matches = Column::INTEGER;
     }
 
+    /**
+     * @param \Yaoi\Database\Definition\Table $table
+     * @param \stdClass|static $columns
+     */
     static function setUpTable(\Yaoi\Database\Definition\Table $table, $columns)
     {
-        $table->setSchemaName('rank');
+        $table->setSchemaName('rank')->addIndex(Index::TYPE_UNIQUE, $columns->gameId, $columns->userId);
     }
 
     public function draw(Rank $opponent)
@@ -74,6 +81,13 @@ class Rank extends Entity
     {
         $this->lastUpdateTime = time();
         parent::save();
+
+        $history = new RankHistory();
+        $history->userId = $this->userId;
+        $history->gameId = $this->gameId;
+        $history->rank = $this->rank;
+        $history->time = time();
+        $history->save();
     }
 
     public static function getRanks($gameId, $perPage = 20, $page = 0)

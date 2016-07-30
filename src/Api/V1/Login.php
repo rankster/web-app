@@ -2,6 +2,7 @@
 
 namespace Rankster\Api\V1;
 
+use Facebook\FacebookRequest;
 use Rankster\Entity\User;
 use Rankster\Service\Facebook;
 use Yaoi\Command;
@@ -27,10 +28,12 @@ class Login extends Command
             if (!$accessToken) {
                 $accessToken = $fbLogin->callback();
             }
-            $user = new Facebook\User($accessToken);
-            $data = $user->getData('me', ['picture', 'name', 'email']);
-            $data->getPicture()->getUrl();
 
+            $user = new Facebook\User($accessToken);
+            $data = $user->getData('me', ['picture', 'name', 'email', 'friends']);
+            print_r($data);
+            exit;
+            $data->getPicture()->getUrl();
             $userEntity = new User();
             $userEntity->facebookId = $data->getId();
             if (!($userEntity = $userEntity->findSaved())) {
@@ -41,6 +44,7 @@ class Login extends Command
                 $userEntity->email = $data->getEmail();
                 $userEntity->findOrSave();
             }
+
 
             $_SESSION['user_id'] = $userEntity->id;
             $_SESSION['user_facebook_id'] = $userEntity->facebookId;

@@ -19,7 +19,7 @@
       <div class="circliful-chart circliful" data-dimension="90" data-text="35%" data-width="5" data-fontsize="14" data-percent="35" data-fgcolor="#5fbeaa" data-bgcolor="#ebeff2" style="width: 90px;">
       </div>
       <h3 class="text-success counter">19</h3>
-      <p class="text-muted">Total Wins Today</p>
+      <p class="text-muted">Total wins this week</p>
     </div>
   </div>
 
@@ -39,7 +39,7 @@
 
   <div class="col-sm-6 col-lg-3">
     <div class="widget-simple-chart text-right card-box" style="min-height: 123px;text-align: center;">
-      Replay Match
+      Replay
       <img src="http://collegiateattire.com/wp-content/uploads/2016/06/versus-icon-vs-icon-315x400.jpg" width="50" />
       <img class="img-circle" src="//rankster.penix.tk/user-images/fb5/c5c9e9261d500eb3ffd1b3a58e811.jpg">
       <img class="img-circle" width="75" src="//rankster.penix.tk/user-images/../images/pingpong.png">
