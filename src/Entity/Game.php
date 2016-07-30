@@ -48,8 +48,7 @@ class Game extends Entity
     {
         $r = Rank::statement()->select('COUNT(1) AS c')->where("? = ?", Rank::columns()->gameId, $this->id)
             ->bindResultClass()
-            ->query()->fetchAll();
-        var_dump($r);
+            ->query()->fetchRow();
         return $r['c'];
     }
 }
