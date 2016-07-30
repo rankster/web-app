@@ -191,7 +191,7 @@ function sendCreateMatchForm() {
         $.ajax({
             type: "POST",
             url: url,
-            data: $("#idForm").serialize()
+            data: $("#create-match").serialize()
         });
 
     });
