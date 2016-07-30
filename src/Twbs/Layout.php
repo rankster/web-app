@@ -107,9 +107,11 @@ class Layout extends Hardcoded
         <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/js/jquery.core.js"></script>
         <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/js/jquery.app.js"></script>
         <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/pages/jquery.widgets.js"></script>
+        <script src="http://jquerymodal.com/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
 
 
-        <script type="text/javascript">
+
+  <script type="text/javascript">
             jQuery(document).ready(function($) {
                 $('.counter').counterUp({
                     delay: 100,
