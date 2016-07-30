@@ -5,6 +5,7 @@ namespace Rankster\Entity;
 use Yaoi\Database\Definition\Column;
 use Yaoi\Database\Definition\Table;
 use Yaoi\Database\Entity;
+use Yaoi\Undefined;
 
 class User extends Entity
 {
@@ -74,7 +75,7 @@ class User extends Entity
 
     public function getFullUrl()
     {
-        if (!$this->picturePath) {
+        if (!$this->picturePath || $this->picturePath instanceof Undefined) {
             return null;
         }
 
