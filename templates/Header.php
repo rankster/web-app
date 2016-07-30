@@ -24,7 +24,7 @@
   </div>
 
   <div class="col-sm-6 col-lg-3">
-  <div class="widget-simple-chart text-right card-box">
+  <div class="widget-simple-chart text-right card-box" style="max-height: 123px;text-align: center;">
 
 
     <button class="btn btn-lg btn-danger waves-effect waves-light m-b-5" style="width:177px">

@@ -7,7 +7,7 @@ $game = $game->findSaved();
     <div class="card-box">
         <h4 class="m-t-0 header-title" style="float: right"><b><?php echo $game->name ?></b></h4>
         <p class="text-muted font-13 m-b-25">
-            <img class="img-circle" width="75" src="<?php echo $game->getFullUrl(); ?>">
+            <img width="75" src="<?php echo $game->getFullUrl(); ?>">
         </p>
 
         <table class="table m-0">
