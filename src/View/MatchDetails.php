@@ -3,6 +3,7 @@
 namespace Rankster\View;
 
 use Rankster\Entity\Match;
+use Rankster\Entity\Rank;
 use Rankster\Entity\User;
 use Yaoi\View\Hardcoded;
 
@@ -21,8 +22,11 @@ class MatchDetails extends Hardcoded
         $user1 = User::findByPrimaryKey($match->user1Id);
         $user2 = User::findByPrimaryKey($match->user2Id);
 
-        $user1Plate = (string)UserPlate::create($user1);
-        $user2Plate = (string)UserPlate::create($user2);
+        $rank1 = Rank::findOrCreateByUserGame($user1->id, $match->gameId);
+        $rank2 = Rank::findOrCreateByUserGame($user2->id, $match->gameId);
+
+        $user1Plate = (string)UserPlate::create($user1, $rank1->rank);
+        $user2Plate = (string)UserPlate::create($user2, $rank2->rank);
 
         echo <<<HTML
 <div class="row">

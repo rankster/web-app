@@ -8,14 +8,14 @@ use Yaoi\View\Hardcoded;
 
 class UserPlate extends Hardcoded
 {
-    public function __construct(User $user, $rank = null)
+    public function __construct(User $user, $info = null)
     {
         $this->user = $user;
-        $this->rank = $rank;
+        $this->info = $info;
     }
 
     public $user;
-    public $rank;
+    public $info;
 
     public function render()
     {
@@ -27,7 +27,7 @@ class UserPlate extends Hardcoded
         <img src="http://rankster.penix.tk/user-images{$user->picturePath}" class="img-responsive img-circle" alt="user">
         <div class="wid-u-info">
           <h4 class="m-t-0 m-b-5">{$user->name}</h4>
-          <p class="text-muted m-b-5 font-13">{$this->rank}</p>          
+          <p class="text-muted m-b-5 font-13">{$this->info}</p>          
           <small class="text-success"><b>Rookie</b></small>
         </div>
       </div>
