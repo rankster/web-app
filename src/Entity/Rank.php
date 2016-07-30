@@ -73,4 +73,18 @@ class Rank extends Entity
         $this->lastUpdateTime = time();
         parent::save();
     }
+
+    public static function getRanks($gameId, $perPage = 20, $page = 0)
+    {
+        $st = Rank::statement()
+            ->where('? = ?', Rank::columns()->gameId, $gameId)
+            ->order('? DESC', Rank::columns()->rank)
+            ->innerJoin('? ON (? = ?)', User::table(), User::columns()->id, Rank::columns()->userId)
+            ->limit($perPage, $perPage * $page);
+
+        $query = $st->query();
+        $query->bindResultClass();
+
+        return $query->fetchAll();
+    }
 }

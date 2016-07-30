@@ -16,12 +16,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php foreach (\Rankster\Entity\Rank::getRanks(1) as $i => $rank) : ?>
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td>Mark</td>
+                                        <td><? print_r($rank); ?></td>
                                         <td>Otto</td>
                                         <td>@mdo</td>
                                     </tr>
+                                    <?php endforeach; ?>
                                     <tr>
                                         <th scope="row">2</th>
                                         <td>Jacob</td>
