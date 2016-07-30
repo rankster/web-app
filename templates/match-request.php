@@ -15,7 +15,7 @@
                         <select style="width: 100%" id="game" tabindex="-1"></select>
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="control-label">Participant:</label>
+                        <label for="recipient-name" class="control-label">Opponent:</label>
                         <select style="width: 100%" id="recipient-name" tabindex=""></select>
                     </div>
 
