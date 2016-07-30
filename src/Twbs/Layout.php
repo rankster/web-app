@@ -68,6 +68,11 @@ class Layout extends Hardcoded
       <script src="/js/html5shiv.min.js"></script>
       <script src="/js/respond.min.js"></script>
     <![endif]-->
+
+      <link href="/css/font-awesome.css" rel="stylesheet">
+      <link href="/css/docs.css" rel="stylesheet">
+
+      <link href="/css/bootstrap-social.css" rel="stylesheet">
   </head>
   <body>
   <div class="container">
