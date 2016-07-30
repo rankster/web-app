@@ -15,24 +15,23 @@
                         <label for="recipient-name" class="control-label">Opponent:</label>
                         <select style="width: 100%" id="recipient-name" tabindex="" name="opponent_id"></select>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label">Result:</label>
+                    <div class="form-group" style="text-align:center">
                         <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-success active">
+                            <label class="btn btn-lg btn-success active">
                                 <input type="radio" name="result" id="option1" autocomplete="off" value="win" checked>WIN
                             </label>
-                            <label class="btn btn-danger">
+                            <label class="btn btn-lg btn-danger">
                                 <input type="radio" name="result" id="option2" autocomplete="off" value="lose"> LOSE
                             </label>
-                            <label class="btn btn-warning">
+                            <label class="btn btn-lg btn-warning">
                                 <input type="radio" name="result" id="option3" autocomplete="off" value="draw"> DRAW
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-default" data-dismiss="modal" rel="modal:close">Close</a>
-                    <button type="submit" class="btn btn-primary">Send Request</button>
+                    <a type="button" class="btn btn-default" data-dismiss="modal" rel="modal:close">Cancel</a>
+                    <button type="submit" class="btn btn-success">Submit Result</button>
                 </div>
             </form>
         </div>
