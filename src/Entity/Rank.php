@@ -75,14 +75,14 @@ class Rank extends Entity
     public function save()
     {
         $this->lastUpdateTime = time();
+        parent::save();
+
         $history = new RankHistory();
         $history->userId = $this->userId;
         $history->gameId = $this->gameId;
         $history->rank = $this->rank;
         $history->time = time();
         $history->save();
-
-        parent::save();
     }
 
     public static function getRanks($gameId, $perPage = 20, $page = 0)
