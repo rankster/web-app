@@ -79,6 +79,11 @@ class User extends Entity
             return null;
         }
 
-        return '//' . $_SERVER['HTTP_HOST'] . '/' . self::IMAGE_FOLDER . $this->picturePath;
+        return self::patchToUrl($this->picturePath);
+    }
+
+    public static function patchToUrl($path)
+    {
+        return '//' . $_SERVER['HTTP_HOST'] . '/' . self::IMAGE_FOLDER . $path;
     }
 }

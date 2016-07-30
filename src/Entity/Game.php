@@ -14,6 +14,7 @@ class Game extends Entity
     public $id;
     public $name;
     public $picturePath;
+
     /**
      * @param \stdClass|static $columns
      */
@@ -35,6 +36,11 @@ class Game extends Entity
             return null;
         }
 
-        return '//' . $_SERVER['HTTP_HOST'] . '/' . self::IMAGE_FOLDER . $this->picturePath;
+        return self::patchToUrl($this->picturePath);
+    }
+
+    public static function patchToUrl($path)
+    {
+        return '//' . $_SERVER['HTTP_HOST'] . '/' . self::IMAGE_FOLDER . $path;
     }
 }
