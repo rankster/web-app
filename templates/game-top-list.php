@@ -19,7 +19,7 @@ $game = $game->findSaved();
             <tbody>
             <?php foreach (\Rankster\Entity\Rank::getRanks($game->id) as $i => $rank) {
                 $history = RankHistory::statement()->where('? = ? AND ? = ?',
-                   RankHistory::columns()->id, $rank['id'],
+                   RankHistory::columns()->userId, $rank['id'],
                     RankHistory::columns()->gameId, $game->id)
                     ->order('? ASC', RankHistory::columns()->time)->bindResultClass()
                     ->query()
