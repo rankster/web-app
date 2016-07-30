@@ -18,13 +18,13 @@
                     <div class="form-group">
                         <label class="control-label">Result:</label>
                         <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-primary active">
+                            <label class="btn btn-success active">
                                 <input type="radio" name="result" id="option1" autocomplete="off" value="win" checked>WIN
                             </label>
-                            <label class="btn btn-primary">
+                            <label class="btn btn-danger">
                                 <input type="radio" name="result" id="option2" autocomplete="off" value="lose"> LOSE
                             </label>
-                            <label class="btn btn-primary">
+                            <label class="btn btn-warning">
                                 <input type="radio" name="result" id="option3" autocomplete="off" value="draw"> DRAW
                             </label>
                         </div>
