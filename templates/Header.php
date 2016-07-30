@@ -19,7 +19,7 @@
       <div class="circliful-chart circliful" data-dimension="90" data-text="35%" data-width="5" data-fontsize="14" data-percent="35" data-fgcolor="#5fbeaa" data-bgcolor="#ebeff2" style="width: 90px;">
       </div>
       <h3 class="text-success counter">19</h3>
-      <p class="text-muted">Total Wins Today</p>
+      <p class="text-muted">Total wins this week</p>
     </div>
   </div>
 
