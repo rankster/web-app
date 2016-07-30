@@ -28,7 +28,7 @@ class Runner extends BaseClass
         }
         catch (\Exception $exception) {
             $response->error($exception->getMessage());
-            $response->error($exception->getTraceAsString());
+            $response->error('<pre>' . $exception->getTraceAsString() . '</pre>');
         }
 
         $layout->render();
