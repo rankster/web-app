@@ -19,7 +19,7 @@ $game = $game->findSaved();
             <tbody>
             <?php foreach (\Rankster\Entity\Rank::getRanks($game->id) as $i => $rank) {
                 $history = RankHistory::statement()->where('? = ? AND ? = ?',
-                   RankHistory::columns()->userId, $rank['id'],
+                    RankHistory::columns()->userId, $rank['id'],
                     RankHistory::columns()->gameId, $game->id)
                     ->order('? ASC', RankHistory::columns()->time)->bindResultClass()
                     ->query()
@@ -32,18 +32,21 @@ $game = $game->findSaved();
                         <?php if ($i == 0): ?>
                             <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                         <?php else: ?>
-                            <?php echo ($i + 1); ?>
+                            <?php echo($i + 1); ?>
                         <?php endif; ?>
                     </th>
-                    <td><img class="img-circle" src="<?php echo \Rankster\Entity\User::patchToUrl($rank['picture_path']); ?>"/></td>
+                    <td><img class="img-circle"
+                             src="<?php echo \Rankster\Entity\User::patchToUrl($rank['picture_path']); ?>"/></td>
                     <td><?php echo $rank['name']; ?></td>
                     <td><?php echo $rank['rank']; ?></td>
                     <td>
-                        <div id="#r<?=$rank['id']?>" style="width:40px;height: 20px"></div>
+                        <div id="#r<?= $rank['id'] ?>" style="width:40px;height: 20px"></div>
                         <script>
-                            $("#r<?=$rank['id']?>").sparkline([<?php echo implode(',', $history) ?>], {
-                                type: 'line'
-                            });
+                            $(
+                                $("#r<?=$rank['id']?>").sparkline([<?php echo implode(',', $history) ?>], {
+                                    type: 'line'
+                                })
+                            );
                         </script>
                     </td>
                 </tr>
