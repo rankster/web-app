@@ -20,7 +20,15 @@ class Login extends Command
 
     public function performAction()
     {
-        var_dump(Facebook\User::getInstance()->getData());
+        $fbLogin = new Facebook\Login();
+        try {
+            $accessToken = $fbLogin->callback();
+            $user = new Facebook\User($accessToken);
+            $data = $user->getData();
+            var_dump($data);
+        } catch (\Exception $e) {
+            return ['ok' => false, 'error' => $e->getMessage()];
+        }
 
         return ['ok' => true];
     }

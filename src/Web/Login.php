@@ -20,7 +20,8 @@ class Login extends Command
 
     public function performAction()
     {
-        $url = FacebookLogin::getInstance()->getLoginUrl();
+        $fbLogin = new FacebookLogin();
+        $url = $fbLogin->getLoginUrl();
         echo $url; exit;
         header('Location: ' . $url);
         exit();

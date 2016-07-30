@@ -32,17 +32,14 @@ class Login extends Service
         }
 
         if (!isset($accessToken)) {
-            $return = [
-                'success'           => false,
-                'error_description' => 'Bad request'
-            ];
             if ($helper->getError()) {
-                $return['error'] = $helper->getError();
-                $return['error_code'] = $helper->getErrorCode();
-                $return['error_reason'] = $helper->getErrorReason();
-                $return['error_description'] = $helper->getErrorDescription();
+//                $return['error'] = $helper->getError();
+//                $return['error_code'] = $helper->getErrorCode();
+//                $return['error_reason'] = $helper->getErrorReason();
+//                $return['error_description'] = $helper->getErrorDescription();
+                throw new \Exception($helper->getErrorDescription());
             }
-            return $return;
+            throw new \Exception('Bad request');
         }
 
         $oAuth2Client = $fb->getOAuth2Client();
@@ -59,17 +56,10 @@ class Login extends Service
             try {
                 $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
             } catch (FacebookSDKException $e) {
-                return [
-                    'success'   => false,
-                    'error_description' => 'Error getting long-lived access token: ' . $helper->getMessage(),
-                ];
+                throw new \Exception('Error getting long-lived access token: ' . $helper->getMessage());
             }
         }
 
-        return [
-            'success'   => true,
-            'token'     => (string) $accessToken,
-
-        ];
+        return (string) $accessToken;
     }
 }
