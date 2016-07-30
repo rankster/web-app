@@ -27,6 +27,7 @@ class Index extends Command
             ->setDescription('Root action')
             ->setIsUnnamed()
             ->addToEnum(Login::definition())
+            ->addToEnum(Logout::definition())
             ->addToEnum(MainPage::definition(), '')
             ->addToEnum(SubmitScore::definition(), 'submit-score')
             ->addToEnum(Game::definition())
