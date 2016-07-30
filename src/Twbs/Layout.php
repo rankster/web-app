@@ -79,6 +79,21 @@ class Layout extends Hardcoded
     <script src="/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/js/bootstrap.min.js"></script>
+        <!-- Counter Up  -->
+        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/waypoints/lib/jquery.waypoints.js"></script>
+        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/counterup/jquery.counterup.min.js"></script>
+
+        <!-- Sweet Alert  -->
+        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
+
+        <!-- Sparkline -->
+        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+
+        <!-- skycons -->
+        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/skyicons/skycons.min.js" type="text/javascript"></script>
+
+        <!-- Todojs  -->
+        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/pages/jquery.todo.js"></script>
         <!-- Circliful -->
         <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/jquery-circliful/js/jquery.circliful.min.js"></script>
         <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/js/jquery.core.js"></script>
