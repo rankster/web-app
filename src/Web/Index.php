@@ -3,6 +3,7 @@
 namespace Rankster\Web;
 
 use Rankster\Api\V1;
+use Rankster\Web\Forms\SubmitScore;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 use Yaoi\Database\Definition\Exception;
@@ -26,6 +27,7 @@ class Index extends Command
             ->setIsUnnamed()
             ->addToEnum(Login::definition())
             ->addToEnum(MainPage::definition(), '')
+            ->addToEnum(SubmitScore::definition(), 'submit-score')
             ->addToEnum(V1::definition(), 'v1')
             ->addToEnum(V1\Update::definition(), 'git-update')
         ;
