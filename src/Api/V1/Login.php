@@ -47,6 +47,7 @@ class Login extends Command
             $_SESSION['user_name'] = $userEntity->name;
             $_SESSION['user_picture'] = $userEntity->getFullUrl();
             $_SESSION['user_email'] = $userEntity->email;
+            $_SESSION['logged_in_redirect'] = true;
             header('Location: /');
             exit;
         } catch (\Exception $e) {
