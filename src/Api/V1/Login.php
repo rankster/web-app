@@ -35,7 +35,7 @@ class Login extends Command
 //            exit;
 
             $request = new FacebookRequest(
-                $_SESSION,
+                $fb->getApp(),
                 'GET',
                 '/{user-id}/friends'
             );
