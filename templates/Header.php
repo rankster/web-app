@@ -16,9 +16,8 @@
 <div class="col-sm-6 col-lg-3">
   <div class="widget-simple-chart text-right card-box">
     <div class="circliful-chart circliful" data-dimension="90" data-text="35%" data-width="5" data-fontsize="14" data-percent="35" data-fgcolor="#5fbeaa" data-bgcolor="#ebeff2" style="width: 90px;">
-		<!--span class="circle-text" style="line-height: 90px; font-size: 14px;">35%</span><canvas width="90" height="90"></canvas-->
 	</div>
-    <h3 class="text-success counter">12 Games</h3>
+    <h3 class="text-success counter">19</h3>
     <p class="text-muted">Total Wins Today</p>
   </div>
 </div>
