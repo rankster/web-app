@@ -79,6 +79,43 @@ class Layout extends Hardcoded
     <script src="/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/js/bootstrap.min.js"></script>
+        <!-- Circliful -->
+        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/jquery-circliful/js/jquery.circliful.min.js"></script>
+
+        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/js/jquery.core.js"></script>
+        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/js/jquery.app.js"></script>
+
+        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/pages/jquery.widgets.js"></script>
+
+
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                $('.counter').counterUp({
+                    delay: 100,
+                    time: 1200
+                });
+                $('.circliful-chart').circliful();
+            });
+
+            /* BEGIN SVG WEATHER ICON */
+            if (typeof Skycons !== 'undefined'){
+            var icons = new Skycons(
+                {"color": "#fff"},
+                {"resizeClear": true}
+                ),
+                    list  = [
+                        "clear-day", "clear-night", "partly-cloudy-day",
+                        "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+                        "fog"
+                    ],
+                    i;
+
+                for(i = list.length; i--; )
+                icons.set(list[i], list[i]);
+                icons.play();
+            };
+
+        </script>
   </body>
 </html>
 <?php
