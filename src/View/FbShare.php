@@ -16,7 +16,7 @@ class FbShare extends Hardcoded
         echo <<<HTML
  <!-- Your share button code -->
 <div class="fb-share-button" data-href="{$url}" data-layout="button" data-size="large" data-mobile-iframe="true">
-<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Frankster.penix.tk%2F&amp;src=sdkpreparse">Share</a>
+<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={$urlEncoded}&amp;src=sdkpreparse">Share</a>
 </div>
 HTML;
     }
