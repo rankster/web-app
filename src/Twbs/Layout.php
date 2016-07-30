@@ -3,6 +3,7 @@
 namespace Rankster\Twbs;
 
 
+use Rankster\View\FbLike;
 use Yaoi\View\Hardcoded;
 use Yaoi\View\Renderer;
 use Yaoi\View\Stack;
@@ -36,7 +37,10 @@ class Layout extends Hardcoded
 
     public function render()
     {
-?>
+
+        $fbLike = (string)FbLike::create();
+
+        ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -81,6 +85,10 @@ class Layout extends Hardcoded
   <div class="container">
       <h1><a href="/"><img src="http://i.imgur.com/mQtR9aL.png" width="150" /></a></h1>
       <?php echo $this->main ?>
+
+      <div class="row">
+          <?=$fbLike?>
+      </div>
   </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
