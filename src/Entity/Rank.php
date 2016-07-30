@@ -4,8 +4,10 @@ namespace Rankster\Entity;
 
 use Alcalyn\Elo\EloSystem;
 use Yaoi\Database\Definition\Column;
-use Yaoi\Database\Definition\Table;
 use Yaoi\Database\Entity;
+
+require_once __DIR__ . '/../../vendor/alcalyn/elo/src/Exception/EloCoefficientException.php';
+require_once __DIR__ . '/../../vendor/alcalyn/elo/src/EloSystem.php';
 
 class Rank extends Entity
 {
