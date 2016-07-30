@@ -18,8 +18,8 @@ class MainPage extends Command
     public function performAction()
     {
         $this->response->success("Hello !");
-        //$this->response->addContent(Output::process('MainPage_tables'));
-        $this->response->addContent(Output::process('Header'));
+        $this->response->addContent(Output::process('MainPage_tables'));
+        //$this->response->addContent(Output::process('Header'));
     }
 
 }
