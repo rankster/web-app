@@ -188,11 +188,9 @@ function sendCreateMatchForm() {
 
         var url = "/match/create"; // the script where you handle the form input.
 
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: $("#create-match").serialize()
-        });
+        $.post(url,
+            $("#create-match").serialize()
+        );
 
     });
 
