@@ -1,0 +1,1 @@
+Copy `conf.dist.php` to `conf.php` and update settings with your env.
