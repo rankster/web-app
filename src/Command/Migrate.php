@@ -53,10 +53,28 @@ class Migrate extends Command
         $game->picturePath = '';
         $game->findOrSave();
 
+        $game = new Game();
+        $game->name = 'Battroborg Thumb War';
+        $game->picturePath = '';
+        $game->findOrSave();
+
+        $game = new Game();
+        $game->name = 'Soccer Table';
+        $game->picturePath = '';
+        $game->findOrSave();
+
+        $game = new Game();
+        $game->name = 'Co Tuong';
+        $game->picturePath = '';
+        $game->findOrSave();
+
 //       add users
-//       $user = new User();
-//       $user->facebookId = '';
-//       $user->name = '';
+        $user = new User();
+        $user->facebookId = '10153792250453603';
+        $user->name = 'Alexis Grohar';
+        $user->picturePath = '/fb5/c5c9e9261d500eb3ffd1b3a58e811.jpg';
+        $user->findOrSave();
+
 //       $user->login = '';
 //       $user->email = '';
 //       $user->downloadImage('');
