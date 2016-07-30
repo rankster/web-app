@@ -1,4 +1,4 @@
-<?php if isset($_SESSION['user_name']): ?>
+<?php if (isset($_SESSION['user_name'])): ?>
 <div class="row">
   <div class="col-sm-6 col-lg-3">
     <div class="card-box widget-user">
