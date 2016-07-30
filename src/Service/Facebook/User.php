@@ -5,8 +5,9 @@ namespace Rankster\Service\Facebook;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Rankster\Service\Facebook;
+use Yaoi\Service;
 
-class User
+class User extends Service
 {
     protected $accessToken;
 

@@ -24,6 +24,7 @@ class Index extends Command
         $options->action = Command\Option::create()
             ->setDescription('Root action')
             ->setIsUnnamed()
+            ->addToEnum(Login::definition(), '')
             ->addToEnum(MainPage::definition(), '')
             ->addToEnum(V1::definition(), 'v1')
             ->addToEnum(V1\Update::definition(), 'git-update')
