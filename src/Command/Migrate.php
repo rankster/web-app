@@ -46,6 +46,23 @@ class Migrate extends Command
         foreach ($tables as $table) {
             $table->migration()->setLog($log)->setDryRun($this->dryRun)->apply();
         }
+
+        // Fixtures Generator
+        $game = new Game();
+        $game->name = 'Ping Pong';
+        $game->picturePath = '';
+        $game->findOrSave();
+
+//       add users
+//       $user = new User();
+//       $user->facebookId = '';
+//       $user->name = '';
+//       $user->login = '';
+//       $user->email = '';
+//       $user->downloadImage('');
+//       $user->findOrSave();
+
+
     }
 
 }
