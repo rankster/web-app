@@ -2,11 +2,11 @@
 
 namespace Rankster\Api\V1;
 
-use Rankster\Entity\Game;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
+use YaoiTests\Helper\Entity\User;
 
-class Games extends Command
+class Users extends Command
 {
     public $q;
     public $p;
@@ -27,10 +27,10 @@ class Games extends Command
         $perPage = 20;
         $page = $this->p;
 
-        $st = Game::statement()
-            ->order('? ASC', Game::columns()->name);
+        $st = User::statement()
+            ->order('? ASC', User::columns()->name);
         if ($this->q) {
-           $st->where('? LIKE ?', Game::columns()->name, $this->q . '%');
+           $st->where('? LIKE ?', User::columns()->name, $this->q . '%');
         }
 
         $stCnt = clone($st);

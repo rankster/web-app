@@ -75,6 +75,7 @@ class Layout extends Hardcoded
       <link href="/css/docs.css" rel="stylesheet">
 
       <link href="/css/bootstrap-social.css" rel="stylesheet">
+      <link href="/css/rankster.css" rel="stylesheet">
   </head>
   <body>
   <div class="container">
