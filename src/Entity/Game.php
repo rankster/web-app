@@ -46,7 +46,9 @@ class Game extends Entity
 
     public function countPlayers()
     {
-        $r = Rank::statement()->select('COUNT(1) AS c')->where("? = ?", Rank::columns()->gameId, $this->id)->query()->bindResultClass();
+        $r = Rank::statement()->select('COUNT(1) AS c')->where("? = ?", Rank::columns()->gameId, $this->id)
+            ->bindResultClass()
+            ->query()->fetchRow();
         return $r['c'];
     }
 }
