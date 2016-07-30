@@ -6,6 +6,7 @@ namespace Rankster\Api;
 use Rankster\Api\V1\AddUser;
 use Rankster\Api\V1\Games;
 use Rankster\Api\V1\Login;
+use Rankster\Api\V1\SeedMatches;
 use Rankster\Api\V1\Users;
 use Rankster\Command\AuthRequired;
 use Rankster\Api\V1\SubmitScore;
@@ -33,6 +34,7 @@ class V1 extends Command
             ->addToEnum(Users::definition(), 'users')
             ->addToEnum(SubmitScore::definition(), 'submit-score')
             ->addToEnum(AddUser::definition(), 'add-user')
+            ->addToEnum(SeedMatches::definition(), 'seed-matches')
             ->setIsUnnamed();
 
     }

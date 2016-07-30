@@ -10,6 +10,9 @@ class Match extends Entity
 {
     const STATUS_ACCEPT = 'accepted';
     const STATUS_REJECT = 'rejected';
+    const RESULT_LOSE = 'lose';
+    const RESULT_DRAW = 'draw';
+    const RESULT_WIN = 'win';
 
     public $id;
     public $gameId;
@@ -44,5 +47,44 @@ class Match extends Entity
     {
         Column::cast($columns->winnerId)->setFlag(Column::NOT_NULL, false);
         $table->setSchemaName('game_match');
+    }
+
+
+    public static function make($user1Id, $user2Id, $gameId, $result) {
+        $match = new Match();
+        $match->user1Id = $user1Id;
+        $match->user2Id = $user2Id;
+        $match->gameId = $gameId;
+
+        $rank1 = Rank::findOrCreateByUserGame($match->user1Id, $gameId);
+        $rank2 = Rank::findOrCreateByUserGame($match->user2Id, $gameId);
+
+        $r1 = $rank1->rank;
+        $r2 = $rank2->rank;
+
+        $match->eventTime = time();
+        $match->status = Match::STATUS_ACCEPT;
+        if ($result === self::RESULT_DRAW) {
+            $match->winnerId = null;
+            $rank1->draw($rank2);
+        } elseif ($result === self::RESULT_WIN) {
+            $rank1->win($rank2);
+            $match->winnerId = $match->user1Id;
+        } else {
+            $rank2->win($rank1);
+            $match->winnerId = $match->user2Id;
+        }
+
+        $match->user1Delta = $rank1->rank - $r1;
+        $match->user2Delta = $rank2->rank - $r2;
+
+        $rank1->matches++;
+        $rank2->matches++;
+
+        $rank1->save();
+        $rank2->save();
+        $match->save();
+
+        return $match;
     }
 }

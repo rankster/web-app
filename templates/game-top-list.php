@@ -21,7 +21,7 @@ $game = $game->findSaved();
                 $history = RankHistory::statement()->where('? = ? AND ? = ?',
                     RankHistory::columns()->userId, $rank['id'],
                     RankHistory::columns()->gameId, $game->id)
-                    ->order('? ASC', RankHistory::columns()->time)->bindResultClass()
+                    ->order('? ASC', RankHistory::columns()->id)->bindResultClass()
                     ->query()
                     ->fetchAll(null, 'rank');
 

@@ -9,10 +9,6 @@ use Yaoi\Command\Definition;
 
 class Create extends Command
 {
-    const RESULT_WIN = 'win';
-    const RESULT_LOSE = 'lose';
-    const RESULT_DRAW = 'draw';
-
     public $opponentId;
     public $gameId;
     public $result;
@@ -26,7 +22,7 @@ class Create extends Command
         $options->opponentId = Command\Option::create()->setType()->setIsRequired()->setDescription('Opponent user ID');
         $options->gameId = Command\Option::create()->setType()->setIsRequired()->setDescription('Game ID');
         $options->result = Command\Option::create()
-            ->setEnum(self::RESULT_WIN, self::RESULT_LOSE, self::RESULT_DRAW)
+            ->setEnum(MatchEntity::RESULT_WIN, MatchEntity::RESULT_LOSE, MatchEntity::RESULT_DRAW)
             ->setDescription('Match result');
     }
 
@@ -40,39 +36,7 @@ class Create extends Command
 
         //$this->response->addContent('<pre>' . print_r($_SESSION, 1) . '</pre>');
 
-        $match = new MatchEntity();
-        $match->user1Id = $_SESSION['user_id'];
-        $match->user2Id = $this->opponentId;
-        $match->gameId = $this->gameId;
-
-        $rank1 = RankEntity::findOrCreateByUserGame($match->user1Id, $this->gameId);
-        $rank2 = RankEntity::findOrCreateByUserGame($match->user2Id, $this->gameId);
-
-        $r1 = $rank1->rank;
-        $r2 = $rank2->rank;
-
-        $match->eventTime = time();
-        $match->status = MatchEntity::STATUS_ACCEPT;
-        if ($this->result === self::RESULT_DRAW) {
-            $match->winnerId = null;
-            $rank1->draw($rank2);
-        } elseif ($this->result === self::RESULT_WIN) {
-            $rank1->win($rank2);
-            $match->winnerId = $match->user1Id;
-        } else {
-            $rank2->win($rank1);
-            $match->winnerId = $match->user2Id;
-        }
-
-        $match->user1Delta = $rank1->rank - $r1;
-        $match->user2Delta = $rank2->rank - $r2;
-
-        $rank1->matches++;
-        $rank2->matches++;
-
-        $rank1->save();
-        $rank2->save();
-        $match->save();
+        $match = MatchEntity::make($_SESSION['user_id'], $this->opponentId, $this->gameId, $this->result);
 
         $details = Details::createState();
         $details->matchId = $match->id;
