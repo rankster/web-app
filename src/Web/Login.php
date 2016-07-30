@@ -22,7 +22,6 @@ class Login extends Command
     {
         $fbLogin = new FacebookLogin();
         $url = $fbLogin->getLoginUrl();
-        echo '<a href="' . $url . '">' . $url . '</a>'; exit;
         header('Location: ' . $url);
         exit();
     }
