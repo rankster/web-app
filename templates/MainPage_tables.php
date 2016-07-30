@@ -19,7 +19,7 @@
                                     <?php foreach (\Rankster\Entity\Rank::getRanks(1) as $i => $rank) : ?>
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td><? print_r($rank); ?></td>
+                                        <td><?php print_r($rank); ?></td>
                                         <td>Otto</td>
                                         <td>@mdo</td>
                                     </tr>
