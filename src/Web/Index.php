@@ -24,7 +24,7 @@ class Index extends Command
         $options->action = Command\Option::create()
             ->setDescription('Root action')
             ->setIsUnnamed()
-            ->addToEnum(MainPage::definition(), '')
+            ->addToEnum(MainPage::definition(), '/')
             ->addToEnum(V1::definition(), 'v1')
         ;
 
