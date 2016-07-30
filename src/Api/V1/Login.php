@@ -2,6 +2,7 @@
 
 namespace Rankster\Api\V1;
 
+use Rankster\Entity\User;
 use Rankster\Service\Facebook;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
@@ -29,7 +30,25 @@ class Login extends Command
             }
             $user = new Facebook\User($accessToken);
             $data = $user->getData('me', ['picture', 'name', 'email']);
-            var_dump($data);
+            $data->getPicture()->getUrl();
+
+            $userEntity = new User();
+            $userEntity->facebookId = $data->getId();
+            if (!$userEntity->findSaved()) {
+                $userEntity->name = $data->getName();
+                if ($data->getPicture() && $data->getPicture()->getUrl()) {
+                    $userEntity->downloadImage($data->getPicture()->getUrl());
+                }
+                $userEntity->email = $data->getEmail();
+                $userEntity->findOrSave();
+            }
+
+            $_SESSION['user_id'] = $userEntity->id;
+            $_SESSION['user_facebook_id'] = $userEntity->facebookId;
+            $_SESSION['user_name'] = $userEntity->name;
+            $_SESSION['picture'] = $userEntity->picturePath;
+            header('Location: /');
+            exit;
         } catch (\Exception $e) {
             return ['ok' => false, 'error' => $e->getMessage()];
         }
