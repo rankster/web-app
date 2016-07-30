@@ -14,7 +14,7 @@ class Login extends Service
     {
         $fb = Facebook::getInstance()->getSDK();
         $helper = $fb->getRedirectLoginHelper();
-        $permissions = ['public_profile', 'email'];
+        $permissions = ['email'];
 
         return $helper->getLoginUrl(Facebook::getInstance()->getCallbackUri(), $permissions);
     }
