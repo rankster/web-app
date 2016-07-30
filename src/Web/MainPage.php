@@ -9,17 +9,18 @@ use Yaoi\Command\Definition;
 
 class MainPage extends Command
 {
-    public $bitch = "Hello!";
-
     static function setUpDefinition(Definition $definition, $options)
     {
     }
 
     public function performAction()
     {
-        $this->response->success("Hello !");
+      $this->response->addContent(Output::process('Header'));
+      if (isset($_SESSION['logged_in_redirect'])) {
+        unset($_SESSION['logged_in_redirect']);
+        $this->response->success("Successfuly logged in !");
+      }
         $this->response->addContent(Output::process('MainPage_tables'));
-        $this->response->addContent(Output::process('Header'));
     }
 
 }
