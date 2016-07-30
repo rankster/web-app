@@ -46,7 +46,7 @@ class Login extends Command
             $_SESSION['user_facebook_id'] = $userEntity->facebookId;
             $_SESSION['user_name'] = $userEntity->name;
             $_SESSION['user_picture'] = $userEntity->getFullUrl();
-            $_SESSION['user_email'] = $userEntity->getFullUrl();
+            $_SESSION['user_email'] = $userEntity->email;
             header('Location: /');
             exit;
         } catch (\Exception $e) {
