@@ -22,6 +22,7 @@ class Game extends Command
         $options->action = Command\Option::create()
             ->addToEnum(Details::definition())
             ->addToEnum(Items::definition())
+            ->setIsUnnamed()
             ->setIsRequired();
 
     }
