@@ -36,9 +36,6 @@ class Login extends Command
             print_r($data
             );
 
-            /** @var \Facebook\GraphNodes\GraphEdge $f */
-            $f = $data->getField('friends');
-            var_dump($f->all());
             exit;
 
             $userEntity = new User();
