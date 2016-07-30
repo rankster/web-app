@@ -47,10 +47,10 @@ class Layout extends Hardcoded
     <title><?=$this->title?></title>
 
     <!-- Bootstrap -->
-      <link rel="stylesheet" href="/css/bootstrap.min.css">
+      <!--link rel="stylesheet" href="/css/bootstrap.min.css"-->
 
       <!-- Optional theme -->
-      <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+      <!--link rel="stylesheet" href="/css/bootstrap-theme.min.css"-->
 
         <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/bootstrap-sweetalert/sweet-alert.css " rel="stylesheet" type="text/css">
         <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/jquery-circliful/css/jquery.circliful.css" rel="stylesheet" type="text/css" />
