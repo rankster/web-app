@@ -15,8 +15,8 @@ class Output
         ob_start();
         /** @noinspection PhpIncludeInspection */
         include($fullPath);
-        $output = ob_get_clean();
-        ob_end_flush();
+        $output = ob_get_contents();
+        ob_end_clean();
 
         return $output;
     }
