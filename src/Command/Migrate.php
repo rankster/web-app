@@ -50,23 +50,29 @@ class Migrate extends Command
         // Fixtures Generator
         $game = new Game();
         $game->name = 'Ping Pong';
-        $game->picturePath = '';
+        $game->picturePath = '/../images/pingpong.png';
         $game->findOrSave();
 
         $game = new Game();
         $game->name = 'Battroborg Thumb War';
-        $game->picturePath = '';
+        $game->picturePath = '/../images/robots256x256.jpg';
         $game->findOrSave();
 
         $game = new Game();
         $game->name = 'Soccer Table';
-        $game->picturePath = '';
+        $game->picturePath = '/../images/soccertable256x256';
         $game->findOrSave();
 
         $game = new Game();
         $game->name = 'Co Tuong';
-        $game->picturePath = '';
+        $game->picturePath = '/../images/vietchess256x256';
         $game->findOrSave();
+
+        $game = new Game();
+        $game->name = 'Paper Rock Cissor';
+        $game->picturePath = '/../images/ShiFuMi256x256.png';
+        $game->findOrSave();
+
 
 //       add users
         $user = new User();
