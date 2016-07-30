@@ -18,6 +18,7 @@ class Rank extends Entity
     public $userId;
     public $rank;
     public $lastUpdateTime;
+    public $matches = 0;
 
     /**
      * @param \stdClass|static $columns
@@ -29,6 +30,7 @@ class Rank extends Entity
         $columns->userId = User::columns()->id;
         $columns->rank = Column::INTEGER;
         $columns->lastUpdateTime = Column::INTEGER;
+        $columns->matches = Column::INTEGER;
     }
 
     static function setUpTable(\Yaoi\Database\Definition\Table $table, $columns)
@@ -73,6 +75,13 @@ class Rank extends Entity
     public function save()
     {
         $this->lastUpdateTime = time();
+        $history = new RankHistory();
+        $history->userId = $this->userId;
+        $history->gameId = $this->gameId;
+        $history->rank = $this->rank;
+        $history->time = time();
+        $history->save();
+
         parent::save();
     }
 

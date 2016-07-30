@@ -67,6 +67,9 @@ class Create extends Command
         $match->user1Delta = $rank1->rank - $r1;
         $match->user2Delta = $rank2->rank - $r2;
 
+        $rank1->matches++;
+        $rank2->matches++;
+
         $rank1->save();
         $rank2->save();
         $match->save();

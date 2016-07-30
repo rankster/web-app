@@ -3,11 +3,17 @@
 namespace Rankster\Entity;
 
 
+use Yaoi\Database\Definition\Column;
 use Yaoi\Database\Definition\Table;
 use Yaoi\Database\Entity;
 
 class RankHistory extends Entity
 {
+    public $id;
+    public $gameId;
+    public $userId;
+    public $rank;
+    public $time;
 
 
     /**
@@ -15,7 +21,11 @@ class RankHistory extends Entity
      */
     static function setUpColumns($columns)
     {
-        // TODO: Implement setUpColumns() method.
+        $columns->id = Column::AUTO_ID;
+        $columns->gameId = Game::columns()->id;
+        $columns->userId = User::columns()->id;
+        $columns->rank = Column::INTEGER;
+        $columns->time = Column::INTEGER;
     }
 
     /**
@@ -24,7 +34,7 @@ class RankHistory extends Entity
      */
     static function setUpTable(\Yaoi\Database\Definition\Table $table, $columns)
     {
-        // TODO: Implement setUpTable() method.
+        $table->setSchemaName('rank_history');
     }
 
 
