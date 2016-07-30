@@ -4,9 +4,47 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ce2b0ee676f8ebdec091ccdc0d359aa2",
-    "content-hash": "5f557591b03915e253fd75f32be19bc1",
+    "hash": "61e4f35c8093d4a4717e1a4ad82e2d2c",
+    "content-hash": "15947669a7cdf54292674a7d2210726e",
     "packages": [
+        {
+            "name": "alcalyn/elo",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alcalyn/elo.git",
+                "reference": "adc226113d7e1a6f5eda179069ae6f16c01dc819"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alcalyn/elo/zipball/adc226113d7e1a6f5eda179069ae6f16c01dc819",
+                "reference": "adc226113d7e1a6f5eda179069ae6f16c01dc819",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Alcalyn\\Elo": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Julien Maulny",
+                    "email": "doubjulien@hotmail.fr"
+                }
+            ],
+            "description": "Elo system with a reliability purpose",
+            "homepage": "https://github.com/alcalyn/elo",
+            "keywords": [
+                "elo",
+                "php"
+            ],
+            "time": "2014-11-26 09:56:26"
+        },
         {
             "name": "facebook/php-sdk-v4",
             "version": "5.2.0",
