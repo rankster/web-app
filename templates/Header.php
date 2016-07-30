@@ -22,7 +22,6 @@
       <p class="text-muted">Total Wins Today</p>
     </div>
   </div>
-</div>
 
   <div class="col-sm-6 col-lg-3">
   <div class="widget-simple-chart text-right card-box">
