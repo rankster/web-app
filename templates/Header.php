@@ -24,7 +24,7 @@
   </div>
 </div>
 
-  <div class="col-sm-6 col-lg-4">
+  <div class="col-sm-6 col-lg-3">
   <div class="widget-simple-chart text-right card-box">
     <p><a href="#game-req" rel="modal:open">Game Submit result</a></p>
     </div>
