@@ -98,7 +98,7 @@ class Layout extends Hardcoded
         <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/jquery-circliful/js/jquery.circliful.min.js"></script>
         <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/js/jquery.core.js"></script>
         <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/js/jquery.app.js"></script>
-        <!-- script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/pages/jquery.widgets.js"></script -->
+        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/pages/jquery.widgets.js"></script>
 
 
         <script type="text/javascript">
