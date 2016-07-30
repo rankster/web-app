@@ -25,6 +25,9 @@
 
   <div class="col-sm-6 col-lg-3">
   <div class="widget-simple-chart text-right card-box" style="min-height: 123px;text-align: center;">
+    <button class="btn btn-default waves-effect waves-light btn-sm" id="sa-win" style="display:none;">Click me</button>
+    <button class="btn btn-default waves-effect waves-light btn-sm" id="sa-draw" style="display:none;">Click me</button>
+    <button class="btn btn-default waves-effect waves-light btn-sm" id="sa-lose" style="display:none;">Click me</button>
     <span class="btn btn-lg btn-danger waves-effect waves-light m-b-5" style="width:177px;margin:18px">
       <a href="#game-req" rel="modal:open">
         <i class="glyphicon glyphicon-new-window m-r-5" style="color: #fff;"></i>

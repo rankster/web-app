@@ -101,6 +101,7 @@ class Layout extends Hardcoded
 
         <!-- Sweet Alert  -->
         <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
+        <script src="/js/sweet_alerts.js"></script>
 
         <!-- Sparkline -->
         <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
