@@ -23,7 +23,7 @@ class V1 extends Command
     {
         $options->action = Command\Option::create()
             ->addToEnum(Update::definition())
-            ->addToEnum(SubmitScore::definition())
+            ->addToEnum(SubmitScore::definition(), 'submit-score')
             ->setIsUnnamed();
 
     }
