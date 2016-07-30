@@ -61,6 +61,7 @@ class Layout extends Hardcoded
         <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/css/pages.css" rel="stylesheet" type="text/css" />
         <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/css/menu.css" rel="stylesheet" type="text/css" />
         <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/js/modernizr.min.js"></script>
       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
