@@ -1,6 +1,7 @@
 {
   "require": {
-    "php-yaoi/php-yaoi": "^1.0"
+    "php-yaoi/php-yaoi": "dev-dirty",
+    "php-yaoi/twbs": "dev-master"
   },
   "autoload": {
     "psr-4": {
