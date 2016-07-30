@@ -44,6 +44,8 @@ class MatchDetails extends Hardcoded
         $user1Plate = (string)UserPlate::create($user1, $user1Info);
         $user2Plate = (string)UserPlate::create($user2, $user2Info);
 
+        $fbShare = (string)FbShare::create();
+
         echo <<<HTML
 <div class="row">
 {$gamePlate}
@@ -52,6 +54,8 @@ class MatchDetails extends Hardcoded
 {$user1Plate}
 {$user2Plate}
 </div>
+
+$fbShare
 HTML;
     }
 
