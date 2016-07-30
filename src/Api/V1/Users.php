@@ -30,7 +30,7 @@ class Users extends Command
         $st = User::statement()
             ->order('? ASC', User::columns()->name);
         if ($this->q) {
-           $st->where('? LIKE ?', User::columns()->name, $this->q . '%');
+           $st->where('? LIKE ?', User::columns()->name, '%' . $this->q . '%');
         }
 
         $stCnt = clone($st);
