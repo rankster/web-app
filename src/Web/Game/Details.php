@@ -24,7 +24,7 @@ class Details extends Command
     {
         $game = Game::findByPrimaryKey($this->gameId);
 
-        $this->response->addContent(print_r($game->toArray()));
+        $this->response->addContent(print_r($game->toArray(), 1));
     }
 
 
