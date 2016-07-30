@@ -1,0 +1,10 @@
+{
+  "require": {
+    "php-yaoi/php-yaoi": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Rankster\\": "src/"
+    }
+  }
+}
