@@ -29,25 +29,13 @@ class Login extends Command
                 $accessToken = $fbLogin->callback();
             }
 
-            $fb = Facebook::getInstance()->getSDK();
-            $response = $fb->get('/1335861333109486/friends?fields=id&limit=50', $accessToken);
-            print_r($response->getGraphEdge());
-            exit;
-
-            $request = new FacebookRequest(
-                $fb->getApp(),
-                'GET',
-                '/{user-id}/friends?fields=id'
-            );
-            $response = $request->execute();
-            $graphObject = $response->getGraphObject();
-
-            print_r($graphObject);
-            exit;
-
             $user = new Facebook\User($accessToken);
-            $data = $user->getData('me', ['picture', 'name', 'email']);
+            $data = $user->getData('me', ['picture', 'name', 'email', 'friends']);
             $data->getPicture()->getUrl();
+
+            print_r($data
+            );
+            exit;
 
             $userEntity = new User();
             $userEntity->facebookId = $data->getId();
