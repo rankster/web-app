@@ -2,9 +2,9 @@
 
 namespace Rankster\Api\V1;
 
+use Rankster\Entity\User;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
-use YaoiTests\Helper\Entity\User;
 
 class Users extends Command
 {
