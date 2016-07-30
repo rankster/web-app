@@ -38,7 +38,14 @@ $game = $game->findSaved();
                     <td><img class="img-circle" src="<?php echo \Rankster\Entity\User::patchToUrl($rank['picture_path']); ?>"/></td>
                     <td><?php echo $rank['name']; ?></td>
                     <td><?php echo $rank['rank']; ?></td>
-                    <td><?php echo implode(',', $history) ?></td>
+                    <td>
+                        <div id="#r<?=$rank['id']?>"></div>
+                        <script>
+                            $("#r<?=$rank['id']?>").sparkline([<?php echo implode(',', $history) ?>], {
+                                type: 'line'
+                            });
+                        </script>
+                    </td>
                 </tr>
             <?php } ?>
             </tbody>
