@@ -20,6 +20,10 @@ class Login extends Command
 
     public function performAction()
     {
+        if (!empty($_SESSION['user_id'])) {
+            header('Location: /');
+            exit();
+        }
         $fbLogin = new FacebookLogin();
         $url = $fbLogin->getLoginUrl();
         header('Location: ' . $url);
