@@ -24,22 +24,13 @@
   </div>
 
   <div class="col-sm-6 col-lg-3">
-  <div class="widget-simple-chart text-right card-box" style="max-height: 123px;text-align: center;">
-
-
-    <button class="btn btn-lg btn-danger waves-effect waves-light m-b-5" style="width:177px">
+  <div class="widget-simple-chart text-right card-box" style="min-height: 123px;text-align: center;">
+    <span class="btn btn-lg btn-danger waves-effect waves-light m-b-5" style="width:177px;margin:18px">
       <a href="#game-req" rel="modal:open">
         <i class="glyphicon glyphicon-new-window m-r-5" style="color: #fff;"></i>
         <span style="color: #fff;">New Match</span>
       </a>
-    </button>
-
-    <button class="btn btn-lg btn-success waves-effect waves-light m-b-5">
-      <a href="#game-req" rel="modal:open">
-        <i class="glyphicon glyphicon-refresh m-r-5" style="color: #fff;"></i>
-        <span style="color: #fff;">Replay Previous</span>
-      </a>
-      </button>
+    </span>
 
     </div>
   </div>
