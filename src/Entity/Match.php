@@ -39,6 +39,6 @@ class Match extends Entity
     static function setUpTable(\Yaoi\Database\Definition\Table $table, $columns)
     {
         Column::cast($columns->winnerId)->setFlag(Column::NOT_NULL, false);
-        $table->setSchemaName('match');
+        $table->setSchemaName('game_match');
     }
 }
