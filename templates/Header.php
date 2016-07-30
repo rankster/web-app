@@ -1,7 +1,7 @@
 <?php if (isset($_SESSION['user_name'])): ?>
 <div class="row">
-  <div class="col-sm-6 col-lg-3" style="min-height:123px;max-height:123px;">
-    <div class="card-box widget-user">
+  <div class="col-sm-6 col-lg-3" style="max-height:123px;">
+    <div class="card-box widget-user" style="min-height:123px;">
       <div>
         <img src="http://<?php echo $_SESSION['user_picture']; ?>" class="img-responsive img-circle" alt="user">
         <div class="wid-u-info">
