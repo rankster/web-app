@@ -1,4 +1,5 @@
 <button type="button" class="btn btn-primary" data-animation="blur" data-toggle="modal" data-target="#game-request" data-game-id="1">Open modal </button>
+<p><a href="#game-request" rel="modal:open">Open Modal.. yea</a></p>
 <div class="modal fade" id="game-request" tabindex="-1" role="dialog" aria-labelledby="gameRequestModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
