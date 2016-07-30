@@ -96,3 +96,4 @@
         });
     }, false);
 </script>
+<script src="jquery.modal.js" type="text/javascript" charset="utf-8"></script>
