@@ -3,7 +3,7 @@
 namespace Rankster\Web\Game;
 
 
-use Rankster\Entity\Game;
+use Rankster\Entity\Game as GameEntity;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 use Yaoi\Io\Content\Anchor;
@@ -19,13 +19,13 @@ class Items extends Command
 
     public function performAction()
     {
-        $games = Game::statement()->query()->fetchAll();
+        $games = GameEntity::statement()->query()->fetchAll();
         $gameState = Details::createState();
 
         $this->response->addContent(new Heading("Games"));
 
         $this->response->addContent(new Rows(Processor::create($games)->map(
-            function (Game $game) use ($gameState) {
+            function (GameEntity $game) use ($gameState) {
                 $row = array();
                 $gameState->gameId = $game->id;
                 $row['Name'] = new Anchor($game->name, $this->io->makeAnchor($gameState));

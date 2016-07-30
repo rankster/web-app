@@ -3,7 +3,7 @@
 namespace Rankster\Web\Game;
 
 
-use Rankster\Entity\Game;
+use Rankster\Entity\Game as GameEntity;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -22,7 +22,7 @@ class Details extends Command
 
     public function performAction()
     {
-        $game = Game::findByPrimaryKey($this->gameId);
+        $game = GameEntity::findByPrimaryKey($this->gameId);
 
         $this->response->addContent(print_r($game->toArray(), 1));
     }

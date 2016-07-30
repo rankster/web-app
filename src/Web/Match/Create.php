@@ -2,8 +2,8 @@
 
 namespace Rankster\Web\Match;
 
-use Rankster\Entity\Match;
-use Rankster\Entity\Rank;
+use Rankster\Entity\Match as CreateEntity;
+use Rankster\Entity\Rank as RankEntity;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -45,11 +45,11 @@ class Create extends Command
         $match->user2Id = $this->opponentId;
         $match->gameId = $this->gameId;
 
-        $rank1 = Rank::findOrCreateByUserGame($match->user1Id, $this->gameId);
-        $rank2 = Rank::findOrCreateByUserGame($match->user2Id, $this->gameId);
+        $rank1 = RankEntity::findOrCreateByUserGame($match->user1Id, $this->gameId);
+        $rank2 = RankEntity::findOrCreateByUserGame($match->user2Id, $this->gameId);
 
         $match->eventTime = time();
-        $match->status = Match::STATUS_ACCEPT;
+        $match->status = MatchEntity::STATUS_ACCEPT;
         if ($this->result === self::RESULT_DRAW) {
             $match->winnerId = null;
             $rank1->draw($rank2);

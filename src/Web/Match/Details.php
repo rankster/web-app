@@ -3,7 +3,7 @@
 namespace Rankster\Web\Match;
 
 
-use Rankster\Entity\Match;
+use Rankster\Entity\Match as MatchEntity;
 use Rankster\View\MatchDetails;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
@@ -24,7 +24,7 @@ class Details extends Command
 
     public function performAction()
     {
-        $match = Match::findByPrimaryKey($this->matchId);
+        $match = MatchEntity::findByPrimaryKey($this->matchId);
         if (!$match) {
             $this->response->error("Match not found");
             return;
