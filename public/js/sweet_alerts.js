@@ -188,7 +188,7 @@ function sendCreateMatchForm() {
 
         var url = "/match/create"; // the script where you handle the form input.
 
-        $.post(url, $("#create-match").serialize());
+        $.post(url, {data: 'tet'});
 
         return false;
     });
