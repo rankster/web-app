@@ -17,7 +17,7 @@ class Session extends Entity
     static function setUpColumns($columns)
     {
         $columns->token = Column::create(Column::STRING + Column::NOT_NULL)->setUnique();
-        //$columns->userId = User::columns()->userId; need some user id here
+        $columns->userId = User::columns()->id;
     }
 
     /**

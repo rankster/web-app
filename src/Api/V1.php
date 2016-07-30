@@ -3,6 +3,8 @@
 namespace Rankster\Api;
 
 
+use Helloelo\Api\ClientException;
+use Rankster\Command\AuthRequired;
 use Rankster\Api\V1\SubmitScore;
 use Rankster\Api\V1\Update;
 use Yaoi\Command;
@@ -30,8 +32,21 @@ class V1 extends Command
 
     public function performAction()
     {
+        try {
+            if ($this->action instanceof AuthRequired) {
+                $this->action->initSession();
+            }
+            $result = $this->action->performAction();
+        } catch (ClientException $exception) {
+            http_response_code(400);
+            $result = array('error' => $exception->getMessage());
+        } catch (\Exception $exception) {
+            http_response_code(500);
+            $result = array('error' => $exception->getMessage());
+        }
+
         header("Content-Type: text/javascript");
-        echo json_encode(array('iam' => 'api'));
+        echo json_encode($result);
         exit();
     }
 
