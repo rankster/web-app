@@ -64,6 +64,11 @@ class Create extends Command
         $rank1->save();
         $rank2->save();
         $match->save();
+
+        $details = Details::createState();
+        $details->matchId = $match->id;
+        $url = (string)$this->io->makeAnchor($details);
+        header("Location: $url");
     }
 
 
