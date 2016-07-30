@@ -47,6 +47,8 @@ class MatchDetails extends Hardcoded
         echo <<<HTML
 <div class="row">
 {$gamePlate}
+</div>
+<div class="row">
 {$user1Plate}
 {$user2Plate}
 </div>
