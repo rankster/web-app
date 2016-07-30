@@ -15,6 +15,8 @@ class Match extends Entity
     public $gameId;
     public $user1Id;
     public $user2Id;
+    public $user1Delta;
+    public $user2Delta;
     public $winnerId;
     public $eventTime;
     public $status;
@@ -28,6 +30,8 @@ class Match extends Entity
         $columns->user1Id = User::columns()->id;
         $columns->user2Id = User::columns()->id;
         $columns->winnerId = User::columns()->id;
+        $columns->user1Delta = Column::INTEGER;
+        $columns->user2Delta = Column::INTEGER;
         $columns->status = Column::STRING;
         $columns->eventTime = Column::INTEGER;
     }
