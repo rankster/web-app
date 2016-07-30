@@ -30,14 +30,12 @@ class Login extends Command
             }
 
             $user = new Facebook\User($accessToken);
-            $data = $user->getData('me', ['picture', 'name', 'email', 'friends']);
-            $data->getPicture()->getUrl();
 
-            print_r($data
-            );
-
+            $user->getUserList();
             exit;
 
+            $data = $user->getData('me', ['picture', 'name', 'email']);
+            $data->getPicture()->getUrl();
             $userEntity = new User();
             $userEntity->facebookId = $data->getId();
             if (!($userEntity = $userEntity->findSaved())) {
@@ -48,6 +46,7 @@ class Login extends Command
                 $userEntity->email = $data->getEmail();
                 $userEntity->findOrSave();
             }
+
 
             $_SESSION['user_id'] = $userEntity->id;
             $_SESSION['user_facebook_id'] = $userEntity->facebookId;

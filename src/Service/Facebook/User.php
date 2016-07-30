@@ -34,10 +34,10 @@ class User extends Service
         return $response->getGraphUser();
     }
 
-    public function getUserList($user = 'me')
+    public function getUserList()
     {
         $fb = Facebook::getInstance()->getSDK();
-        $response = $fb->get('/me/friends', $this->accessToken);
+        $response = $fb->get('/me/friends?fields=id', $this->accessToken);
         var_dump($response);
     }
 }
