@@ -38,8 +38,7 @@ class Create extends Command
             return;
         }
 
-        $this->response->addContent('<pre>' . print_r($_SESSION, 1) . '</pre>');
-
+        //$this->response->addContent('<pre>' . print_r($_SESSION, 1) . '</pre>');
 
         $match = new Match();
         $match->user1Id = $_SESSION['user_id'];
@@ -64,7 +63,6 @@ class Create extends Command
         $rank1->save();
         $rank2->save();
         $match->save();
-
     }
 
 
