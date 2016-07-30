@@ -80,9 +80,9 @@ class Layout extends Hardcoded
 
       <link href="/css/bootstrap-social.css" rel="stylesheet">
       <link href="/css/rankster.css" rel="stylesheet">
-      <script src="/js/jquery.sparkline.min.js"></script>
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="/js/jquery.min.js"></script>
+      <script src="/js/jquery.sparkline.min.js"></script>
 
   </head>
   <body>
