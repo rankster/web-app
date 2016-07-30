@@ -6,7 +6,7 @@
         <img src="<?php echo $_SESSION['user_picture']; ?>" class="img-responsive img-circle" alt="user">
         <div class="wid-u-info">
           <h4 class="m-t-0 m-b-5"><?php echo $_SESSION['user_name']; ?></h4>
-          <p class="text-muted m-b-5 font-13"><?php echo $_SESSION['user_email']; ?></p>
+          <p class="text-muted m-b-5 font-13"><?php echo '<pre>'; print_r($_SESSION); echo '</pre>'; ?></p>
           <small class="text-warning"><b>Gamer - Rookie</b></small>
         </div>
       </div>
