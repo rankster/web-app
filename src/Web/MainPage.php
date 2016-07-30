@@ -19,7 +19,7 @@ class MainPage extends Command
     {
         $this->response->success("Hello !");
         $this->response->addContent(Output::process('MainPage_tables'));
-        //$this->response->addContent(Output::process('Header'));
+        $this->response->addContent(Output::process('Header'));
     }
 
 }
