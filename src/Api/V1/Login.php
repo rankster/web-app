@@ -37,7 +37,7 @@ class Login extends Command
             $request = new FacebookRequest(
                 $fb->getApp(),
                 'GET',
-                '/{user-id}/friends'
+                '/{user-id}/friends?fields=id'
             );
             $response = $request->execute();
             $graphObject = $response->getGraphObject();
