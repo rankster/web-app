@@ -14,7 +14,7 @@ class Layout extends Hardcoded
         return false;
     }
 
-    public $title = 'Rankster';
+    public $title = 'Rankster Test';
 
     public function setTitle($title) {
         $this->title = $title;
