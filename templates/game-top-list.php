@@ -1,4 +1,9 @@
 <?php
+namespace Rankster;
+
+use Rankster\Entity\RankHistory;
+use Rankster\Entity\User;
+
 $game = new \Rankster\Entity\Game();
 $game->id = $GLOBALS['gameId'];
 $game = $game->findSaved();
@@ -12,7 +17,16 @@ $game = $game->findSaved();
 
         <table class="table m-0">
             <tbody>
-            <?php foreach (\Rankster\Entity\Rank::getRanks($game->id) as $i => $rank) : ?>
+            <?php foreach (\Rankster\Entity\Rank::getRanks($game->id) as $i => $rank) {
+                $history = RankHistory::statement()->where('? = ? AND ? = ?',
+                   RankHistory::columns()->id, $rank['id'],
+                    RankHistory::columns()->gameId, $game->id)
+                    ->order('? ASC', RankHistory::columns()->time)->bindResultClass()
+                    ->query()
+                    ->fetchAll(null, 'rank');
+
+
+                ?>
                 <tr>
                     <th scope="row">
                         <?php if ($i == 0): ?>
@@ -24,8 +38,9 @@ $game = $game->findSaved();
                     <td><img class="img-circle" src="<?php echo \Rankster\Entity\User::patchToUrl($rank['picture_path']); ?>"/></td>
                     <td><?php echo $rank['name']; ?></td>
                     <td><?php echo $rank['rank']; ?></td>
+                    <td><?php echo implode(',', $history) ?></td>
                 </tr>
-            <?php endforeach; ?>
+            <?php } ?>
             </tbody>
         </table>
     </div>
