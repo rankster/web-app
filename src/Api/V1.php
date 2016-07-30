@@ -26,7 +26,7 @@ class V1 extends Command
     {
         $options->action = Command\Option::create()
             ->addToEnum(Update::definition())
-            ->addToEnum(Login::definition())
+            ->addToEnum(Login::definition(), 'login')
             ->addToEnum(SubmitScore::definition(), 'submit-score')
             ->addToEnum(AddUser::definition(), 'add-user')
             ->setIsUnnamed();
