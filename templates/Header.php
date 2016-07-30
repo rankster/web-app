@@ -27,7 +27,7 @@
   <div class="widget-simple-chart text-right card-box">
 
 
-    <button class="btn btn-lg btn-warning waves-effect waves-light m-b-5">
+    <button class="btn btn-lg btn-danger waves-effect waves-light m-b-5" style="width:177px">
       <a href="#game-req" rel="modal:open">
         <i class="glyphicon glyphicon-new-window m-r-5" style="color: #fff;"></i>
         <span style="color: #fff;">New Match</span>

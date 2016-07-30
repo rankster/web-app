@@ -25,7 +25,7 @@ class GamePlate extends Hardcoded
   <div class="col-sm-6 col-lg-6">
     <div class="card-box widget-user">
       <div>
-        <img src="{$image}" class="img-responsive img-circle" alt="user">
+        <img src="{$image}" class="img-responsive" alt="user">
         <div class="wid-u-info">
           <h4 class="m-t-0 m-b-5">{$game->name}</h4>
           <p class="text-muted m-b-5 font-13">Players: {$players}</p>          
