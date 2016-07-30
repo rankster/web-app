@@ -40,6 +40,9 @@ class V1 extends Command
         } catch (ClientException $exception) {
             http_response_code(400);
             $result = array('error' => $exception->getMessage());
+        } catch (Command\Exception $exception) {
+            http_response_code(400);
+            $result = array('error' => $exception->getMessage());
         } catch (\Exception $exception) {
             http_response_code(500);
             $result = array('error' => $exception->getMessage());
