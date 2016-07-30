@@ -14,7 +14,8 @@ class MainPage extends Command
 
     public function performAction()
     {
-        $this->response->success("Hello! Test From Alexis");
+      $this->response->success("Hello! Test From Alexis");
+      $this->response->addContent("qwe");
     }
 
 
