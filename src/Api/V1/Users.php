@@ -19,7 +19,6 @@ class Users extends Command
     {
         $options->p = Command\Option::create()->setType();
         $options->q = Command\Option::create()->setType();
-
     }
 
     public function performAction()
@@ -29,6 +28,9 @@ class Users extends Command
 
         $st = User::statement()
             ->order('? ASC', User::columns()->name);
+        if (isset($_SESSION['user_id'])) {
+            $st->where('? != ?', User::columns()->id, $_SESSION['user_id']);
+        }
         if ($this->q) {
            $st->where('? LIKE ?', User::columns()->name, '%' . $this->q . '%');
         }
