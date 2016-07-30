@@ -26,8 +26,8 @@
 
 <?php } else { ?>
 <div class="row">
-  <div class="col-sm-6 col-lg-3" style="max-height:123px;">
-    <div class="card-box widget-user" style="min-height:123px;">
+  <div class="col-sm-6 col-lg-3">
+    <div class="card-box">
       <div>
         <a href="/login" class="btn btn-block btn-social btn-facebook">
           <span class="fa fa-facebook"></span> Sign in with Facebook
