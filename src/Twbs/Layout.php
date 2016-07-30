@@ -47,7 +47,7 @@ class Layout extends Hardcoded
     <title><?=$this->title?></title>
       <link rel="shortcut icon" href="/rankster-favico.png">
     <!-- Bootstrap -->
-      <!--link rel="stylesheet" href="/css/bootstrap.min.css"-->
+      <link rel="stylesheet" href="/css/bootstrap.min.css">
 
       <!-- Optional theme -->
       <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
