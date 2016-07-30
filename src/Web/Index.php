@@ -42,11 +42,7 @@ class Index extends Command
 
     public function performAction()
     {
-        try {
-            $this->action->performAction();
-        } catch (Exception $e) {
-            var_dump($e->query);
-        }
+        $this->action->performAction();
     }
 
 }

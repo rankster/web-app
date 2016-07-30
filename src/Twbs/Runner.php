@@ -6,6 +6,7 @@ use Rankster\Twbs\Response;
 use Rankster\Twbs\Layout;
 use Yaoi\BaseClass;
 use Yaoi\Command;
+use Yaoi\Database\Exception;
 use Yaoi\Io\Request;
 
 class Runner extends BaseClass
@@ -25,6 +26,11 @@ class Runner extends BaseClass
         try {
             $io = new Command\Io($definition, $requestMapper, $response);
             $io->getCommand()->performAction();
+        }
+        catch (Exception $exception) {
+            $response->error($exception->getMessage());
+            $response->error($exception->query);
+            $response->error('<pre>' . $exception->getTraceAsString() . '</pre>');
         }
         catch (\Exception $exception) {
             $response->error($exception->getMessage());
