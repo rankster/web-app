@@ -4,6 +4,7 @@ namespace Rankster\Api;
 
 
 use Rankster\Api\V1\AddUser;
+use Rankster\Api\V1\Games;
 use Rankster\Api\V1\Login;
 use Rankster\Command\AuthRequired;
 use Rankster\Api\V1\SubmitScore;
@@ -27,6 +28,7 @@ class V1 extends Command
         $options->action = Command\Option::create()
             ->addToEnum(Update::definition())
             ->addToEnum(Login::definition(), 'login')
+            ->addToEnum(Games::definition(), 'games')
             ->addToEnum(SubmitScore::definition(), 'submit-score')
             ->addToEnum(AddUser::definition(), 'add-user')
             ->setIsUnnamed();

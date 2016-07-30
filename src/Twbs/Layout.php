@@ -50,7 +50,7 @@ class Layout extends Hardcoded
       <!--link rel="stylesheet" href="/css/bootstrap.min.css"-->
 
       <!-- Optional theme -->
-      <!--link rel="stylesheet" href="/css/bootstrap-theme.min.css"-->
+      <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
 
         <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/bootstrap-sweetalert/sweet-alert.css " rel="stylesheet" type="text/css">
         <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/jquery-circliful/css/jquery.circliful.css" rel="stylesheet" type="text/css" />
@@ -115,6 +115,9 @@ class Layout extends Hardcoded
                 $('.circliful-chart').circliful();
             });
         </script>
+    <script src="/js/select2.min.js"></script>
+
+    <script src="/js/rankster.js"></script>
   </body>
 </html>
 <?php
