@@ -29,7 +29,7 @@
 
     <button class="btn btn-lg btn-warning waves-effect waves-light m-b-5">
       <a href="#game-req" rel="modal:open">
-        <i class="glyphicon glyphicon-refresh m-r-5" style="color: #fff;"></i>
+        <i class="glyphicon glyphicon-new-window m-r-5" style="color: #fff;"></i>
         <span style="color: #fff;">New Match</span>
       </a>
     </button>
