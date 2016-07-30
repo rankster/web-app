@@ -48,6 +48,9 @@ class Create extends Command
         $rank1 = RankEntity::findOrCreateByUserGame($match->user1Id, $this->gameId);
         $rank2 = RankEntity::findOrCreateByUserGame($match->user2Id, $this->gameId);
 
+        $r1 = $rank1->rank;
+        $r2 = $rank2->rank;
+
         $match->eventTime = time();
         $match->status = MatchEntity::STATUS_ACCEPT;
         if ($this->result === self::RESULT_DRAW) {
@@ -60,6 +63,9 @@ class Create extends Command
             $rank2->win($rank1);
             $match->winnerId = $match->user2Id;
         }
+
+        $match->user1Delta = $rank1->rank - $r1;
+        $match->user2Delta = $rank2->rank - $r2;
 
         $rank1->save();
         $rank2->save();
