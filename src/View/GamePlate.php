@@ -29,7 +29,6 @@ class GamePlate extends Hardcoded
         <div class="wid-u-info">
           <h4 class="m-t-0 m-b-5">{$game->name}</h4>
           <p class="text-muted m-b-5 font-13">Players: {$players}</p>          
-          <small class="text-success"><b>Rookie</b></small>
         </div>
       </div>
     </div>
