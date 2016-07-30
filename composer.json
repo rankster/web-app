@@ -1,7 +1,8 @@
 {
   "require": {
     "php-yaoi/php-yaoi": "dev-dirty",
-    "php-yaoi/twbs": "dev-master"
+    "php-yaoi/twbs": "dev-master",
+    "facebook/php-sdk-v4": "^5.2"
   },
   "autoload": {
     "psr-4": {

@@ -7,6 +7,10 @@ use Yaoi\Command;
 use Yaoi\Command\Definition;
 use Yaoi\Database\Definition\Table;
 use Yaoi\Log;
+use Rankster\Entity\Game;
+use Rankster\Entity\User;
+use Rankster\Entity\Match;
+use Rankster\Entity\Rank;
 
 class Migrate extends Command
 {
@@ -27,6 +31,10 @@ class Migrate extends Command
         $tables = array(
             // put your tables here
             Session::table(),
+            User::table(),
+            Game::table(),
+            Match::table(),
+            Rank::table(),
         );
 
         $log = new Log('colored-stdout');
