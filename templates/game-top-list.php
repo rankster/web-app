@@ -42,11 +42,9 @@ $game = $game->findSaved();
                     <td>
                         <div id="#r<?= $rank['id'] ?>" style="width:40px;height: 20px"></div>
                         <script>
-                            $(
-                                $("#r<?=$rank['id']?>").sparkline([<?php echo implode(',', $history) ?>], {
-                                    type: 'line'
-                                })
-                            );
+                            $("#r<?=$rank['id']?>").sparkline([<?php echo implode(',', $history) ?>], {
+                                type: 'line'
+                            });
                         </script>
                     </td>
                 </tr>
