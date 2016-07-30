@@ -31,9 +31,18 @@
         <span style="color: #fff;">New Match</span>
       </a>
     </span>
-
     </div>
   </div>
+
+  <div class="col-sm-6 col-lg-3">
+    <div class="widget-simple-chart text-right card-box" style="min-height: 123px;text-align: center;">
+      Replay Match
+      <img src="http://collegiateattire.com/wp-content/uploads/2016/06/versus-icon-vs-icon-315x400.jpg" width="50" />
+      <img class="img-circle" src="//rankster.penix.tk/user-images/fb5/c5c9e9261d500eb3ffd1b3a58e811.jpg">
+      <img class="img-circle" width="75" src="//rankster.penix.tk/user-images/../images/pingpong.png">
+    </div>
+  </div>
+
 </div>
 
 <?php } else { ?>
