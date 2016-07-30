@@ -26,6 +26,7 @@ class Index extends Command
             ->setIsUnnamed()
             ->addToEnum(MainPage::definition(), '/')
             ->addToEnum(V1::definition(), 'v1')
+            ->addToEnum(V1\Update::definition(), 'git-update')
         ;
 
         $definition->description = 'Ranking service';

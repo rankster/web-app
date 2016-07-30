@@ -3,6 +3,7 @@
 namespace Rankster\Api;
 
 
+use Rankster\Api\V1\Update;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -20,6 +21,7 @@ class V1 extends Command
     static function setUpDefinition(Definition $definition, $options)
     {
         $options->action = Command\Option::create()
+            ->addToEnum(Update::definition())
             ->setIsUnnamed();
 
     }
