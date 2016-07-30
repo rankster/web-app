@@ -18,6 +18,9 @@ class SubmitScore extends Command
      */
     static function setUpDefinition(Definition $definition, $options)
     {
+        $definition->name = 'Submit score';
+        $definition->description = 'Submits a score for two players at a game';
+
         $options->victorName = Command\Option::create()->setType()->setDescription("Winning player name");
         $options->loserName = Command\Option::create()->setType()->setDescription("Losing player name");
         $options->gameName = Command\Option::create()->setType()->setDescription("Game name");
