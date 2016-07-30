@@ -7,6 +7,7 @@ use Rankster\Entity\Game;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 use Yaoi\Io\Content\Anchor;
+use Yaoi\Io\Content\Heading;
 use Yaoi\Io\Content\Rows;
 use Yaoi\Rows\Processor;
 
@@ -20,6 +21,8 @@ class Items extends Command
     {
         $games = Game::statement()->query()->fetchAll();
         $gameState = Details::createState();
+
+        $this->response->addContent(new Heading("Games"));
 
         $this->response->addContent(new Rows(Processor::create($games)->map(
             function (Game $game) use ($gameState) {
