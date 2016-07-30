@@ -26,9 +26,21 @@
   <div class="col-sm-6 col-lg-3">
   <div class="widget-simple-chart text-right card-box">
 
-    <button href="#game-req" rel="modal:open" class="btn-big btn-warning waves-effect waves-light m-b-5"> <i class="fa fa-rocket m-r-5"></i> <span>Submit Results!</span> </button>
 
-    <p><a href="#game-req" rel="modal:open">Game Submit result</a></p>
+    <button class="btn btn-lg btn-warning waves-effect waves-light m-b-5">
+      <a href="#game-req" rel="modal:open">
+        <i class="glyphicon glyphicon-refresh m-r-5" style="color: #fff;"></i>
+        <span style="color: #fff;">New Match</span>
+      </a>
+    </button>
+
+    <button class="btn btn-lg btn-success waves-effect waves-light m-b-5">
+      <a href="#game-req" rel="modal:open">
+        <i class="glyphicon glyphicon-refresh m-r-5" style="color: #fff;"></i>
+        <span style="color: #fff;">Replay Previous</span>
+      </a>
+      </button>
+
     </div>
   </div>
 </div>
