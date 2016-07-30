@@ -11,6 +11,7 @@ class User extends Entity
     public $id;
     public $facebookId;
     public $name;
+    public $login;
     public $email;
     public $picturePath;
     /**
@@ -22,6 +23,7 @@ class User extends Entity
         $columns->facebookId = Column::create(Column::STRING + Column::NOT_NULL)
             ->setStringLength(50)
             ->setUnique();
+        $columns->login = Column::create(Column::STRING)->setUnique();
         $columns->name = Column::STRING + Column::NOT_NULL;
         $columns->email = Column::STRING + Column::NOT_NULL;
         $columns->picturePath = Column::STRING;
