@@ -95,7 +95,7 @@ class Layout extends Hardcoded
 
       <!-- Your share button code -->
       <div class="fb-share-button"
-           data-href="http://www.your-domain.com/your-page.html"
+           data-href="http://rankster.penix.tk/<?=$_SERVER['REQUEST_URI']?>"
            data-layout="button_count">
       </div>
   </div>
