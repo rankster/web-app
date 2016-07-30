@@ -20,6 +20,7 @@ class Login extends Command
 
     public function performAction()
     {
+        session_start();
         $fbLogin = new Facebook\Login();
         try {
             $accessToken = $fbLogin->callback();
