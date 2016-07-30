@@ -23,7 +23,10 @@ class Login extends Command
         session_start();
         $fbLogin = new Facebook\Login();
         try {
-            $accessToken = $fbLogin->callback();
+            $accessToken = $fbLogin->getStoredAccessToken();
+            if (!$accessToken) {
+                $accessToken = $fbLogin->callback();
+            }
             $user = new Facebook\User($accessToken);
             $data = $user->getData();
             var_dump($data);
