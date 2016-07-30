@@ -3,6 +3,7 @@
 namespace Rankster\Web;
 
 
+use Rankster\Service\Output;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -16,15 +17,8 @@ class MainPage extends Command
 
     public function performAction()
     {
-      $this->response->success("Hello! Test From Alexis");
-      $this->response->addContent(file_get_contents("./Static/MainPage_tables.html"));
-
-        $ss = <<<HTML
-<p>Yeah, {$this->bitch}</p>
-HTML;
-        $this->response->addContent($ss);
-
+        $this->response->success("Hello! Test From Alexis");
+        $this->response->addContent(Output::process('MainPage_tables'));
     }
-
 
 }
