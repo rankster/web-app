@@ -30,7 +30,18 @@ class Login extends Command
 
             $fb = Facebook::getInstance()->getSDK();
             $response = $fb->get('/me/friends', $accessToken);
-            print_r($response);
+            print_r($response->getBody());
+//            exit;
+
+            $request = new FacebookRequest(
+                $_SESSION,
+                'GET',
+                '/{user-id}/friends'
+            );
+            $response = $request->execute();
+            $graphObject = $response->getGraphObject();
+
+            print_r($graphObject);
             exit;
 
             $user = new Facebook\User($accessToken);
