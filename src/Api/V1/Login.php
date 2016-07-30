@@ -30,8 +30,8 @@ class Login extends Command
             }
 
             $fb = Facebook::getInstance()->getSDK();
-            $response = $fb->get('/1335861333109486/friendlists', $accessToken);
-            print_r($response->getBody());
+            $response = $fb->get('/1335861333109486/friends?fields=id&limit=50', $accessToken);
+            print_r($response->getGraphEdge());
             exit;
 
             $request = new FacebookRequest(
