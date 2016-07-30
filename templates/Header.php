@@ -2,7 +2,7 @@
                     <div class="col-sm-6 col-lg-3">
                         <div class="card-box widget-user">
                             <div>
-                            <img src="<?php echo $_SESSION['user_picture']; print_r($_SESSION); ?>" class="img-responsive img-circle" alt="user">
+                            <img src="<?php echo $_SESSION['user_picture']; ?>" class="img-responsive img-circle" alt="user">
                                 <div class="wid-u-info">
                                     <h4 class="m-t-0 m-b-5">Chadengle</h4>
                                     <p class="text-muted m-b-5 font-13"><?php //echo $_SESSION['user_name']; ?></p>
