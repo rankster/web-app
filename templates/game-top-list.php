@@ -53,7 +53,7 @@ $game = $game->findSaved();
                         </script>
                     </td>
                     <td>
-                        <button onclick="gameReplayDialog(<?=json_encode($game->toArray())?>, <?=json_encode($user->toArray())?>)">...</button>
+                        <button onclick='gameReplayDialog(<?=json_encode($game->toArray())?>, <?=json_encode($user->toArray())?>)'>...</button>
                     </td>
                 </tr>
             <?php } ?>
