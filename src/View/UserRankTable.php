@@ -70,7 +70,7 @@ class UserRankTable extends Hardcoded
         </td>
         <td>
         <span title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5" onclick='gameReplayDialog($gameJson, $userJson)'>
-            <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i>
+            <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i> New match
         </span>
         </td>
     </tr>
