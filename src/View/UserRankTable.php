@@ -90,7 +90,7 @@ HTML;
     <div class="card-box">
         <h4 class="m-t-0 header-title" style="float: right"><b>{$this->name}</b></h4>
         <p class="text-muted font-13 m-b-25">
-            <img class="img-circle" width="75" src="{$this->image}">
+            <img class="img-circle" width="55" src="{$this->image}">
         </p>
 
         <table class="table m-0">
