@@ -63,7 +63,7 @@ class Match extends Entity
 
 
         $matchWin = count($totalMatch) - count($matchLost);
-        $percents = ($matchWin / count($totalMatch)) * 100;
+        $percents = (count($matchLost) / count($totalMatch)) * 100;
 
         return ["total" => count($totalMatch), "percents" => round($percents)];
     }

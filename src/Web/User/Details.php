@@ -2,7 +2,7 @@
 
 namespace Rankster\Web\User;
 
-use Rankster\Entity\User;
+use Rankster\Entity\User as UserEntity;
 use Rankster\View\UserRankTable;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
@@ -22,7 +22,7 @@ class Details extends Command
 
     public function performAction()
     {
-        $user = User::findByPrimaryKey($this->userId);
+        $user = UserEntity::findByPrimaryKey($this->userId);
         $ranks = \Rankster\Entity\Rank::getRanksByUser($this->userId);
         $table = UserRankTable::create();
         $table->name = $user->name;
