@@ -33,7 +33,7 @@ class UserRankTable extends Hardcoded
         if ($this->byUser) {
             $game = Game::findByPrimaryKey($r->gameId);
             $image = $game->getFullUrl();
-            $title = $game->name;
+            $title = $game->name . '<br/>' . $r->matches . 'matches played';
 
         } else {
             $image = \Rankster\Entity\User::patchToUrl($rank['picture_path']);
@@ -72,6 +72,8 @@ HTML;
 
     public function render()
     {
+
+        print_r($this->userRanks);
 
         $rows = '';
         foreach ($this->userRanks as $i => $rank) {
