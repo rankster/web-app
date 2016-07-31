@@ -13,13 +13,17 @@
       </div>
     </div>
   </div>
-
+    
+    <?php
+      $match = new \Rankster\Entity\Match();
+      $userStats = $match->getTotalWins($_SESSION['user_email']);
+    ?>
   <div class="col-sm-6 col-lg-3">
     <div class="widget-simple-chart text-right card-box">
-      <div class="circliful-chart circliful" data-dimension="90" data-text="35%" data-width="5" data-fontsize="14" data-percent="35" data-fgcolor="#5fbeaa" data-bgcolor="#ebeff2" style="width: 90px;">
+      <div class="circliful-chart circliful" data-dimension="90" data-text="<?php echo $userStats["percents"]; ?>%" data-width="5" data-fontsize="14" data-percent="<?php echo $userStats["percents"]; ?>" data-fgcolor="#5fbeaa" data-bgcolor="#ebeff2" style="width: 90px;">
       </div>
-      <h3 class="text-success counter">19</h3>
-      <p class="text-muted">Total wins this week</p>
+      <h3 class="text-success counter"><?php echo $userStats["total"]; ?></h3>
+      <p class="text-muted">Total Games This Week</p>
     </div>
   </div>
 

@@ -49,6 +49,24 @@ class Match extends Entity
         $table->setSchemaName('game_match');
     }
 
+    public function getTotalWins($userEmail) {
+        $match = new Match();
+
+        $totalMatch = $match->statement()->
+        where("?=? OR ?=?", $match->columns()->user1Id, $_SESSION['user_id'], $match->columns()->user2Id, $_SESSION['user_id'])->
+        query()->fetchAll();
+
+        $matchLost = $match->statement()->
+        where("?=? OR ?=?", $match->columns()->user1Id, $_SESSION['user_id'], $match->columns()->user2Id, $_SESSION['user_id'])->
+            where("? != ?", $match->columns()->winnerId, $_SESSION['user_id'])->
+            query()->fetchAll();
+
+
+        $matchWin = count($totalMatch) - count($matchLost);
+        $percents = ($matchWin / count($totalMatch)) * 100;
+
+        return ["total" => count($totalMatch), "percents" => round($percents)];
+    }
 
     public static function make($user1Id, $user2Id, $gameId, $result) {
         $match = new Match();
