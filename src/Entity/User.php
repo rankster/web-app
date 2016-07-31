@@ -86,4 +86,20 @@ class User extends Entity
     {
         return '//' . $_SERVER['HTTP_HOST'] . '/' . self::IMAGE_FOLDER . $path;
     }
+
+    public function findLastMatch()
+    {
+        $cols = Match::columns();
+        /** @var Match $last */
+        $last = Match::statement()->where("? = ? OR ? = ?", $cols->user1Id, $this->id, $cols->user2Id, $this->id)
+            ->order("? DESC", $cols->id)
+            ->limit(1);
+
+        if (!$last) {
+            return null;
+        }
+
+        $opponentId = $last->user1Id === $this->id ? $last->user2Id : $last->user1Id;
+        return array('user' => User::findByPrimaryKey($opponentId), 'game' => Game::findByPrimaryKey($last->gameId));
+    }
 }
