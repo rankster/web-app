@@ -59,9 +59,6 @@ function sendCreateMatchForm() {
             'result': $( "input:radio[name=result]:checked" ).val(),
             'opponent_id': $('#recipient-name').val(),
             'game_id': $('#game').val()
-        },
-        function (data) {
-            console.log(data);
         }
     );
 
