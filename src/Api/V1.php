@@ -8,6 +8,7 @@ use Rankster\Api\V1\Games;
 use Rankster\Api\V1\Login;
 use Rankster\Api\V1\SeedMatches;
 use Rankster\Api\V1\Users;
+use Rankster\Api\V1\WipeRank;
 use Rankster\Command\AuthRequired;
 use Rankster\Api\V1\SubmitScore;
 use Rankster\Api\V1\Update;
@@ -33,6 +34,7 @@ class V1 extends Command
             ->addToEnum(Games::definition(), 'games')
             ->addToEnum(Users::definition(), 'users')
             ->addToEnum(SubmitScore::definition(), 'submit-score')
+            ->addToEnum(WipeRank::definition(), 'wipe-rank')
             ->addToEnum(AddUser::definition(), 'add-user')
             ->addToEnum(SeedMatches::definition(), 'seed-matches')
             ->setIsUnnamed();
