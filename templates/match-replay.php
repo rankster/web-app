@@ -40,11 +40,16 @@
     </div>
 </div>
 <script>
+window.addEventListener('load', function () {
+    $('#game-replay [rel="modal:close"]').click(function () {
+        $('#game-replay').hide();
+    })
+}, false);
 function gameReplayDialog(game, opponent) {
     $('#reply-game-id').val(game.id);
-    $('#label-game-name').val(game.name);
+    $('#label-game-name').html(game.name);
     $('#reply-opponent-id').val(opponent.id);
-    $('#label-opponent-name').val(opponent.name);
+    $('#label-opponent-name').html(opponent.name);
     $('#game-replay').show();
 }
 </script>
