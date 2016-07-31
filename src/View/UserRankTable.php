@@ -53,7 +53,7 @@ class UserRankTable extends Hardcoded
         return <<<HTML
     <tr>
         <th scope="row">{$firstcol}</th>
-        <td><img class="img-circle" src="{$image}"/></td>
+        <td><img class="img-circle" style="width:50px;height:50px" src="{$image}"/></td>
         <td>$title</td>
         <td><?php echo $r->rank; ?></td>
         <td style="width:80px">
