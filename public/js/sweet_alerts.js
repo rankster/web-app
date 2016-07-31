@@ -54,9 +54,7 @@
 
 function sendCreateMatchForm() {
 
-    $.post( "/v1/submit-score", $("#create-match").serialize(), function (data) {
-       console.log(data);
-    });
+    $.post( "/v1/submit-score", $("#create-match").serialize());
 
     switch($( "input:radio[name=result]:checked" ).val()) {
     case "win":
