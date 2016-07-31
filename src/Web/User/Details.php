@@ -29,6 +29,9 @@ class Details extends Command
         $table->image = $user->getFullUrl();
         $table->userRanks = $ranks;
         $this->response->addContent((string)$table);
+
+        $this->response->addContent(\Rankster\Service\Output::process('match-replay'));
+        $this->response->addContent(\Rankster\Service\Output::process('match-request'));
     }
 
 }
