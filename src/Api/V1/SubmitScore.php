@@ -3,14 +3,16 @@
 namespace Rankster\Api\V1;
 
 
+use Rankster\Entity\Match;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
 class SubmitScore extends Command
 {
-    public $victorName;
-    public $loserName;
-    public $gameName;
+    public $user1Id;
+    public $user2Id;
+    public $gameId;
+    public $result;
 
     /**
      * @param Definition $definition
@@ -21,14 +23,15 @@ class SubmitScore extends Command
         $definition->name = 'Submit score';
         $definition->description = 'Submits a score for two players at a game';
 
-        $options->victorName = Command\Option::create()->setType()->setIsRequired()->setDescription("Winning player name");
-        $options->loserName = Command\Option::create()->setType()->setIsRequired()->setDescription("Losing player name");
-        $options->gameName = Command\Option::create()->setType()->setIsRequired()->setDescription("Game name");
+        $options->user1Id = Command\Option::create()->setType()->setIsRequired();
+        $options->user2Id = Command\Option::create()->setType()->setIsRequired();
+        $options->gameId = Command\Option::create()->setType()->setIsRequired();
+        $options->result = Command\Option::create()->setEnum(Match::RESULT_WIN, Match::RESULT_DRAW, Match::RESULT_LOSE);
     }
 
     public function performAction()
     {
-        return array($this->victorName, $this->loserName, $this->gameName);
+        return Match::make($this->user1Id, $this->user2Id, $this->gameId, $this->result)->toArray();
     }
 
 
