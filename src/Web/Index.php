@@ -6,6 +6,7 @@ use Rankster\Api\V1;
 use Rankster\Web\Forms\SubmitScore;
 use Rankster\Web\Game\Game;
 use Rankster\Web\Match\Match;
+use Rankster\Web\User\User;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 use Yaoi\Database\Definition\Exception;
@@ -33,6 +34,7 @@ class Index extends Command
             ->addToEnum(SubmitScore::definition(), 'submit-score')
             ->addToEnum(Game::definition())
             ->addToEnum(Match::definition())
+            ->addToEnum(User::definition())
             ->addToEnum(V1::definition(), 'v1')
             ->addToEnum(V1\Update::definition(), 'git-update')
         ;
