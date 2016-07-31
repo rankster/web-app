@@ -40,7 +40,10 @@ $game = $game->findSaved();
                     </th>
                     <td><img class="img-circle"
                              src="<?php echo \Rankster\Entity\User::patchToUrl($rank['picture_path']); ?>"/></td>
-                    <td><a href="/user/details?user_id=<?=$user->id?>"><?php echo $user->name; ?></a><br /><?php echo $r->matches ?> matches played</td>
+                    <td>
+                        <a href="/user/details?user_id=<?= $user->id ?>"><?php echo $user->name; ?></a><br/><?php echo $r->matches ?>
+                        matches played
+                    </td>
                     <td><?php echo $r->rank; ?></td>
                     <td style="width:80px">
                         <div id="r<?= $rank['id'] . '-' . $game->id ?>" style="width:80px;height: 20px"></div>
@@ -53,7 +56,11 @@ $game = $game->findSaved();
                         </script>
                     </td>
                     <td>
-                        <button onclick='gameReplayDialog(<?=json_encode($game->toArray())?>, <?=json_encode($user->toArray())?>)'>...</button>
+                        <span title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5"
+                              onclick='gameReplayDialog(<?= json_encode($game->toArray()) ?>, <?= json_encode($user->toArray()) ?>)'>
+            <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i> New match
+        </span>
+
                     </td>
                 </tr>
             <?php } ?>

@@ -34,11 +34,11 @@ class UserRankTable extends Hardcoded
 
         if ($this->byUser) {
             $image = $game->getFullUrl();
-            $title = $game->name . '<br/>' . $r->matches . 'matches played';
+            $title = $game->name . '<br/>' . $r->matches . ' matches played';
 
         } else {
             $image = \Rankster\Entity\User::patchToUrl($rank['picture_path']);
-            $title = $user->name . '<br/>' . $r->matches . 'matches played';
+            $title = $user->name . '<br/>' . $r->matches . ' matches played';
         }
 
         $history = RankHistory::statement()->where('? = ? AND ? = ?',
