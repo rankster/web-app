@@ -52,7 +52,7 @@ $game = $game->findSaved();
                             });
                         </script>
                     </td>
-                    <td><?php echo $r->matches ?></td>
+                    <td><?php echo $r->matches ?> matches</td>
                 </tr>
             <?php } ?>
             </tbody>
