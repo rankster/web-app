@@ -93,7 +93,7 @@ class User extends Entity
         /** @var Match $last */
         $last = Match::statement()->where("? = ? OR ? = ?", $cols->user1Id, $this->id, $cols->user2Id, $this->id)
             ->order("? DESC", $cols->id)
-            ->limit(1);
+            ->limit(1)->query()->fetchRow();
 
         if (!$last) {
             return null;
