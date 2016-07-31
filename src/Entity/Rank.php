@@ -103,4 +103,19 @@ class Rank extends Entity
 
         return $query->fetchAll();
     }
+
+    public static function getRanksByUser($userId, $perPage = 20, $page = 0)
+    {
+        $st = Rank::statement()
+            ->where('? = ?', Rank::columns()->userId, $userId)
+            ->order('? DESC', Rank::columns()->rank)
+            ->innerJoin('? ON (? = ?)', User::table(), User::columns()->id, Rank::columns()->userId)
+            ->limit($perPage, $perPage * $page);
+
+        $query = $st->query();
+        $query->bindResultClass();
+
+        return $query->fetchAll();
+    }
+
 }
