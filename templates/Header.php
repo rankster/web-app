@@ -63,7 +63,7 @@
 
         <img src="http://collegiateattire.com/wp-content/uploads/2016/06/versus-icon-vs-icon-315x400.jpg" width="50"/>
         <img class="img-circle" src="<?=$user->getFullUrl()?>">
-        <img class="img-circle" width="75" src="<?=$game->getFullUrl()?>">
+        <img class="img-circle" width="55" src="<?=$game->getFullUrl()?>">
         <?php
       }
       ?>
