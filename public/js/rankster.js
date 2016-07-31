@@ -49,3 +49,11 @@ function formatParticipant (participant) {
 function formatParticipantSelection (participant) {
     return participant.name || participant.text;
 }
+
+function gameReplayDialog(game, opponent) {
+    $('#reply-game-id').val(game.id);
+    $('#label-game-name').html(game.name);
+    $('#reply-opponent-id').val(opponent.id);
+    $('#label-opponent-name').html(opponent.name);
+    $('#game-replay').show();
+}

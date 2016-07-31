@@ -30,15 +30,15 @@ class UserRankTable extends Hardcoded
 
         $user = User::fromArray($rank);
         $r = Rank::fromArray($rank);
+        $game = Game::findByPrimaryKey($r->gameId);
 
         if ($this->byUser) {
-            $game = Game::findByPrimaryKey($r->gameId);
             $image = $game->getFullUrl();
-            $title = $game->name . '<br/>' . $r->matches . 'matches played';
+            $title = $game->name . '<br/>' . $r->matches . ' matches played';
 
         } else {
             $image = \Rankster\Entity\User::patchToUrl($rank['picture_path']);
-            $title = $user->name . '<br/>' . $r->matches . 'matches played';
+            $title = $user->name . '<br/>' . $r->matches . ' matches played';
         }
 
         $history = RankHistory::statement()->where('? = ? AND ? = ?',
@@ -50,7 +50,8 @@ class UserRankTable extends Hardcoded
         $history = implode(',', $history);
 
 
-
+        $gameJson = json_encode($game->toArray());
+        $userJson = json_encode($user->toArray());
         return <<<HTML
     <tr>
         <th scope="row">{$firstcol}</th>
@@ -66,6 +67,11 @@ class UserRankTable extends Hardcoded
                     height: '20px'
                 });
             </script>
+        </td>
+        <td>
+        <span title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5" onclick='gameReplayDialog($gameJson, $userJson)'>
+            <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i> New match
+        </span>
         </td>
     </tr>
 HTML;
