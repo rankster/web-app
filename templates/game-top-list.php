@@ -1,6 +1,7 @@
 <?php
 namespace Rankster;
 
+use Rankster\Entity\Rank;
 use Rankster\Entity\RankHistory;
 use Rankster\Entity\User;
 
@@ -25,6 +26,8 @@ $game = $game->findSaved();
                     ->query()
                     ->fetchAll(null, 'rank');
 
+                $user = User::fromArray($rank);
+                $r = Rank::fromArray($rank);
 
                 ?>
                 <tr>
@@ -37,8 +40,8 @@ $game = $game->findSaved();
                     </th>
                     <td><img class="img-circle"
                              src="<?php echo \Rankster\Entity\User::patchToUrl($rank['picture_path']); ?>"/></td>
-                    <td><?php echo $rank['name']; ?></td>
-                    <td><?php echo $rank['rank']; ?></td>
+                    <td><?php echo $user->name; ?></td>
+                    <td><?php echo $r->rank; ?></td>
                     <td style="width:80px">
                         <div id="r<?= $rank['id'] . '-' . $game->id ?>" style="width:80px;height: 20px"></div>
                         <script>
@@ -49,6 +52,7 @@ $game = $game->findSaved();
                             });
                         </script>
                     </td>
+                    <td><?php echo $r->matches ?></td>
                 </tr>
             <?php } ?>
             </tbody>
