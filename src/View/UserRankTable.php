@@ -4,6 +4,7 @@ namespace Rankster\View;
 
 
 use Rankster\Entity\Game;
+use Rankster\Entity\Rank;
 use Rankster\Entity\RankHistory;
 use Rankster\Entity\User;
 use Yaoi\View\Hardcoded;
@@ -28,7 +29,7 @@ class UserRankTable extends Hardcoded
 
 
         $user = User::fromArray($rank);
-        $r = RankHistory::fromArray($rank);
+        $r = Rank::fromArray($rank);
 
         if ($this->byUser) {
             $game = Game::findByPrimaryKey($r->gameId);
@@ -72,8 +73,6 @@ HTML;
 
     public function render()
     {
-
-        print_r($this->userRanks);
 
         $rows = '';
         foreach ($this->userRanks as $i => $rank) {
