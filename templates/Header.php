@@ -43,7 +43,11 @@
 
   <div class="col-sm-6 col-lg-3">
     <div class="widget-simple-chart text-right card-box" style="min-height: 123px;text-align: center;">
-      Replay
+              <span title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5"
+                    onclick='gameReplayDialog({name:"Ping Pong", id:1}, {name: "Alexis Grohar", id: 1})'>
+            <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i> Play again
+        </span>
+
       <img src="http://collegiateattire.com/wp-content/uploads/2016/06/versus-icon-vs-icon-315x400.jpg" width="50" />
       <img class="img-circle" src="//rankster.penix.tk/user-images/097/f0b7af132b83e36cb5988a40df38d.jpg">
       <img class="img-circle" width="75" src="//rankster.penix.tk/user-images/../images/pingpong.png">
