@@ -54,8 +54,13 @@
 
 function sendCreateMatchForm() {
 
-    $.post( "/v1/submit-score", $("#create-match").serialize());
-
+    $.post( "/v1/submit-score",
+        {
+            'result': $( "input:radio[name=result]:checked" ).val(),
+            'opponent_id': $('#recipient-name').val(),
+            'game_id': $('#game').val()
+        });
+/*
     switch($( "input:radio[name=result]:checked" ).val()) {
     case "win":
         $( "#sa-win" ).trigger( "click" );
@@ -65,7 +70,7 @@ function sendCreateMatchForm() {
         break;
     default:
         $( "#sa-draw" ).trigger( "click" );
-    }
+    }*/
 
     $( "#close-me" ).trigger( "click" );
 
