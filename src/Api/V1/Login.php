@@ -34,13 +34,15 @@ class Login extends Command
             $data->getPicture()->getUrl();
             $userEntity = new User();
             $userEntity->facebookId = $data->getId();
-            if (!($userEntity = $userEntity->findSaved())) {
+            if (!($found = $userEntity->findSaved())) {
                 $userEntity->name = $data->getName();
                 if ($data->getPicture() && $data->getPicture()->getUrl()) {
                     $userEntity->downloadImage($data->getPicture()->getUrl());
                 }
                 $userEntity->email = $data->getEmail();
                 $userEntity->findOrSave();
+            } else {
+                $userEntity = $found;
             }
 
 
