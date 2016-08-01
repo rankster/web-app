@@ -62,8 +62,13 @@ class Match extends Entity
             query()->fetchAll();
 
 
-        $matchWin = count($totalMatch) - count($matchLost);
-        $percents = (count($matchLost) / count($totalMatch)) * 100;
+        if ($totalMatch) {
+            $matchWin = count($totalMatch) - count($matchLost);
+            $percents = (count($matchLost) / count($totalMatch)) * 100;
+        } else {
+            $matchWin = 0;
+            $percents = 0;
+        }
 
         return ["total" => count($totalMatch), "percents" => round($percents)];
     }
