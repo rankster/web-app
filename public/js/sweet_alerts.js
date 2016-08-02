@@ -57,8 +57,8 @@ function sendCreateMatchForm() {
     $.post( "/v1/submit-score",
         {
             'result': $( "input:radio[name=result]:checked" ).val(),
-            'opponent_id': $('#recipient-name').val(),
-            'game_id': $('#game').val()
+            'opponent_id': $(this).parent().find('input[name=opponent_id]').val(),
+            'game_id': $(this).parent().find('input[name=game_id]').val()
         }
     );
 
