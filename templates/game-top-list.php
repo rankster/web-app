@@ -57,7 +57,7 @@ $game = $game->findSaved();
                     <td>
                         <span title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5"
                               onclick='gameReplayDialog(<?= json_encode($game->toArray()) ?>, <?= json_encode($user->toArray()) ?>)'>
-            <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i> New match
+            <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i> <span class="caption hidden-xs">New match</span>
         </span>
 
                     </td>
