@@ -2,13 +2,11 @@
 
 namespace Rankster\Entity;
 
-use Alcalyn\Elo\EloSystem;
+use Rankster\Elo\Alcalyn;
+use Rankster\Elo\Ranker;
 use Yaoi\Database\Definition\Column;
 use Yaoi\Database\Definition\Index;
 use Yaoi\Database\Entity;
-
-require_once __DIR__ . '/../../vendor/alcalyn/elo/src/Exception/EloCoefficientException.php';
-require_once __DIR__ . '/../../vendor/alcalyn/elo/src/EloSystem.php';
 
 class Rank extends Entity
 {
@@ -29,8 +27,8 @@ class Rank extends Entity
         $columns->id = Column::AUTO_ID;
         $columns->gameId = Game::columns()->id;
         $columns->userId = User::columns()->id;
-        $columns->rank = Column::INTEGER;
-        $columns->lastUpdateTime = Column::INTEGER;
+        $columns->rank = Column::FLOAT + Column::SIZE_8B;
+        $columns->lastUpdateTime = Column::INTEGER + Column::USE_PHP_DATETIME;
         $columns->matches = Column::INTEGER;
     }
 
@@ -45,21 +43,12 @@ class Rank extends Entity
 
     public function draw(Rank $opponent)
     {
-        $eloSystem = new EloSystem();
-
-        $updatedElos = $eloSystem->draw($this->rank, $opponent->rank);
-        $this->rank = $updatedElos[0];
-        $opponent->rank = $updatedElos[1];
+        self::$ranker->update($this, $opponent, true);
     }
 
     public function win(Rank $loser)
     {
-        $eloSystem = new EloSystem();
-
-        $updatedElos = $eloSystem->calculate($this->rank, $loser->rank, 1);
-
-        $this->rank = $updatedElos[0];
-        $loser->rank = $updatedElos[1];
+        self::$ranker->update($this, $loser);
     }
 
 
@@ -79,7 +68,7 @@ class Rank extends Entity
 
     public function save()
     {
-        $this->lastUpdateTime = time();
+        $this->lastUpdateTime = new \DateTime();
         parent::save();
 
         $history = new RankHistory();
@@ -118,4 +107,22 @@ class Rank extends Entity
         return $query->fetchAll();
     }
 
+    /** @var Ranker */
+    private static $ranker;
+    public static function setRanker(Ranker $ranker)
+    {
+        self::$ranker = $ranker;
+    }
+
+    public static function getRanker()
+    {
+        return self::$ranker;
+    }
+
+    public function show()
+    {
+        return round($this->rank);
+    }
 }
+
+Rank::setRanker(new Alcalyn());
