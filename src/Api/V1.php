@@ -15,6 +15,7 @@ use Rankster\Api\V1\SubmitScore;
 use Rankster\Api\V1\Update;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
+use Yaoi\Database\Exception;
 
 class V1 extends Command
 {
@@ -56,6 +57,9 @@ class V1 extends Command
         } catch (Command\Exception $exception) {
             http_response_code(400);
             $result = array('error' => $exception->getMessage());
+        } catch (Exception $exception) {
+            http_response_code(500);
+            $result = array('error' => $exception->getMessage(), 'query' => $exception->query);
         } catch (\Exception $exception) {
             http_response_code(500);
             $result = array('error' => $exception->getMessage());
