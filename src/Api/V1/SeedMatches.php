@@ -50,7 +50,7 @@ class SeedMatches extends Command
 
             $result = $results[rand(0, count($results) - 1)];
 
-            Match::make($user1->id, $user2->id, $gameId, $result);
+            Match::make($user1->id, $user2->id, $gameId, $result)->applyRanks();
         }
     }
 

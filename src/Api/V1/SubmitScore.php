@@ -34,7 +34,7 @@ class SubmitScore extends Command
             throw new ClientException("Please authorize");
         }
 
-        return Match::make($_SESSION['user_id'], $this->opponentId, $this->gameId, $this->result)->toArray();
+        return Match::make($_SESSION['user_id'], $this->opponentId, $this->gameId, $this->result)->applyRanks()->toArray();
     }
 
 

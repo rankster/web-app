@@ -73,40 +73,49 @@ class Match extends Entity
         return ["total" => count($totalMatch), "percents" => round($percents)];
     }
 
-    public static function make($user1Id, $user2Id, $gameId, $result) {
-        $match = new Match();
-        $match->user1Id = $user1Id;
-        $match->user2Id = $user2Id;
-        $match->gameId = $gameId;
-
-        $rank1 = Rank::findOrCreateByUserGame($match->user1Id, $gameId);
-        $rank2 = Rank::findOrCreateByUserGame($match->user2Id, $gameId);
+    public function applyRanks()
+    {
+        $rank1 = Rank::findOrCreateByUserGame($this->user1Id, $this->gameId);
+        $rank2 = Rank::findOrCreateByUserGame($this->user2Id, $this->gameId);
 
         $r1 = $rank1->rank;
         $r2 = $rank2->rank;
 
-        $match->eventTime = time();
-        $match->status = Match::STATUS_ACCEPT;
-        if ($result === self::RESULT_DRAW) {
-            $match->winnerId = null;
+        if ($this->winnerId === null) {
             $rank1->draw($rank2);
-        } elseif ($result === self::RESULT_WIN) {
+        } elseif ($this->winnerId === $this->user1Id) {
             $rank1->win($rank2);
-            $match->winnerId = $match->user1Id;
         } else {
             $rank2->win($rank1);
-            $match->winnerId = $match->user2Id;
         }
 
-        $match->user1Delta = $rank1->rank - $r1;
-        $match->user2Delta = $rank2->rank - $r2;
+        $this->user1Delta = $rank1->rank - $r1;
+        $this->user2Delta = $rank2->rank - $r2;
 
         $rank1->matches++;
         $rank2->matches++;
 
         $rank1->save();
         $rank2->save();
-        $match->save();
+        $this->save();
+        return $this;
+    }
+
+    public static function make($user1Id, $user2Id, $gameId, $result) {
+        $match = new Match();
+        $match->user1Id = $user1Id;
+        $match->user2Id = $user2Id;
+        $match->gameId = $gameId;
+        $match->eventTime = time();
+
+        $match->status = Match::STATUS_ACCEPT;
+        if ($result === self::RESULT_DRAW) {
+            $match->winnerId = null;
+        } elseif ($result === self::RESULT_WIN) {
+            $match->winnerId = $match->user1Id;
+        } else {
+            $match->winnerId = $match->user2Id;
+        }
 
         return $match;
     }

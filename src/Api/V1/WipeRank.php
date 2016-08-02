@@ -7,6 +7,7 @@ use Rankster\Entity\Game;
 use Rankster\Entity\Match;
 use Rankster\Entity\Rank;
 use Rankster\Entity\RankHistory;
+use Rankster\Manager\GameManager;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 use Yaoi\Database;
@@ -32,17 +33,7 @@ class WipeRank extends Command
             $gameIds = Game::statement()->bindResultClass()->query()->fetchAll(null, 'id');
         }
 
-        Database::getInstance()->query("DELETE FROM ? WHERE ? IN (?)", Rank::table(), Rank::columns()->gameId, $gameIds)
-            ->execute();
-
-        Database::getInstance()
-            ->query("DELETE FROM ? WHERE ? IN (?)", RankHistory::table(), RankHistory::columns()->gameId, $gameIds)
-            ->execute();
-
-
-        Database::getInstance()
-            ->query("DELETE FROM ? WHERE ? IN (?)", Match::table(), Match::columns()->gameId, $gameIds)
-            ->execute();
+        GameManager::wipeMatches($gameIds);
 
         return "done";
     }
