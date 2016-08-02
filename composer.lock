@@ -104,16 +104,16 @@
         },
         {
             "name": "php-yaoi/php-yaoi",
-            "version": "v1.0.24",
+            "version": "v1.0.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-yaoi/php-yaoi.git",
-                "reference": "bfb2d5b6556ce3c10b7074021b3e8c28e791dd72"
+                "reference": "8cac346286e841fa0aaf7aae869a00faea9031d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-yaoi/php-yaoi/zipball/bfb2d5b6556ce3c10b7074021b3e8c28e791dd72",
-                "reference": "bfb2d5b6556ce3c10b7074021b3e8c28e791dd72",
+                "url": "https://api.github.com/repos/php-yaoi/php-yaoi/zipball/8cac346286e841fa0aaf7aae869a00faea9031d3",
+                "reference": "8cac346286e841fa0aaf7aae869a00faea9031d3",
                 "shasum": ""
             },
             "require": {
@@ -151,7 +151,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-08-02 16:07:10"
+            "time": "2016-08-02 16:38:36"
         }
     ],
     "packages-dev": [
