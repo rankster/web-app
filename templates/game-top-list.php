@@ -44,21 +44,22 @@ $game = $game->findSaved();
                         <a href="/user/details?user_id=<?= $user->id ?>"><?php echo $user->name; ?></a><br/><?php echo $r->matches ?>
                         matches played
                     </td>
-                    <td style="width:80px"><?php echo $r->rank; ?>
-                        <div id="r<?= $rank['id'] . '-' . $game->id ?>" style="width:80px;height: 20px"></div>
+                    <td style="width:60px"><?php echo $r->rank; ?>
+                        <div id="r<?= $rank['id'] . '-' . $game->id ?>" style="width:60px;height: 20px"></div>
                         <script>
                             $("#r<?=$rank['id'] . '-' . $game->id ?>").sparkline([<?php echo implode(',', $history) ?>], {
                                 type: 'line',
-                                width: '80px',
+                                width: '60px',
                                 height: '20px'
                             });
                         </script>
                     </td>
-                    <td>
-                        <span title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5"
-                              onclick='gameReplayDialog(<?= json_encode($game->toArray()) ?>, <?= json_encode($user->toArray()) ?>)'>
-            <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i> <span class="caption hidden-xs">New match</span>
-        </span>
+                    <td style="vertical-align: middle">
+                        <div title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5"
+                             onclick='gameReplayDialog(<?= json_encode($game->toArray()) ?>, <?= json_encode($user->toArray()) ?>)'>
+                            <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i> <span
+                                class="caption hidden-xs">New match</span>
+                        </div>
 
                     </td>
                 </tr>
