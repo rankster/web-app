@@ -44,7 +44,7 @@ $game = $game->findSaved();
                         <a href="/user/details?user_id=<?= $user->id ?>"><?php echo $user->name; ?></a><br/><?php echo $r->matches ?>
                         matches played
                     </td>
-                    <td style="width:60px;vertical-align: middle"><?php echo $r->rank; ?>
+                    <td style="width:60px;vertical-align: middle"><?php echo $r->show(); ?>
                         <div id="r<?= $rank['id'] . '-' . $game->id ?>" style="width:60px;height: 20px"></div>
                         <script>
                             $("#r<?=$rank['id'] . '-' . $game->id ?>").sparkline([<?php echo implode(',', $history) ?>], {

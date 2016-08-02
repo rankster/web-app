@@ -57,7 +57,7 @@ class UserRankTable extends Hardcoded
         <th scope="row">{$firstcol}</th>
         <td><img class="img-circle" style="width:50px;height:50px" src="{$image}"/></td>
         <td>{$title}</td>
-        <td>{$r->rank}</td>
+        <td>{$r->show()}</td>
         <td style="width:80px">
             <div id="r{$rank['id']}-{$r->gameId}" style="width:80px;height: 20px"></div>
             <script>
