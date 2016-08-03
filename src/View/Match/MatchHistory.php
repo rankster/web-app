@@ -31,13 +31,17 @@ class MatchHistory extends Hardcoded
     {
         if ($match->user1Id === $this->user->id) {
             $opponent = User::findByPrimaryKey($match->user2Id);
-            $opponentDelta = $match->user2Delta;
+            $userDelta = round($match->user1Delta);
         } else {
             $opponent = User::findByPrimaryKey($match->user1Id);
-            $opponentDelta = $match->user1Delta;
+            $userDelta = ($match->user2Delta);
         }
 
-        echo (new UserPlate($opponent, ($opponentDelta > 0 ? '+' . $opponentDelta : $opponentDelta) . ' points'));
+        $date = $match->eventTime->format("Y-m-d H:i");
+        $info = ($userDelta > 0 ? '+' . $userDelta : $userDelta) . ' points';
+        $info .= ', ' . $date;
+
+        echo (new UserPlate($opponent, $info));
     }
 
     public function render()
@@ -48,6 +52,9 @@ class MatchHistory extends Hardcoded
 <div class="row">
     {$userPlate}
     {$gamePlate}
+</div>
+<div class="row">
+    <h2>History</h2>
 </div>
 HTML;
 

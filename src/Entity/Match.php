@@ -21,6 +21,7 @@ class Match extends Entity
     public $user1Delta;
     public $user2Delta;
     public $winnerId;
+    /** @var \DateTime */
     public $eventTime;
     public $status;
     /**
@@ -36,7 +37,7 @@ class Match extends Entity
         $columns->user1Delta = Column::FLOAT;
         $columns->user2Delta = Column::FLOAT;
         $columns->status = Column::STRING;
-        $columns->eventTime = Column::INTEGER;
+        $columns->eventTime = Column::INTEGER + Column::USE_PHP_DATETIME;
     }
 
     /**
@@ -106,7 +107,7 @@ class Match extends Entity
         $match->user1Id = $user1Id;
         $match->user2Id = $user2Id;
         $match->gameId = $gameId;
-        $match->eventTime = time();
+        $match->eventTime = new \DateTime();
 
         $match->status = Match::STATUS_ACCEPT;
         if ($result === self::RESULT_DRAW) {
