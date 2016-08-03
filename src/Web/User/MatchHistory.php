@@ -5,6 +5,7 @@ namespace Rankster\Web\User;
 
 use Rankster\Entity\Game;
 use Rankster\Entity\Match;
+use Rankster\Entity\Rank;
 use Rankster\Entity\User;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
@@ -37,6 +38,8 @@ class MatchHistory extends Command
             $this->response->error("User not found");
             return;
         }
+
+        $rank = Rank::findOrCreateByUserGame($this->userId, $this->gameId);
 
         $rows = Match::statement()
             ->where('? = ?', Match::columns()->gameId, $this->gameId)

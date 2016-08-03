@@ -5,6 +5,7 @@ namespace Rankster\View\Match;
 
 use Rankster\Entity\Game;
 use Rankster\Entity\Match;
+use Rankster\Entity\Rank;
 use Rankster\Entity\User;
 use Rankster\View\GamePlate;
 use Rankster\View\UserPlate;
@@ -19,12 +20,15 @@ class MatchHistory extends Hardcoded
     private $game;
     /** @var User */
     private $user;
+    /** @var Rank */
+    private $rank;
 
-    public function __construct($rows, Game $game, User $user)
+    public function __construct($rows, Game $game, User $user, Rank $rank)
     {
         $this->rows = $rows;
         $this->game = $game;
         $this->user = $user;
+        $this->rank = $rank;
     }
 
     private function renderItem(Match $match)
@@ -46,8 +50,9 @@ class MatchHistory extends Hardcoded
 
     public function render()
     {
-        $gamePlate = GamePlate::create($this->game);
-        $userPlate = UserPlate::create($this->user);
+        $gamePlate = new GamePlate($this->game);
+        $info = 'Rank: ' . $this->rank->show();
+        $userPlate = new UserPlate($this->user, $info);
         echo <<<HTML
 <div class="row">
     {$userPlate}
