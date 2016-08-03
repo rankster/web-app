@@ -22,7 +22,7 @@ class GamePlate extends Hardcoded
         $players = $game->countPlayers();
 
         echo <<<HTML
-  <div class="col-sm-6 col-lg-6">
+  <div class="col-sm-4 col-lg-6">
     <div class="card-box widget-user">
       <div>
         <img src="{$image}" class="img-responsive" alt="user">

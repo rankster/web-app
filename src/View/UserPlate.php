@@ -21,7 +21,7 @@ class UserPlate extends Hardcoded
     {
         $user = $this->user;
         echo <<<HTML
-  <div class="col-sm-6 col-lg-3">
+  <div class="col-sm-4 col-lg-3">
     <div class="card-box widget-user">
       <div>
         <img src="http://rankster.penix.tk/user-images{$user->picturePath}" class="img-responsive img-circle" alt="user">
