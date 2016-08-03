@@ -34,7 +34,7 @@ class MatchHistory extends Hardcoded
             $userDelta = round($match->user1Delta);
         } else {
             $opponent = User::findByPrimaryKey($match->user1Id);
-            $userDelta = ($match->user2Delta);
+            $userDelta = round($match->user2Delta);
         }
 
         $date = $match->eventTime->format("Y-m-d H:i");
