@@ -33,8 +33,8 @@ class Match extends Entity
         $columns->user1Id = User::columns()->id;
         $columns->user2Id = User::columns()->id;
         $columns->winnerId = User::columns()->id;
-        $columns->user1Delta = Column::INTEGER;
-        $columns->user2Delta = Column::INTEGER;
+        $columns->user1Delta = Column::FLOAT;
+        $columns->user2Delta = Column::FLOAT;
         $columns->status = Column::STRING;
         $columns->eventTime = Column::INTEGER;
     }

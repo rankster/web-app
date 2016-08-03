@@ -74,7 +74,7 @@ class Rank extends Entity
         $history = new RankHistory();
         $history->userId = $this->userId;
         $history->gameId = $this->gameId;
-        $history->rank = $this->rank;
+        $history->rank = $this->show();
         $history->time = time();
         $history->save();
     }
