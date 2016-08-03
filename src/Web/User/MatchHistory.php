@@ -6,7 +6,7 @@ namespace Rankster\Web\User;
 use Rankster\Entity\Game;
 use Rankster\Entity\Match;
 use Rankster\Entity\Rank;
-use Rankster\Entity\User;
+use Rankster\Entity\User as UserEntity;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -33,7 +33,7 @@ class MatchHistory extends Command
             return;
         }
 
-        $user = User::findByPrimaryKey($this->userId);
+        $user = UserEntity::findByPrimaryKey($this->userId);
         if (!$user) {
             $this->response->error("User not found");
             return;
@@ -48,7 +48,7 @@ class MatchHistory extends Command
             ->query();
 
 
-        $this->response->addContent(new \Rankster\View\Match\MatchHistory($rows, $game, $user));
+        $this->response->addContent(new \Rankster\View\Match\MatchHistory($rows, $game, $user, $rank));
     }
 
 
