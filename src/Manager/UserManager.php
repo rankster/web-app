@@ -17,6 +17,8 @@ class UserManager
         RankHistory::statement()->delete()->where('? = ?', RankHistory::columns()->userId, $user->id)->query()->execute();
         Match::statement()->delete()->where('? IN (?, ?)', $user->id, Match::columns()->user1Id, Match::columns()->user2Id);
 
+        $user->delete();
+
         foreach ($gameIds as $gameId) {
             GameManager::rebuildRanks($gameId);
         }
