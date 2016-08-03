@@ -102,4 +102,15 @@ class User extends Entity
         $opponentId = $last->user1Id === $this->id ? $last->user2Id : $last->user1Id;
         return array('user' => User::findByPrimaryKey($opponentId), 'game' => Game::findByPrimaryKey($last->gameId));
     }
+
+    private $gameIds;
+    public function getGameIds()
+    {
+        if (null === $this->gameIds) {
+            $this->gameIds = Rank::statement()
+                ->where('? = ?', Rank::columns()->userId, $this->id)
+                ->query()->fetchAll(Rank::columns()->gameId, Rank::columns()->gameId);
+        }
+        return $this->gameIds;
+    }
 }

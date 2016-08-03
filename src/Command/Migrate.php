@@ -2,6 +2,7 @@
 
 namespace Rankster\Command;
 
+use Rankster\Entity\AdminUser;
 use Rankster\Entity\RankHistory;
 use Rankster\Entity\Session;
 use Yaoi\Command;
@@ -37,6 +38,7 @@ class Migrate extends Command
             Match::table(),
             Rank::table(),
             RankHistory::table(),
+            AdminUser::table(),
         );
 
         $log = new Log('colored-stdout');

@@ -4,6 +4,7 @@ namespace Rankster\Api;
 
 
 use Rankster\Api\V1\AddUser;
+use Rankster\Api\V1\DeleteUser;
 use Rankster\Api\V1\Games;
 use Rankster\Api\V1\Login;
 use Rankster\Api\V1\RecalculateRank;
@@ -40,6 +41,7 @@ class V1 extends Command
             ->addToEnum(RecalculateRank::definition(), 'recalculate-rank')
             ->addToEnum(AddUser::definition(), 'add-user')
             ->addToEnum(SeedMatches::definition(), 'seed-matches')
+            ->addToEnum(DeleteUser::definition(), 'delete-user')
             ->setIsUnnamed();
 
     }

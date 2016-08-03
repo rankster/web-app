@@ -14,6 +14,9 @@ class Game extends Entity
     public $id;
     public $name;
     public $picturePath;
+    public $playersCount;
+    public $matchesCount;
+    public $creatorUserId;
 
     /**
      * @param \stdClass|static $columns
@@ -21,8 +24,11 @@ class Game extends Entity
     static function setUpColumns($columns)
     {
         $columns->id = Column::AUTO_ID;
+        $columns->creatorUserId = User::columns()->id;
         $columns->name = Column::create(Column::STRING + Column::NOT_NULL)->setUnique();
         $columns->picturePath = Column::STRING;
+        $columns->playersCount = Column::INTEGER + Column::NOT_NULL;
+        $columns->matchesCount = Column::INTEGER + Column::NOT_NULL;
     }
 
     static function setUpTable(\Yaoi\Database\Definition\Table $table, $columns)
