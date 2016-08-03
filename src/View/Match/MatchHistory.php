@@ -56,12 +56,16 @@ class MatchHistory extends Hardcoded
 <div class="row">
     <h2>History</h2>
 </div>
+<div class="row">
 HTML;
-
-
         foreach ($this->rows as $i => $match) {
             echo $this->renderItem($match);
         }
+
+        echo <<<HTML
+</div>
+HTML;
+
     }
 
 }
