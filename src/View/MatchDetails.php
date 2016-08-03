@@ -27,8 +27,8 @@ class MatchDetails extends Hardcoded
         $rank2 = Rank::findOrCreateByUserGame($user2->id, $match->gameId);
 
         $gamePlate = (string)GamePlate::create(Game::findByPrimaryKey($match->gameId));
-        $user1Info = $rank1->rank . ' (' . ($match->user1Delta > 0 ? '+' : '') . round($match->user1Delta) . ')';
-        $user2Info = $rank2->rank . ' (' . ($match->user2Delta > 0 ? '+' : '') . round($match->user2Delta) . ')';
+        $user1Info = $rank1->show() . ' (' . ($match->user1Delta > 0 ? '+' : '') . round($match->user1Delta) . ')';
+        $user2Info = $rank2->show() . ' (' . ($match->user2Delta > 0 ? '+' : '') . round($match->user2Delta) . ')';
 
         if ($match->winnerId === null) {
             $user1Info .= ' draw';

@@ -41,8 +41,8 @@ $game = $game->findSaved();
                     <td><img class="img-circle"
                              src="<?php echo \Rankster\Entity\User::patchToUrl($rank['picture_path']); ?>"/></td>
                     <td class="col-lg-3">
-                        <a href="/user/details?user_id=<?= $user->id ?>"><?php echo $user->name; ?></a><br/><?php echo $r->matches ?>
-                        matches played
+                        <a href="/user/details?user_id=<?= $user->id ?>"><?php echo $user->name; ?></a><br/>
+                        <a href="/user/matches?user_id=<?= $user->id ?>&game_id=<?=$game->id?>"><?= $r->matches ?> matches</a> played
                     </td>
                     <td style="width:60px;vertical-align: middle"><?php echo $r->show(); ?>
                         <div id="r<?= $rank['id'] . '-' . $game->id ?>" style="width:60px;height: 20px"></div>

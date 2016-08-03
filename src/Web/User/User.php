@@ -18,6 +18,7 @@ class User extends Command
     {
         $options->action = Command\Option::create()
             ->addToEnum(Details::definition())
+            ->addToEnum(MatchHistory::definition(), 'match-history')
             ->setIsUnnamed()
             ->setIsRequired();
 
