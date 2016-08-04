@@ -2,7 +2,7 @@
 
 namespace Rankster\Command;
 
-use Helloelo\Api\ClientException;
+use Rankster\Api\ClientException;
 use Rankster\Entity\Session;
 use Yaoi\Command;
 

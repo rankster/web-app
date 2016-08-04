@@ -7,6 +7,7 @@ use Rankster\Entity\Match;
 use Rankster\Entity\Rank;
 use Rankster\Entity\RankHistory;
 use Rankster\Entity\User;
+use Yaoi\Database;
 
 class UserManager
 {
