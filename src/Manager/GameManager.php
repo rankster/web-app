@@ -30,7 +30,7 @@ class GameManager
 
     }
 
-    public static function rebuildRanks($gameId)
+    public static function buildRanks($gameId)
     {
         $res = Match::statement()
             ->where('? = ?', Match::columns()->gameId, $gameId)
@@ -39,7 +39,14 @@ class GameManager
         foreach ($res as $row) {
             $row->applyRanks();
         }
+    }
 
+    public static function rebuildRanks(array $gameIds)
+    {
+        GameManager::wipeRanks($gameIds);
+        foreach ($gameIds as $gameId) {
+            GameManager::buildRanks($gameId);
+        }
     }
 
 }

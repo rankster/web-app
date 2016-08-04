@@ -27,10 +27,7 @@ class RecalculateRank extends Command
             $gameIds = Game::statement()->bindResultClass()->query()->fetchAll(null, 'id');
         }
 
-        GameManager::wipeRanks($gameIds);
-        foreach ($gameIds as $gameId) {
-            GameManager::rebuildRanks($gameId);
-        }
+        GameManager::rebuildRanks($gameIds);
 
         return "done";
     }
