@@ -44,6 +44,7 @@ class Login extends Command
 
 
             AuthSession::set($userEntity->id);
+            session_destroy();
             header('Location: /');
             exit;
         } catch (\Exception $e) {

@@ -25,6 +25,7 @@ class Login extends Command
             header('Location: /');
             exit();
         }
+        session_start();
         $fbLogin = new FacebookLogin();
         $url = $fbLogin->getLoginUrl();
         header('Location: ' . $url);
