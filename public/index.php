@@ -10,7 +10,6 @@ ini_set("display_errors", 1);
 
 define('DOC_ROOT', __DIR__);
 
-session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../env/conf.php';
 

@@ -24,10 +24,10 @@ class Login extends Command
     {
         $fbLogin = new Facebook\Login();
         try {
-            $accessToken = $fbLogin->getStoredAccessToken();
-            if (!$accessToken) {
+            //$accessToken = $fbLogin->getStoredAccessToken();
+            //if (!$accessToken) {
                 $accessToken = $fbLogin->callback();
-            }
+            //}
 
             $user = new Facebook\User($accessToken);
             $data = $user->getData('me', ['picture', 'name', 'email']);
