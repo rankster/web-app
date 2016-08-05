@@ -20,7 +20,6 @@ class Facebook extends Service
             $this->sdkInstance = new \Facebook\Facebook([
                 'app_id'                    => $this->getSettings()->appId,
                 'app_secret'                => $this->getSettings()->appSecret,
-                'persistent_data_handler'   => 'session'
                 //'default_graph_version' => $this->getSettings()->defaultGraphVersion,
             ]);
         }
