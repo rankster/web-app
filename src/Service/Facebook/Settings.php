@@ -11,7 +11,7 @@ class Settings extends YSettings
     public $defaultGraphVersion = '2.2';
     public $callbackUri;
 
-    public function __construct($dsnUrl)
+    public function __construct($dsnUrl = null)
     {
         parent::__construct($dsnUrl);
         if (null === $this->callbackUri) {
