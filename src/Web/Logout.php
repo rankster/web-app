@@ -3,6 +3,7 @@
 namespace Rankster\Web;
 
 
+use Rankster\Service\AuthSession;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -15,7 +16,7 @@ class Logout extends Command
 
     public function performAction()
     {
-        session_destroy();
+        AuthSession::clear();
         header("Location: /");
     }
 
