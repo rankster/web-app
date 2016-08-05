@@ -1,14 +1,18 @@
-<?php if (isset($_SESSION['user_name'])) {
-  $currentUser = \Rankster\Entity\User::findByPrimaryKey($_SESSION['user_id']);
-  ?>
+<?php
+namespace Rankster;
+
+use Rankster\Entity\Match;
+use Rankster\Service\AuthSession;
+
+if ($currentUser = AuthSession::getUser()) { ?>
 <div class="row">
   <div class="col-sm-6 col-lg-3" style="max-height:123px;">
     <div class="card-box widget-user" style="min-height:123px;">
       <div>
-        <img src="http://<?php echo $_SESSION['user_picture']; ?>" class="img-responsive img-circle" alt="user">
+        <img src="<?= $currentUser->getFullUrl() ?>" class="img-responsive img-circle" alt="user">
         <div class="wid-u-info">
-          <h4 class="m-t-0 m-b-5"><?php echo $_SESSION['user_name']; ?></h4>
-          <p class="text-muted m-b-5 font-13"><?php echo $_SESSION['user_email']; ?></p>
+          <h4 class="m-t-0 m-b-5"><?= $currentUser->name ?></h4>
+          <p class="text-muted m-b-5 font-13"><?= $currentUser->email ?></p>
           <small class="text-success"><b>Rookie</b></small>
           <a href="/logout" class="btn btn-default btn-xs" style="float:right;margin-top:15px">Logout</a>
         </div>
@@ -17,12 +21,14 @@
   </div>
     
     <?php
-      $match = new \Rankster\Entity\Match();
-      $userStats = $match->getTotalWins($_SESSION['user_email']);
+      $userStats = Match::getTotalWins($currentUser->id);
     ?>
   <div class="col-sm-6 col-lg-3">
     <div class="widget-simple-chart text-right card-box">
-      <div class="circliful-chart circliful" data-dimension="90" data-text="<?php echo $userStats["percents"]; ?>%" data-width="5" data-fontsize="14" data-percent="<?php echo $userStats["percents"]; ?>" data-fgcolor="#5fbeaa" data-bgcolor="#ebeff2" style="width: 90px;">
+      <div title="Victory rate" class="circliful-chart circliful" data-dimension="90"
+           data-text="<?php echo $userStats["percents"]; ?>%"
+           data-width="5" data-fontsize="14" data-percent="<?php echo $userStats["percents"]; ?>"
+           data-fgcolor="#5fbeaa" data-bgcolor="#ebeff2" style="width: 90px;">
       </div>
       <h3 class="text-success counter"><?php echo $userStats["total"]; ?></h3>
       <p class="text-muted">Total Games This Week</p>

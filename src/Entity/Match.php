@@ -2,6 +2,7 @@
 
 namespace Rankster\Entity;
 
+use Rankster\Service\AuthSession;
 use Yaoi\Database\Definition\Column;
 use Yaoi\Database\Definition\Table;
 use Yaoi\Database\Entity;
@@ -24,6 +25,7 @@ class Match extends Entity
     /** @var \DateTime */
     public $eventTime;
     public $status;
+
     /**
      * @param \stdClass|static $columns
      */
@@ -50,28 +52,19 @@ class Match extends Entity
         $table->setSchemaName('game_match');
     }
 
-    public function getTotalWins($userEmail) {
-        $match = new Match();
+    public static function getTotalWins($userId)
+    {
+        $mCols = Match::columns();
 
-        $totalMatch = $match->statement()->
-        where("?=? OR ?=?", $match->columns()->user1Id, $_SESSION['user_id'], $match->columns()->user2Id, $_SESSION['user_id'])->
-        query()->fetchAll();
+        $stat = Match::statement()
+            ->select('COUNT(1) AS total, SUM(IF(? = ?, 1, 0)) AS wins', $mCols->winnerId, $userId)
+            ->where("? IN (?, ?)", $userId, $mCols->user1Id, $mCols->user2Id)->bindResultClass()
+            ->query()->fetchRow();
 
-        $matchLost = $match->statement()->
-        where("?=? OR ?=?", $match->columns()->user1Id, $_SESSION['user_id'], $match->columns()->user2Id, $_SESSION['user_id'])->
-            where("? != ?", $match->columns()->winnerId, $_SESSION['user_id'])->
-            query()->fetchAll();
-
-
-        if ($totalMatch) {
-            $matchWin = count($totalMatch) - count($matchLost);
-            $percents = (count($matchLost) / count($totalMatch)) * 100;
-        } else {
-            $matchWin = 0;
-            $percents = 0;
-        }
-
-        return ["total" => count($totalMatch), "percents" => round($percents)];
+        return [
+            "total" => $stat['total'],
+            "percents" => $stat['total'] ? round(100 * $stat['wins'] / $stat['total']) : 0
+        ];
     }
 
     public function applyRanks()
@@ -102,7 +95,8 @@ class Match extends Entity
         return $this;
     }
 
-    public static function make($user1Id, $user2Id, $gameId, $result) {
+    public static function make($user1Id, $user2Id, $gameId, $result)
+    {
         $match = new Match();
         $match->user1Id = $user1Id;
         $match->user2Id = $user2Id;

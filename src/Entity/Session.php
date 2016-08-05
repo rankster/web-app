@@ -16,7 +16,7 @@ class Session extends Entity
      */
     static function setUpColumns($columns)
     {
-        $columns->token = Column::create(Column::STRING + Column::NOT_NULL)->setUnique();
+        $columns->token = Column::create(Column::STRING + Column::NOT_NULL)->setStringLength(16, true)->setUnique();
         $columns->userId = User::columns()->id;
     }
 
@@ -28,6 +28,4 @@ class Session extends Entity
     {
         $table->setSchemaName('session')->setPrimaryKey($columns->token);
     }
-
-
 }

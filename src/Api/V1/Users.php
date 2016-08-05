@@ -2,7 +2,9 @@
 
 namespace Rankster\Api\V1;
 
+use Rankster\Entity\Game;
 use Rankster\Entity\User;
+use Rankster\Service\AuthSession;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -28,8 +30,8 @@ class Users extends Command
 
         $st = User::statement()
             ->order('? ASC', User::columns()->name);
-        if (isset($_SESSION['user_id'])) {
-            $st->where('? != ?', User::columns()->id, $_SESSION['user_id']);
+        if ($userId = AuthSession::getUserId()) {
+            $st->where('? != ?', User::columns()->id, $userId);
         }
         if ($this->q) {
            $st->where('? LIKE ?', User::columns()->name, '%' . $this->q . '%');

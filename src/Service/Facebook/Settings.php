@@ -9,5 +9,13 @@ class Settings extends YSettings
     public $appId;
     public $appSecret;
     public $defaultGraphVersion = '2.2';
-    public $callbackUri = 'http://rankster.penix.tk/v1/login';
+    public $callbackUri;
+
+    public function __construct($dsnUrl = null)
+    {
+        parent::__construct($dsnUrl);
+        if (null === $this->callbackUri) {
+            $this->callbackUri = 'http://' . str_replace('www.', '', $_SERVER['HTTP_HOST']) . '/v1/login';
+        }
+    }
 }

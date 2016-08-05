@@ -79,10 +79,10 @@ class User extends Entity
             return null;
         }
 
-        return self::patchToUrl($this->picturePath);
+        return self::pathToUrl($this->picturePath);
     }
 
-    public static function patchToUrl($path)
+    public static function pathToUrl($path)
     {
         return '//' . $_SERVER['HTTP_HOST'] . '/' . self::IMAGE_FOLDER . $path;
     }
@@ -112,5 +112,10 @@ class User extends Entity
                 ->query()->fetchAll(Rank::columns()->gameId, Rank::columns()->gameId);
         }
         return $this->gameIds;
+    }
+
+    public function getLevelCaption()
+    {
+        return 'Rookie';
     }
 }
