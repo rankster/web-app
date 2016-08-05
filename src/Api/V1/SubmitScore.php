@@ -5,6 +5,7 @@ namespace Rankster\Api\V1;
 
 use Rankster\Api\ClientException;
 use Rankster\Entity\Match;
+use Rankster\Service\AuthSession;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -30,11 +31,11 @@ class SubmitScore extends Command
 
     public function performAction()
     {
-        if (empty($_SESSION['user_id'])) {
+        if (!$userId = AuthSession::getUserId()) {
             throw new ClientException("Please authorize");
         }
 
-        return Match::make($_SESSION['user_id'], $this->opponentId, $this->gameId, $this->result)->applyRanks()->toArray();
+        return Match::make($userId, $this->opponentId, $this->gameId, $this->result)->applyRanks()->toArray();
     }
 
 

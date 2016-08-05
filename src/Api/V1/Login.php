@@ -2,8 +2,8 @@
 
 namespace Rankster\Api\V1;
 
-use Facebook\FacebookRequest;
 use Rankster\Entity\User;
+use Rankster\Service\AuthSession;
 use Rankster\Service\Facebook;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
@@ -46,18 +46,11 @@ class Login extends Command
             }
 
 
-            $_SESSION['user_id'] = $userEntity->id;
-            $_SESSION['user_facebook_id'] = $userEntity->facebookId;
-            $_SESSION['user_name'] = $userEntity->name;
-            $_SESSION['user_picture'] = $userEntity->getFullUrl();
-            $_SESSION['user_email'] = $userEntity->email;
-            $_SESSION['logged_in_redirect'] = true;
+            AuthSession::set($userEntity->id);
             header('Location: /');
             exit;
         } catch (\Exception $e) {
             return ['ok' => false, 'error' => $e->getMessage()];
         }
-
-        return ['ok' => true];
     }
 }

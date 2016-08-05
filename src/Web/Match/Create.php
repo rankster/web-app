@@ -4,6 +4,7 @@ namespace Rankster\Web\Match;
 
 use Rankster\Entity\Match as MatchEntity;
 use Rankster\Entity\Rank as RankEntity;
+use Rankster\Service\AuthSession;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -29,14 +30,14 @@ class Create extends Command
     public function performAction()
     {
 
-        if (empty($_SESSION['user_id'])) {
+        if (!$userId = AuthSession::getUserId()) {
             $this->response->error("Please authorize");
             return;
         }
 
         //$this->response->addContent('<pre>' . print_r($_SESSION, 1) . '</pre>');
 
-        $match = MatchEntity::make($_SESSION['user_id'], $this->opponentId, $this->gameId, $this->result)->applyRanks();
+        $match = MatchEntity::make($userId, $this->opponentId, $this->gameId, $this->result)->applyRanks();
 
         $details = Details::createState();
         $details->matchId = $match->id;

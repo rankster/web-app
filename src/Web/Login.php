@@ -2,6 +2,7 @@
 
 namespace Rankster\Web;
 
+use Rankster\Service\AuthSession;
 use Rankster\Service\Facebook\Login as FacebookLogin;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
@@ -20,7 +21,7 @@ class Login extends Command
 
     public function performAction()
     {
-        if (!empty($_SESSION['user_id'])) {
+        if (AuthSession::getUserId()) {
             header('Location: /');
             exit();
         }

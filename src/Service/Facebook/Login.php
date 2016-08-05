@@ -60,7 +60,7 @@ class Login extends Service
             }
         }
 
-        $_SESSION['fb_access_token'] = (string) $accessToken;
+        $_SESSION['fb_access_token'] = (string)$accessToken;
 
         return (string) $accessToken;
     }

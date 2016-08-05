@@ -3,6 +3,7 @@
 namespace Rankster\Web;
 
 use Rankster\Api\V1;
+use Rankster\Command\AuthRequired;
 use Rankster\Web\Forms\SubmitScore;
 use Rankster\Web\Game\Game;
 use Rankster\Web\Match\Match;
