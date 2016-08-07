@@ -108,7 +108,7 @@ class Response extends \Yaoi\Io\Response implements Renderer
     }
 
 
-    public function __construct(Layout $layout)
+    public function setLayout(Layout $layout)
     {
         $this->layout = $layout;
     }
