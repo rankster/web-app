@@ -7,6 +7,8 @@ use Rankster\Entity\Game;
 use Rankster\Entity\Rank;
 use Rankster\Entity\RankHistory;
 use Rankster\Entity\User;
+use Rankster\Service\AuthSession;
+use Rankster\View\SubmitScore\Data;
 use Yaoi\View\Hardcoded;
 
 class UserRankTable extends Hardcoded
@@ -26,7 +28,6 @@ class UserRankTable extends Hardcoded
         } else {
             $firstcol = $i + 1;
         }
-
 
         $user = User::fromArray($rank);
         $r = Rank::fromArray($rank);
@@ -50,9 +51,9 @@ class UserRankTable extends Hardcoded
         $history = implode(',', $history);
 
 
-        $gameJson = json_encode($game->toArray());
-        $userJson = json_encode($user->toArray());
-        return <<<HTML
+        Data::getInstance()->addUserInfo($user)->addGameInfo($game);
+
+        $result = <<<HTML
     <tr>
         <th scope="row">{$firstcol}</th>
         <td><img class="img-circle" style="width:50px;height:50px" src="{$image}"/></td>
@@ -68,17 +69,33 @@ class UserRankTable extends Hardcoded
                 });
             </script>
         </td>
+        
+HTML;
+
+        if ($this->currentUserId && $this->currentUserId != $user->id) {
+            $result .= <<<HTML
         <td>
-        <span title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5" onclick='gameReplayDialog($gameJson, $userJson)'>
-            <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i> New match
-        </span>
+        <button title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5" 
+                onclick='Rankster.gameReplayDialog({$game->id}, {$user->id})'>
+            <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i>
+            <span class="caption hidden-xs">New match</span>
+        </button>
         </td>
+HTML;
+        }
+
+$result .= <<<HTML
     </tr>
 HTML;
-}
+        return $result;
+    }
+
+
+    private $currentUserId;
 
     public function render()
     {
+        $this->currentUserId = AuthSession::getUserId();
 
         $rows = '';
         foreach ($this->userRanks as $i => $rank) {

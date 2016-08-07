@@ -11,8 +11,8 @@
         $('#sa-win').click(function () {
             swal({
                 type: "success",
-                title: "Good Job !",
-                text: "You're getting better and better !.",
+                title: "Good Job!",
+                text: "You're getting better and better!",
                 confirmButtonText: "Thanks!",
                 timer: 2000,
                 showConfirmButton: false
@@ -35,7 +35,7 @@
             swal({
                 type: "warning",
                 title: "Fine!",
-                text: "Let's rematch ! :)",
+                text: "Let's rematch! :)",
                 timer: 2000,
                 showConfirmButton: false
             });

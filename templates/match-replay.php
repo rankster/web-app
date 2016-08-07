@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <a type="button" class="close" data-dismiss="modal" aria-label="Close" rel="modal:close"><span aria-hidden="true">&times;</span></a>
-                <h4 class="modal-title" id="gameRequestModalLabel">Replay Game</h4>
+                <h4 class="modal-title" id="gameRequestModalLabel">Report Game Result</h4>
             </div>
             <form action="/match/create" method="post" id="create-match">
                 <div class="modal-body">

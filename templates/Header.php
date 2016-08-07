@@ -37,9 +37,6 @@ if ($currentUser = AuthSession::getUser()) { ?>
 
   <div class="col-sm-6 col-lg-3">
   <div class="widget-simple-chart text-right card-box" style="min-height: 123px;text-align: center;">
-    <button class="btn btn-default waves-effect waves-light btn-sm" id="sa-win" style="display:none;">Click me</button>
-    <button class="btn btn-default waves-effect waves-light btn-sm" id="sa-draw" style="display:none;">Click me</button>
-    <button class="btn btn-default waves-effect waves-light btn-sm" id="sa-lose" style="display:none;">Click me</button>
     <span class="btn btn-lg btn-danger waves-effect waves-light m-b-5" style="width:177px;margin:18px">
       <a href="#game-req" rel="modal:open">
         <i class="glyphicon glyphicon-new-window m-r-5" style="color: #fff;"></i>
@@ -63,7 +60,7 @@ if ($currentUser = AuthSession::getUser()) { ?>
 
         ?>
         <span title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5"
-              onclick='gameReplayDialog(<?=$gameJson?>, <?=$userJson?>)'>
+              onclick='Rankster.gameReplayDialog(<?=$gameJson?>, <?=$userJson?>)'>
             <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i> Play again
         </span>
 
@@ -78,6 +75,9 @@ if ($currentUser = AuthSession::getUser()) { ?>
   </div>
 
 </div>
+
+<?php echo \Rankster\Service\Output::process('match-replay'); ?>
+<?php echo \Rankster\Service\Output::process('match-request') ?>
 
 <?php } else { ?>
 <div class="row">
