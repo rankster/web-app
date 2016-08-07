@@ -33,7 +33,7 @@
                 </div>
                 <div class="modal-footer">
                     <a type="button" class="btn btn-default" id="close-me" data-dismiss="modal" rel="modal:close">Cancel</a>
-                    <button type="submit" class="btn btn-success" onClick="sendCreateMatchForm();event.preventDefault();">Submit Result</button>
+                    <button type="submit" class="btn btn-success">Submit Result</button>
                 </div>
             </form>
         </div>

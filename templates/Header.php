@@ -3,6 +3,7 @@ namespace Rankster;
 
 use Rankster\Entity\Match;
 use Rankster\Service\AuthSession;
+use Rankster\View\SubmitScore\Data;
 
 if ($currentUser = AuthSession::getUser()) { ?>
 <div class="row">
@@ -58,9 +59,12 @@ if ($currentUser = AuthSession::getUser()) { ?>
         $game = $rematch['game'];
         $gameJson = json_encode($game);
 
+          Data::getInstance()->addUserInfo($user);
+          Data::getInstance()->addGameInfo($game);
+
         ?>
         <span title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5"
-              onclick='Rankster.gameReplayDialog(<?=$gameJson?>, <?=$userJson?>)'>
+              onclick='Rankster.gameReplayDialog(<?=$game->id?>, <?=$user->id?>)'>
             <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i> Play again
         </span>
 
