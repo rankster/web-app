@@ -35,7 +35,9 @@ class UserRankTable extends Hardcoded
 
         if ($this->byUser) {
             $image = $game->getFullUrl();
-            $title = $game->name . '<br/>' . $r->matches . ' matches played';
+            $title = '<a href="/user/details/?user_id=' . $user->id .'">' . $game->name . '</a>'
+                . '<br/><a href="/user/match-history?user_id=' . $user->id . '&game_id='. $r->gameId .'">'
+                . $r->matches . '</a> matches played';
 
         } else {
             $image = \Rankster\Entity\User::pathToUrl($rank['picture_path']);
