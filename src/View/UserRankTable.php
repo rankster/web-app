@@ -35,13 +35,15 @@ class UserRankTable extends Hardcoded
 
         if ($this->byUser) {
             $image = $game->getFullUrl();
-            $title = '<a href="/user/details/?user_id=' . $user->id .'">' . $game->name . '</a>'
-                . '<br/><a href="/user/match-history?user_id=' . $user->id . '&game_id='. $r->gameId .'">'
+            $title = '<a href="/game/details/?game_id=' . $r->gameId .'">' . $game->name . '</a><br/>'
+                . '<a href="/user/match-history?user_id=' . $user->id . '&game_id='. $r->gameId .'">'
                 . $r->matches . '</a> matches played';
 
         } else {
             $image = \Rankster\Entity\User::pathToUrl($rank['picture_path']);
-            $title = $user->name . '<br/>' . $r->matches . ' matches played';
+            $title = '<a href="/user/details/?user_id=' . $user->id . '">' . $user->name . '</a><br/>'
+                . '<a href="/user/match-history?user_id=' . $user->id . '&game_id=' . $r->gameId . '">'
+                . $r->matches . '</a> matches played';
         }
 
         $history = RankHistory::statement()->where('? = ? AND ? = ?',
