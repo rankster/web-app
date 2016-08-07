@@ -35,15 +35,19 @@ class UserRankTable extends Hardcoded
 
         if ($this->byUser) {
             $image = $game->getFullUrl();
-            $title = '<a href="/game/details/?game_id=' . $r->gameId .'">' . $game->name . '</a><br/>'
-                . '<a href="/user/match-history?user_id=' . $user->id . '&game_id='. $r->gameId .'">'
-                . $r->matches . '</a> matches played';
+            $title = <<<HTML
+<a href="/game/details/?game_id={$r->gameId}">{$game->name}</a><br/>
+<a href="/user/match-history?user_id={$user->id}&game_id={$r->gameId}">{$r->matches} matches</a> played
+
+HTML;
 
         } else {
             $image = \Rankster\Entity\User::pathToUrl($rank['picture_path']);
-            $title = '<a href="/user/details/?user_id=' . $user->id . '">' . $user->name . '</a><br/>'
-                . '<a href="/user/match-history?user_id=' . $user->id . '&game_id=' . $r->gameId . '">'
-                . $r->matches . '</a> matches played';
+            $title = <<<HTML
+<a href="/user/details/?user_id={$user->id}">{$user->name}</a><br/>
+<a href="/user/match-history?user_id={$user->id}&game_id={$r->gameId}">{$r->matches} matches</a> played
+
+HTML;
         }
 
         $history = RankHistory::statement()->where('? = ? AND ? = ?',
@@ -62,8 +66,8 @@ class UserRankTable extends Hardcoded
         <th scope="row">{$firstcol}</th>
         <td><img class="img-circle" style="width:50px;height:50px" src="{$image}"/></td>
         <td>{$title}</td>
-        <td>{$r->show()}</td>
         <td style="width:80px">
+            {$r->show()}
             <div id="r{$rank['id']}-{$r->gameId}" style="width:80px;height: 20px"></div>
             <script>
                 $("#r{$rank['id']}-{$r->gameId}").sparkline([{$history}], {
