@@ -28,7 +28,7 @@ class MainPage extends Command
 
         $limit = 2;
         if ($user = AuthSession::getUser()) {
-            $games = $user->getLastPlayedGames($limit);
+            $games = $user->getMostPlayedGames($limit);
         } else {
             $games = Game::statement()
                 ->order('? DESC', Game::columns()->playersCount)
