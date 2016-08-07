@@ -1,8 +1,9 @@
 <?php
 
-namespace Rankster\Twbs;
+namespace Rankster\View;
 
 
+use Rankster\View\HeadScripts;
 use Rankster\View\FbLike;
 use Yaoi\View\Hardcoded;
 use Yaoi\View\Renderer;
@@ -16,6 +17,10 @@ class Layout extends Hardcoded
     }
 
     public $title = 'Rankster';
+    /** @var Header */
+    public $header;
+    /** @var Footer */
+    public $footer;
 
     public function setTitle($title)
     {
@@ -26,6 +31,8 @@ class Layout extends Hardcoded
     public function __construct()
     {
         $this->main = new Stack();
+        $this->header = new Header();
+        $this->footer = new Footer;
     }
 
     /** @var Stack */
@@ -55,11 +62,14 @@ class Layout extends Hardcoded
         <body>
         <div class="container">
             <h1><a href="/"><img src="http://i.imgur.com/mQtR9aL.png" width="150"/></a></h1>
+            <?php $this->header->render() ?>
             <?php echo $this->main ?>
 
             <div class="row">
                 <?= $fbLike ?>
             </div>
+
+            <?php $this->footer->render() ?>
         </div>
 
         <!-- Include all compiled plugins (below), or include individual files as needed -->

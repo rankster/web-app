@@ -1,6 +1,6 @@
 <?php
 
-namespace Rankster\Twbs;
+namespace Rankster\View;
 
 
 use Yaoi\View\Hardcoded;

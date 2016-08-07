@@ -29,10 +29,6 @@ class Details extends Command
         $table->name = $user->name;
         $table->image = $user->getFullUrl();
         $table->userRanks = $ranks;
-
-        $this->response->addContent('<script>Rankster.setUserGameInfo('
-            . json_encode(Data::getInstance()->getUsers()) . ', '
-            . json_encode(Data::getInstance()->getGames()) . ')</script>');
         $this->response->addContent((string)$table);
     }
 

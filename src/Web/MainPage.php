@@ -51,12 +51,6 @@ class MainPage extends Command
 
         }
         $this->response->addContent('</div>');
-        $this->response->addContent('<script>Rankster.setUserGameInfo('
-            . json_encode(Data::getInstance()->getUsers()) . ', '
-            . json_encode(Data::getInstance()->getGames()) . ')</script>');
-
-
-        //$this->response->addContent(Output::process('MainPage_tables'));
     }
 
 }
