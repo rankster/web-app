@@ -22,9 +22,6 @@
   display:none;
 }
 
-#game-req {
-  background-image: url("http://demo.qodeinteractive.com/bridge2/wp-content/uploads/2014/03/pixel.png");
-}
 /**
  * Adjust Select2 inputs to fit Bootstrap 3 default .form-control appearance.
  */
