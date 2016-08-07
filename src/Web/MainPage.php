@@ -26,17 +26,13 @@ class MainPage extends Command
         }
         $this->response->addContent(Output::process('Header'));
 
-        $count = 2;
-        if ($userId = AuthSession::getUserId()) {
-            $games = Game::statement()->select('?.*', Game::table())
-                ->innerJoin('? ON ? = ?', Rank::table(), Rank::columns()->gameId, Game::columns()->id)
-                ->where('? = ?', Rank::columns()->userId, $userId)
-                ->order('? DESC', Rank::columns()->lastUpdateTime)
-                ->limit($count)->bindResultClass(Game::className())->query()->fetchAll(null, Rank::columns()->gameId);
+        $limit = 2;
+        if ($user = AuthSession::getUser()) {
+            $games = $user->getLastPlayedGames($limit);
         } else {
             $games = Game::statement()
                 ->order('? DESC', Game::columns()->playersCount)
-                ->limit($count)->query()->fetchAll();
+                ->limit($limit)->query()->fetchAll();
 
         }
 
