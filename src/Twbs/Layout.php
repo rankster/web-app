@@ -105,7 +105,6 @@ class Layout extends Hardcoded
         </script>
         <script src="/js/select2.min.js"></script>
 
-        <script src="/js/rankster.js"></script>
         </body>
         </html>
         <?php

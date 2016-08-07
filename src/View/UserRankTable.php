@@ -37,7 +37,7 @@ class UserRankTable extends Hardcoded
             $image = $game->getFullUrl();
             $title = <<<HTML
 <a href="/game/details/?game_id={$r->gameId}">{$game->name}</a><br/>
-<a href="/user/match-history?user_id={$user->id}&game_id={$r->gameId}">{$r->matches} matches</a> played
+<a href="/user/match-history?user_id={$user->id}&amp;game_id={$r->gameId}">{$r->matches} matches</a> played
 
 HTML;
 
@@ -45,7 +45,7 @@ HTML;
             $image = \Rankster\Entity\User::pathToUrl($rank['picture_path']);
             $title = <<<HTML
 <a href="/user/details/?user_id={$user->id}">{$user->name}</a><br/>
-<a href="/user/match-history?user_id={$user->id}&game_id={$r->gameId}">{$r->matches} matches</a> played
+<a href="/user/match-history?user_id={$user->id}&amp;game_id={$r->gameId}">{$r->matches} matches</a> played
 
 HTML;
         }
