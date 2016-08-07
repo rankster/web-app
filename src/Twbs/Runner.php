@@ -3,7 +3,7 @@
 namespace Rankster\Twbs;
 
 use Rankster\Twbs\Response;
-use Rankster\Twbs\Layout;
+use Rankster\View\Layout;
 use Yaoi\BaseClass;
 use Yaoi\Command;
 use Yaoi\Database\Exception;
@@ -22,6 +22,7 @@ class Runner extends BaseClass
 
         $layout = new Layout();
         $layout->pushMain($response);
+        $response->setLayout($layout);
 
         try {
             $io = new Command\Io($definition, $requestMapper, $response);

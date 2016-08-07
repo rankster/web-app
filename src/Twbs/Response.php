@@ -2,6 +2,7 @@
 
 namespace Rankster\Twbs;
 
+use Rankster\View\Layout;
 use Yaoi\Io\Content\Anchor;
 use Rankster\Twbs\Io\Content\Badge;
 use Yaoi\Io\Content\Error;
@@ -104,6 +105,18 @@ class Response extends \Yaoi\Io\Response implements Renderer
     public function __toString()
     {
         return $this->content;
+    }
+
+
+    public function setLayout(Layout $layout)
+    {
+        $this->layout = $layout;
+    }
+
+    protected $layout;
+    public function getLayout()
+    {
+        return $this->layout;
     }
 
 

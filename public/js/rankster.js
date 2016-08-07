@@ -1,14 +1,15 @@
-function formatGame (game) {
-    if (game.loading) return game.text;
+(function(){
+    function formatGame(game) {
+        if (game.loading) return game.text;
 
-    var markup = "<div class='select2-result-list clearfix'>" +
-        "<div class='select2-result-list__avatar'><img src='" + (game.picture || '/i/unknown-game.jpg') + "' /></div>" +
-        "<div class='select2-result-list__meta'>" +
-        "<div class='select2-result-list__title'>" + game.name + "</div>";
+        var markup = "<div class='select2-result-list clearfix'>" +
+            "<div class='select2-result-list__avatar'><img src='" + (game.picture || '/i/unknown-game.jpg') + "' /></div>" +
+            "<div class='select2-result-list__meta'>" +
+            "<div class='select2-result-list__title'>" + game.name + "</div>";
 
-    if (game.description) {
-        markup += "<div class='select2-result-list__description'>" + game.description + "</div>";
-    }
+        if (game.description) {
+            markup += "<div class='select2-result-list__description'>" + game.description + "</div>";
+        }
 
 //        markup += "<div class='select2-result-list__statistics'>" +
 //            "<div class='select2-result-list__forks'><i class='fa fa-flash'></i> " + game.forks_count + " Forks</div>" +
@@ -17,24 +18,24 @@ function formatGame (game) {
 //            "</div>" +
 //            "</div></div>";
 
-    return markup;
-}
-
-function formatGameSelection (game) {
-    return game.name || game.text;
-}
-
-function formatParticipant (participant) {
-    if (participant.loading) return participant.text;
-
-    var markup = "<div class='select2-result-list clearfix'>" +
-        "<div class='select2-result-list__avatar'><img src='" + (participant.picture || '/i/unknown-participant.jpg') + "' /></div>" +
-        "<div class='select2-result-list__meta'>" +
-        "<div class='select2-result-list__title'>" + participant.name + "</div>";
-
-    if (participant.description) {
-        markup += "<div class='select2-result-list__description'>" + participant.description + "</div>";
+        return markup;
     }
+
+    function formatGameSelection(game) {
+        return game.name || game.text;
+    }
+
+    function formatParticipant(participant) {
+        if (participant.loading) return participant.text;
+
+        var markup = "<div class='select2-result-list clearfix'>" +
+            "<div class='select2-result-list__avatar'><img src='" + (participant.picture || '/i/unknown-participant.jpg') + "' /></div>" +
+            "<div class='select2-result-list__meta'>" +
+            "<div class='select2-result-list__title'>" + participant.name + "</div>";
+
+        if (participant.description) {
+            markup += "<div class='select2-result-list__description'>" + participant.description + "</div>";
+        }
 
 //        markup += "<div class='select2-result-list__statistics'>" +
 //            "<div class='select2-result-list__forks'><i class='fa fa-flash'></i> " + participant.forks_count + " Forks</div>" +
@@ -43,17 +44,109 @@ function formatParticipant (participant) {
 //            "</div>" +
 //            "</div></div>";
 
-    return markup;
-}
+        return markup;
+    }
 
-function formatParticipantSelection (participant) {
-    return participant.name || participant.text;
-}
+    function formatParticipantSelection(participant) {
+        return participant.name || participant.text;
+    }
 
-function gameReplayDialog(game, opponent) {
-    $('#reply-game-id').val(game.id);
-    $('#label-game-name').html(game.name);
-    $('#reply-opponent-id').val(opponent.id);
-    $('#label-opponent-name').html(opponent.name);
-    $('#game-replay').show();
-}
+    function gameReplayDialog(gameId, opponentId) {
+        $('#reply-game-id').val(gameId);
+        $('#label-game-name').html(games[gameId].name);
+        $('#reply-opponent-id').val(opponentId);
+        $('#label-opponent-name').html(users[opponentId].name);
+        $("#game-replay").modal();
+    }
+
+    function eventHandler () {
+        $('#game').select2({
+            ajax: {
+                url: '/v1/games',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }, // let our custom formatter work
+            //minimumInputLength: 2,
+            templateResult: Rankster.formatGame, // omitted for brevity, see the source of this page
+            templateSelection: Rankster.formatGameSelection // omitted for brevity, see the source of this page
+        });
+
+        $('#recipient-name').select2({
+            ajax: {
+                url: '/v1/users',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }, // let our custom formatter work
+            //minimumInputLength: 2,
+            templateResult: Rankster.formatParticipant, // omitted for brevity, see the source of this page
+            templateSelection: Rankster.formatParticipantSelection // omitted for brevity, see the source of this page
+        });
+    }
+
+    var games = {}, users = {};
+
+
+
+    window.Rankster = {
+        formatGame: formatGame,
+        formatGameSelection: formatGameSelection,
+        formatParticipant: formatParticipant,
+        formatParticipantSelection: formatParticipantSelection,
+        gameReplayDialog: gameReplayDialog,
+        eventHandler: eventHandler,
+        setUserGameInfo: function setUserGameInfo(u, g) {
+            users = u;
+            games = g;
+        }
+    }
+})();
+
+

@@ -118,4 +118,34 @@ class User extends Entity
     {
         return 'Rookie';
     }
+
+    /**
+     * @param int $limit
+     * @return Game[]
+     */
+    public function getLastPlayedGames($limit = 2)
+    {
+        $games = Game::statement()->select('?.*', Game::table())
+            ->innerJoin('? ON ? = ?', Rank::table(), Rank::columns()->gameId, Game::columns()->id)
+            ->where('? = ?', Rank::columns()->userId, $this->id)
+            ->order('? DESC', Rank::columns()->lastUpdateTime)
+            ->limit($limit)->bindResultClass(Game::className())->query()->fetchAll();
+
+        return $games;
+    }
+
+    /**
+     * @param int $limit
+     * @return Game[]
+     */
+    public function getMostPlayedGames($limit = 2)
+    {
+        $games = Game::statement()->select('?.*', Game::table())
+            ->innerJoin('? ON ? = ?', Rank::table(), Rank::columns()->gameId, Game::columns()->id)
+            ->where('? = ?', Rank::columns()->userId, $this->id)
+            ->order('? DESC', Rank::columns()->matches)
+            ->limit($limit)->bindResultClass(Game::className())->query()->fetchAll();
+
+        return $games;
+    }
 }
