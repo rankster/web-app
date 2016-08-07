@@ -42,6 +42,7 @@ class MainPage extends Command
 
             $ranks = \Rankster\Entity\Rank::getRanks($game->id, 10);
             $table = UserRankTable::create();
+            $table->byUser = false;
             $table->name = $game->name;
             $table->image = $game->getFullUrl();
             $table->userRanks = $ranks;
