@@ -36,7 +36,7 @@ class MainPage extends Command
         } else {
             $games = Game::statement()
                 ->order('? DESC', Game::columns()->playersCount)
-                ->limit($count)->bindResultClass()->query()->fetchAll();
+                ->limit($count)->query()->fetchAll();
 
         }
 
