@@ -54,10 +54,10 @@ class Details extends Command
         $table->name = $game->name;
         $table->image = $game->getFullUrl();
         $table->userRanks = $ranks;
+        $table->setPagination(new Pagination(self::createState($this->io), $this->io, self::options()->rankPageId, $pages));
 
         $this->response->addContent((string)$table);
 
-        $this->response->addContent(new Pagination(self::createState($this->io), $this->io, self::options()->rankPageId, $pages));
         self::options()->rankPageId;
 
 
