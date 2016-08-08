@@ -59,4 +59,5 @@ class Game extends Entity
             ->query()->fetchRow();
         return $r['c'];
     }
+
 }

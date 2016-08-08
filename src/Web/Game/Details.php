@@ -5,14 +5,17 @@ namespace Rankster\Web\Game;
 
 use Rankster\Api\ClientException;
 use Rankster\Entity\Game as GameEntity;
+use Rankster\View\Pagination;
 use Rankster\View\UserRankTable;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
+use Yaoi\Io\Content\Anchor;
 use Yaoi\Io\Content\Heading;
 
 class Details extends Command
 {
     public $gameId;
+    public $rankPageId;
 
     /**
      * @param Definition $definition
@@ -21,6 +24,7 @@ class Details extends Command
     static function setUpDefinition(Definition $definition, $options)
     {
         $options->gameId = Command\Option::create()->setIsRequired()->setDescription('Game ID');
+        $options->rankPageId = Command\Option::create()->setDescription('Rank page number');
     }
 
     public function performAction()
@@ -31,7 +35,20 @@ class Details extends Command
         }
         $this->response->addContent(new Heading($game->name));
 
-        $ranks = \Rankster\Entity\Rank::getRanks($game->id, 10);
+        $this->response->addContent('<div class="row">');
+
+        $perPage = 20;
+
+        if (!$this->rankPageId) {
+            $this->rankPageId = 0;
+        }
+
+        $pages = ceil($game->playersCount / $perPage);
+        if ($this->rankPageId > $pages) {
+            $this->rankPageId = $pages;
+        }
+
+        $ranks = \Rankster\Entity\Rank::getRanks($game->id, $perPage, $this->rankPageId - 1);
         $table = UserRankTable::create();
         $table->byUser = false;
         $table->name = $game->name;
@@ -40,8 +57,11 @@ class Details extends Command
 
         $this->response->addContent((string)$table);
 
+        $this->response->addContent(new Pagination(self::createState($this->io), $this->io, self::options()->rankPageId, $pages));
+        self::options()->rankPageId;
 
-        $this->response->addContent(print_r($game->toArray(), 1));
+
+        $this->response->addContent('</div>');
     }
 
 
