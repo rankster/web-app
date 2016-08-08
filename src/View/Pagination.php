@@ -14,8 +14,12 @@ class Pagination extends Hardcoded
     public function __construct($state, Io $io, Option $option, $pages)
     {
         $optionName = $option->name;
+        if (!isset($state->$optionName)) {
+            $page = 1;
+        } else {
+            $page = $state->$optionName;
+        }
 
-        $page = $state->$optionName;
         $this->result = <<<HTML
 <nav>
   <ul class="pager">
