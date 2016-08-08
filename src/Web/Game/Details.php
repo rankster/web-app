@@ -40,7 +40,7 @@ class Details extends Command
         $perPage = 20;
 
         if (!$this->rankPageId) {
-            $this->rankPageId = 0;
+            $this->rankPageId = 1;
         }
 
         $pages = ceil($game->playersCount / $perPage);
