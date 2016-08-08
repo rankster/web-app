@@ -60,6 +60,9 @@ class Rank extends Entity
             return $saved;
         } else {
             $rank->rank = self::DEFAULT_RANK;
+            $game = Game::findByPrimaryKey($rank->gameId);
+            $game->playersCount++;
+            $game->save();
         }
 
         $rank->save();

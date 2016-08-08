@@ -6,6 +6,7 @@ use Rankster\View\Layout;
 use Yaoi\Io\Content\Anchor;
 use Rankster\Twbs\Io\Content\Badge;
 use Yaoi\Io\Content\Error;
+use Yaoi\Io\Content\Heading;
 use Yaoi\Io\Content\ItemList;
 use Yaoi\Io\Content\Multiple;
 use Yaoi\Io\Content\Rows;
@@ -52,6 +53,9 @@ class Response extends \Yaoi\Io\Response implements Renderer
                     $table->addRow($item);
                 }
                 return (string)$table;
+
+            case $message instanceof Heading:
+                return '<h2>' . $message->value . '</h2>';
 
             case $message instanceof Error:
                 return '<div role="alert" class="alert alert-danger"><strong>OOPS!</strong> '

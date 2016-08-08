@@ -4,12 +4,10 @@ namespace Rankster\Web\Game;
 
 
 use Rankster\Entity\Game as GameEntity;
+use Rankster\View\GamePlate;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
-use Yaoi\Io\Content\Anchor;
 use Yaoi\Io\Content\Heading;
-use Yaoi\Io\Content\Rows;
-use Yaoi\Rows\Processor;
 
 class Items extends Command
 {
@@ -19,19 +17,17 @@ class Items extends Command
 
     public function performAction()
     {
-        $games = GameEntity::statement()->query()->fetchAll();
-        $gameState = Details::createState();
+        $games = GameEntity::statement()->order('? DESC', GameEntity::columns()->playersCount)->query()->fetchAll();
 
         $this->response->addContent(new Heading("Games"));
 
-        $this->response->addContent(new Rows(Processor::create($games)->map(
-            function (GameEntity $game) use ($gameState) {
-                $row = array();
-                $gameState->gameId = $game->id;
-                $row['Name'] = new Anchor($game->name, $this->io->makeAnchor($gameState));
-                return $row;
-            }
-        )));
+        $this->response->addContent('<div class="row">');
+        foreach ($games as $game) {
+            $this->response->addContent(new GamePlate($game));
+        }
+
+        $this->response->addContent('</div>');
+
     }
 
 

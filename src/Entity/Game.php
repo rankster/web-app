@@ -48,6 +48,10 @@ class Game extends Entity
         return '//' . $_SERVER['HTTP_HOST'] . '/' . self::IMAGE_FOLDER . $path;
     }
 
+    /**
+     * @return mixed
+     * @deprecated
+     */
     public function countPlayers()
     {
         $r = Rank::statement()->select('COUNT(1) AS c')->where("? = ?", Rank::columns()->gameId, $this->id)

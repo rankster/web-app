@@ -2,7 +2,6 @@
 
 namespace Rankster\Entity;
 
-use Rankster\Service\AuthSession;
 use Yaoi\Database\Definition\Column;
 use Yaoi\Database\Definition\Table;
 use Yaoi\Database\Entity;
@@ -88,6 +87,10 @@ class Match extends Entity
 
         $rank1->matches++;
         $rank2->matches++;
+
+        $game = Game::findByPrimaryKey($this->gameId);
+        $game->matchesCount++;
+        $game->save();
 
         $rank1->save();
         $rank2->save();
