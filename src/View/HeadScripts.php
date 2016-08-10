@@ -19,16 +19,16 @@ class HeadScripts extends Hardcoded
     <link rel="stylesheet" href="/css/select2.min.css">
     <link rel="stylesheet" href="/css/select2-bootstrap.css">
     
-    <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/bootstrap-sweetalert/sweet-alert.css " rel="stylesheet" type="text/css">
-    <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/jquery-circliful/css/jquery.circliful.css" rel="stylesheet" type="text/css" />
-    <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/css/core.css" rel="stylesheet" type="text/css" />
-    <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/css/components.css" rel="stylesheet" type="text/css" />
-    <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/css/icons.css" rel="stylesheet" type="text/css" />
-    <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/css/pages.css" rel="stylesheet" type="text/css" />
-    <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/css/menu.css" rel="stylesheet" type="text/css" />
-    <link href="http://coderthemes.com/minton_1.6/yellow_hori/assets/css/responsive.css" rel="stylesheet" type="text/css" />
-    <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/js/modernizr.min.js"></script>
+    <link href="/css/sweet-alert.css" rel="stylesheet" type="text/css">
+    <link href="/css/jquery.circliful.css" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/core.css" rel="stylesheet" type="text/css" />
+    <link href="/css/components.css" rel="stylesheet" type="text/css" />
+    <link href="/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="/css/pages.css" rel="stylesheet" type="text/css" />
+    <link href="/css/menu.css" rel="stylesheet" type="text/css" />
+    <link href="/css/responsive.css" rel="stylesheet" type="text/css" />
+    <script src="/js/modernizr.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

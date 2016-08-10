@@ -2,7 +2,6 @@
 
 namespace Rankster\Entity;
 
-use Rankster\Service\AuthSession;
 use Yaoi\Database\Definition\Column;
 use Yaoi\Database\Definition\Table;
 use Yaoi\Database\Entity;
@@ -21,6 +20,11 @@ class Match extends Entity
     public $user2Id;
     public $user1Delta;
     public $user2Delta;
+
+    public $user1NewRank;
+    public $user2NewRank;
+
+
     public $winnerId;
     /** @var \DateTime */
     public $eventTime;
@@ -36,8 +40,10 @@ class Match extends Entity
         $columns->user1Id = User::columns()->id;
         $columns->user2Id = User::columns()->id;
         $columns->winnerId = User::columns()->id;
-        $columns->user1Delta = Column::FLOAT;
-        $columns->user2Delta = Column::FLOAT;
+        $columns->user1Delta = Column::INTEGER + Column::NOT_NULL;
+        $columns->user2Delta = Column::INTEGER + Column::NOT_NULL;
+        $columns->user1Delta = Column::INTEGER + Column::NOT_NULL;
+        $columns->user2Delta = Column::INTEGER + Column::NOT_NULL;
         $columns->status = Column::STRING;
         $columns->eventTime = Column::INTEGER + Column::USE_PHP_DATETIME;
     }
@@ -83,11 +89,18 @@ class Match extends Entity
             $rank2->win($rank1);
         }
 
-        $this->user1Delta = $rank1->rank - $r1;
-        $this->user2Delta = $rank2->rank - $r2;
+        $this->user1Delta = round($rank1->rank - $r1);
+        $this->user2Delta = round($rank2->rank - $r2);
+
+        $this->user1NewRank = round($rank1->rank);
+        $this->user2NewRank = round($rank2->rank);
 
         $rank1->matches++;
         $rank2->matches++;
+
+        $game = Game::findByPrimaryKey($this->gameId);
+        $game->matchesCount++;
+        $game->save();
 
         $rank1->save();
         $rank2->save();
@@ -114,4 +127,5 @@ class Match extends Entity
 
         return $match;
     }
+
 }

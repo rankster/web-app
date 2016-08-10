@@ -21,6 +21,15 @@ class UserRankTable extends Hardcoded
     /** @var array */
     public $userRanks;
 
+    /** @var Pagination */
+    private $pagination;
+
+    public function setPagination(Pagination $pagination)
+    {
+        $this->pagination = $pagination;
+    }
+
+
     protected function renderItem($i, $rank)
     {
         if ($i == 0) {
@@ -124,6 +133,7 @@ HTML;
             </tbody>
         </table>
     </div>
+{$this->pagination}
 </div>
 
 HTML;
