@@ -76,32 +76,32 @@ class Layout extends Hardcoded
         <script src="/js/bootstrap.min.js"></script>
         <!-- Counter Up  -->
         <script
-            src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/waypoints/lib/jquery.waypoints.js"></script>
+            src="/js/jquery.waypoints.js"></script>
         <script
-            src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/counterup/jquery.counterup.min.js"></script>
+            src="/js/jquery.counterup.min.js"></script>
 
         <!-- Sweet Alert  -->
         <script
-            src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
+            src="/js/sweet-alert.min.js"></script>
         <script src="/js/sweet_alerts.js"></script>
 
         <!-- Sparkline -->
         <script
-            src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+            src="/js/jquery.sparkline.min.js"></script>
 
         <!-- skycons -->
-        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/skyicons/skycons.min.js"
+        <script src="/js/skycons.min.js"
                 type="text/javascript"></script>
 
         <!-- Todojs  -->
-        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/pages/jquery.todo.js"></script>
+        <script src="/js/jquery.todo.js"></script>
         <!-- Circliful -->
         <script
-            src="http://coderthemes.com/minton_1.6/yellow_hori/assets/plugins/jquery-circliful/js/jquery.circliful.min.js"></script>
-        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/js/jquery.core.js"></script>
-        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/js/jquery.app.js"></script>
-        <script src="http://coderthemes.com/minton_1.6/yellow_hori/assets/pages/jquery.widgets.js"></script>
-        <script src="http://jquerymodal.com/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
+            src="/js/jquery.circliful.min.js"></script>
+        <script src="/js/jquery.core.js"></script>
+        <script src="/js/jquery.app.js"></script>
+        <script src="/js/jquery.widgets.js"></script>
+        <script src="/js/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
 
 
         <script type="text/javascript">

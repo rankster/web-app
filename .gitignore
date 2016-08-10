@@ -1,3 +1,6 @@
 vendor
 .idea
 env/conf.php
+public/user-images
+rankster.sql
+public/nginx-error.log
