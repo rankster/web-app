@@ -61,7 +61,7 @@ class Layout extends Hardcoded
         </head>
         <body>
         <div class="container">
-            <h1><a href="/"><img src="http://i.imgur.com/mQtR9aL.png" width="150"/></a></h1>
+            <h1><a href="/"><img src="/images/mQtR9aL.png" width="150"/></a></h1>
             <?php $this->header->render() ?>
             <?php echo $this->main ?>
 
