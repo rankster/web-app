@@ -20,6 +20,10 @@ class History extends Hardcoded
     /** @var \Rankster\Entity\Match[]  */
     private $rows;
 
+    public $title;
+
+    public $hideGameColumn = false;
+
     /**
      * History constructor.
      * @param Match[] $rows
@@ -31,17 +35,22 @@ class History extends Hardcoded
 
     public function renderItem(Match $match)
     {
-
         $game = Game::findByPrimaryKey($match->gameId);
         $user1 = User::findByPrimaryKey($match->user1Id);
         $user2 = User::findByPrimaryKey($match->user2Id);
 
+        $w1 = $user1->id === $match->winnerId ? ' class="winner"' : '';
+        $w2 = $user1->id === $match->winnerId ? ' class="winner"' : '';
+
+        $d1 = $match->user1Delta > 0 ? '+' . $match->user1Delta : $match->user1Delta;
+        $d2 = $match->user2Delta > 0 ? '+' . $match->user2Delta : $match->user2Delta;
+
         $result = <<<HTML
     <tr>
-        <th scope="row">{$match->eventTime->format('Y-m-d H:i')}</th>
-        <td>{$game->name}</td>
-        <td>{$user1->name} {$match->user1Delta}</td>
-        <td>{$user2->name} {$match->user2Delta}</td>
+        <td scope="row" style="width:90px">{$match->eventTime->format('Y-m-d H:i')}</td>
+        <td><a href="/game/details/?game_id={$game->id}"><img class="i20" src="{$game->getFullUrl()}" title="{$game->name}" /></a></td>
+        <td{$w1}><img class="i20" src="{$user1->getFullUrl()}" /> <a href="/user/details/?user_id={$user1->id}">{$user1->name}</a> {$match->user1NewRank}({$d1})</td>
+        <td{$w2}><img class="i20" src="{$user2->getFullUrl()}" /> <a href="/user/details/?user_id={$user2->id}">{$user2->name}</a> {$match->user2NewRank}({$d2})</td>
     </tr>
 HTML;
         return $result;
@@ -64,6 +73,8 @@ HTML;
         echo <<<HTML
 <div class="col-lg-6">
     <div class="card-box">
+        <h4 class="m-t-0 header-title" style="float: right"><b>{$this->title}</b></h4>
+
         <table class="table m-0">
             <tbody>
             {$rows}

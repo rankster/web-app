@@ -12,3 +12,8 @@
 #game-req, #game-replay {
     background-image: url("http://demo.qodeinteractive.com/bridge2/wp-content/uploads/2014/03/pixel.png");
 }
+
+.i20 {
+    width: 20px;
+    height: 20px;
+}

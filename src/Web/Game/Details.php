@@ -17,8 +17,10 @@ use Yaoi\Io\Content\Heading;
 class Details extends Command
 {
     public $gameId;
-    public $rankPageId;
-    public $historyPageId;
+    /** @var int|Command\Option */
+    public $rankPageId = 0;
+    /** @var int|Command\Option */
+    public $historyPageId = 0;
 
     /**
      * @param Definition $definition
@@ -43,13 +45,13 @@ class Details extends Command
 
         $perPage = 20;
 
-        if (!$this->rankPageId) {
-            $this->rankPageId = 1;
-        }
-
         $pages = ceil($game->playersCount / $perPage);
         if ($this->rankPageId > $pages) {
             $this->rankPageId = $pages;
+        }
+
+        if (!$this->rankPageId) {
+            $this->rankPageId = 1;
         }
 
         $commandState = self::createState($this->io);
@@ -64,11 +66,17 @@ class Details extends Command
         $this->response->addContent((string)$table);
 
 
+        $perPage = 12;
+        $pages = ceil($game->matchesCount / $perPage);
+
+        if ($this->historyPageId > $pages) {
+            $this->historyPageId = $pages;
+        }
+
         if (!$this->historyPageId) {
             $this->historyPageId = 1;
         }
 
-        $pages = ceil($game->matchesCount / $perPage);
         $matches = Match::statement()
             ->where('? = ?', Match::columns()->gameId, $this->gameId)
             ->order('? DESC', Match::columns()->eventTime)
@@ -77,6 +85,7 @@ class Details extends Command
             ->fetchAll();
 
         $history = new History($matches);
+        $history->title = 'Match History';
         $history->setPagination(new Pagination($commandState, self::options()->historyPageId, $pages));
         $this->response->addContent($history);
 
