@@ -77,6 +77,26 @@ class Migrate extends Command
         $game->picturePath = '/../images/ShiFuMi256x256.png';
         $game->findOrSave();
 
+        $game = new Game();
+        $game->name = 'Street Fighter V';
+        $game->picturePath = '/../images/HelloSfv256x256.png';
+        $game->findOrSave();
+
+        $game = new Game();
+        $game->name = 'Fifa 16';
+        $game->picturePath = '/../images/fifa16.png';
+        $game->findOrSave();
+
+        $game = new Game();
+        $game->name = 'Mortal Kombat X';
+        $game->picturePath = '/../images/mkx.jpg';
+        $game->findOrSave();
+
+        $game = new Game();
+        $game->name = 'PES 2016';
+        $game->picturePath = '/../images/pes2016.png';
+        $game->findOrSave();
+
 
 //       add users
         $user = new User();
