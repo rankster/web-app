@@ -6,6 +6,7 @@ namespace Rankster\Web\Game;
 use Rankster\Api\ClientException;
 use Rankster\Entity\Game as GameEntity;
 use Rankster\Entity\Match;
+use Rankster\View\GamePlate;
 use Rankster\View\History;
 use Rankster\View\Pagination;
 use Rankster\View\UserRankTable;
@@ -18,9 +19,9 @@ class Details extends Command
 {
     public $gameId;
     /** @var int|Command\Option */
-    public $rankPageId = 0;
+    public $rankPage = 0;
     /** @var int|Command\Option */
-    public $historyPageId = 0;
+    public $historyPage = 0;
 
     /**
      * @param Definition $definition
@@ -28,65 +29,72 @@ class Details extends Command
      */
     static function setUpDefinition(Definition $definition, $options)
     {
-        $options->gameId = Command\Option::create()->setIsRequired()->setDescription('Game ID');
-        $options->rankPageId = Command\Option::create()->setDescription('Rank page number');
-        $options->historyPageId = Command\Option::create()->setDescription('History page number');
+        $options->gameId = Command\Option::create()->setType()->setIsRequired()->setDescription('Game ID');
+        $options->rankPage = Command\Option::create()->setType()->setDescription('Rank page number');
+        $options->historyPage = Command\Option::create()->setType()->setDescription('History page number');
     }
 
     public function performAction()
     {
         $game = GameEntity::findByPrimaryKey($this->gameId);
+
         if (!$game) {
             throw new ClientException("Game not found");
         }
-        $this->response->addContent(new Heading($game->name));
+
+        $this->response->addContent('<div class="row">');
+        $this->response->addContent(new GamePlate($game));
+        $this->response->addContent('</div>');
+
+        //$this->response->addContent(new Heading($game->name));
 
         $this->response->addContent('<div class="row">');
 
-        $perPage = 20;
+        $perPage = 10;
 
         $pages = ceil($game->playersCount / $perPage);
-        if ($this->rankPageId > $pages) {
-            $this->rankPageId = $pages;
+
+        if ($this->rankPage > $pages) {
+            $this->rankPage = $pages;
         }
 
-        if (!$this->rankPageId) {
-            $this->rankPageId = 1;
+        if (!$this->rankPage) {
+            $this->rankPage = 1;
         }
 
         $commandState = self::createState($this->io);
 
-        $ranks = \Rankster\Entity\Rank::getRanks($game->id, $perPage, $this->rankPageId - 1);
+        $ranks = \Rankster\Entity\Rank::getRanks($game->id, $perPage, $this->rankPage - 1);
         $table = UserRankTable::create();
-        $table->byUser = false;
         $table->name = "Rank";
         $table->image = $game->getFullUrl();
+        $table->game = $game;
         $table->userRanks = $ranks;
-        $table->setPagination(new Pagination($commandState->copy(), self::options()->rankPageId, $pages));
+        $table->setPagination(new Pagination($commandState->copy(), self::options()->rankPage, $pages));
         $this->response->addContent((string)$table);
 
 
         $perPage = 12;
         $pages = ceil($game->matchesCount / $perPage);
 
-        if ($this->historyPageId > $pages) {
-            $this->historyPageId = $pages;
+        if ($this->historyPage > $pages) {
+            $this->historyPage = $pages;
         }
 
-        if (!$this->historyPageId) {
-            $this->historyPageId = 1;
+        if (!$this->historyPage) {
+            $this->historyPage = 1;
         }
 
         $matches = Match::statement()
             ->where('? = ?', Match::columns()->gameId, $this->gameId)
             ->order('? DESC', Match::columns()->eventTime)
-            ->limit($perPage, $perPage * ($this->historyPageId - 1))
+            ->limit($perPage, $perPage * ($this->historyPage - 1))
             ->query()
             ->fetchAll();
 
         $history = new History($matches);
         $history->title = 'Match History';
-        $history->setPagination(new Pagination($commandState, self::options()->historyPageId, $pages));
+        $history->setPagination(new Pagination($commandState, self::options()->historyPage, $pages));
         $this->response->addContent($history);
 
         $this->response->addContent('</div>');

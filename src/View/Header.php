@@ -1,6 +1,8 @@
 <?php
 namespace Rankster\View;
 
+use Rankster\View\Match\ReplayForm;
+use Rankster\View\Match\RequestForm;
 use Yaoi\View\Hardcoded;
 use Rankster\Entity\Match;
 use Rankster\Service\AuthSession;
@@ -68,6 +70,8 @@ class Header extends Hardcoded
                             Data::getInstance()->addGameInfo($game);
 
                             ?>
+                            <img class="img-circle" width="50px" src="<?= $game->getFullUrl() ?>">
+
                             <span title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5"
                                   onclick='Rankster.gameReplayDialog(<?= $game->id ?>, <?= $user->id ?>)'>
             <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i> Play again
@@ -76,8 +80,7 @@ class Header extends Hardcoded
                             <img
                                 src="/images/versus-icon-vs-icon-315x400.jpg"
                                 width="50"/>
-                            <img class="img-circle" src="<?= $user->getFullUrl() ?>">
-                            <img class="img-circle" width="55" src="<?= $game->getFullUrl() ?>">
+                            <img class="img-circle" width="50px" src="<?= $user->getFullUrl() ?>">
                             <?php
                         }
                         ?>
@@ -87,10 +90,10 @@ class Header extends Hardcoded
 
             </div>
 
-            <?php echo \Rankster\Service\Output::process('match-replay'); ?>
-            <?php echo \Rankster\Service\Output::process('match-request') ?>
-
-        <?php } else { ?>
+            <?php
+ReplayForm::create()->render();
+RequestForm::create()->render();
+        } else { ?>
             <div class="row">
                 <div class="col-sm-6 col-lg-3">
                     <div class="card-box">

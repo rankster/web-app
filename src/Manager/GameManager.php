@@ -3,6 +3,7 @@
 namespace Rankster\Manager;
 
 
+use Rankster\Entity\Game;
 use Rankster\Entity\Match;
 use Rankster\Entity\Rank;
 use Rankster\Entity\RankHistory;
@@ -18,6 +19,14 @@ class GameManager
         Database::getInstance()
             ->query("DELETE FROM ? WHERE ? IN (?)", RankHistory::table(), RankHistory::columns()->gameId, $gameIds)
             ->execute();
+
+        Database::getInstance()->query("UPDATE ? SET ? = 0, ? = 0 WHERE ? IN (?)",
+            Game::table(),
+            Game::columns()->playersCount,
+            Game::columns()->matchesCount,
+            Game::columns()->id,
+            $gameIds
+        )->execute();
     }
 
     public static function wipeMatches(array $gameIds)

@@ -22,11 +22,10 @@ class Pagination extends Hardcoded
     public function __construct(State $state, Option $pageNumber, $pages)
     {
         $optionName = $pageNumber->name;
+        $page = (int)$state->$optionName;
 
-        if (!isset($state->$optionName)) {
+        if (empty($page)) {
             $page = 1;
-        } else {
-            $page = $state->$optionName;
         }
 
         $this->result = <<<HTML

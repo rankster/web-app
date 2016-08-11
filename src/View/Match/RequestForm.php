@@ -1,4 +1,16 @@
-<div id="game-replay" style="display:none">
+<?php
+
+namespace Rankster\View\Match;
+
+
+use Yaoi\View\Hardcoded;
+
+class RequestForm extends Hardcoded
+{
+    public function render()
+    {
+        echo <<<'HTML'
+<div id="game-req" style="display:none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,14 +20,12 @@
             <form action="/match/create" method="post" id="create-match">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label">Game:</label>
-                        <input type="hidden" name="game_id" id="reply-game-id">
-                        <label id="label-game-name"></label>
+                        <label for="game" class="control-label">Game:</label>
+                        <select style="width: 100%" id="game" tabindex="-1" name="game_id"></select>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Opponent:</label>
-                        <input type="hidden" name="opponent_id" value="" id="reply-opponent-id">
-                        <label id="label-opponent-name"></label>
+                        <select style="width: 100%" id="recipient-name" tabindex="" name="opponent_id"></select>
                     </div>
                     <div class="form-group" style="text-align:center">
                         <div class="btn-group" data-toggle="buttons">
@@ -33,16 +43,19 @@
                 </div>
                 <div class="modal-footer">
                     <a type="button" class="btn btn-default" id="close-me" data-dismiss="modal" rel="modal:close">Cancel</a>
-                    <button type="submit" class="btn btn-success">Submit Result</button>
+                    <button type="submit" class="btn btn-success" onClick="//sendCreateMatchForm();">Submit Result</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 <script>
-window.addEventListener('load', function () {
-    $('#game-replay [rel="modal:close"]').click(function () {
-        $('#game-replay').hide();
-    })
-}, false);
+    window.addEventListener('load', Rankster.eventHandler, false);
 </script>
+
+HTML;
+
+    }
+
+
+}
