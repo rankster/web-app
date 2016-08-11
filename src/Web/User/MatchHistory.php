@@ -7,13 +7,19 @@ use Rankster\Entity\Game;
 use Rankster\Entity\Match;
 use Rankster\Entity\Rank;
 use Rankster\Entity\User as UserEntity;
+use Rankster\View\GamePlate;
+use Rankster\View\History;
+use Rankster\View\Pagination;
+use Rankster\View\UserPlate;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
+use Yaoi\Io\Content\Heading;
 
 class MatchHistory extends Command
 {
     public $gameId;
     public $userId;
+    public $historyPage;
 
     /**
      * @param Definition $definition
@@ -23,6 +29,7 @@ class MatchHistory extends Command
     {
         $options->gameId = Command\Option::create()->setType()->setIsRequired();
         $options->userId = Command\Option::create()->setType()->setIsRequired();
+        $options->historyPage = Command\Option::create()->setType();
     }
 
     public function performAction()
@@ -41,14 +48,54 @@ class MatchHistory extends Command
 
         $rank = Rank::findOrCreateByUserGame($this->userId, $this->gameId);
 
+        /*
         $rows = Match::statement()
             ->where('? = ?', Match::columns()->gameId, $this->gameId)
             ->where('? IN (?, ?)', $this->userId, Match::columns()->user1Id, Match::columns()->user2Id)
             ->order('? DESC', Match::columns()->id)
             ->query();
+*/
+
+        $commandState = self::createState($this->io);
+
+        $perPage = 12;
+        $pages = ceil($game->matchesCount / $perPage);
+
+        if ($this->historyPage > $pages) {
+            $this->historyPage = $pages;
+        }
+
+        if (!$this->historyPage) {
+            $this->historyPage = 1;
+        }
+
+        $matches = Match::statement()
+            ->where('? = ?', Match::columns()->gameId, $this->gameId)
+            ->order('? DESC', Match::columns()->eventTime)
+            ->limit($perPage, $perPage * ($this->historyPage - 1))
+            ->query()
+            ->fetchAll();
+
+        $history = new History($matches);
+        $history->title = 'Match History';
+        $history->setPagination(new Pagination($commandState, self::options()->historyPage, $pages));
+
+        $gamePlate = new GamePlate($game);
+        $info = 'Rank: ' . $rank->show();
+        $userPlate = new UserPlate($user, $info);
+
+        $this->response->addContent('<div class="row">');
+        $this->response->addContent($gamePlate);
+        $this->response->addContent($userPlate);
+        $this->response->addContent('</div>');
+
+        $this->response->addContent(new Heading('History'));
+        $this->response->addContent('<div class="row">');
+        $this->response->addContent($history);
+        $this->response->addContent('</div>');
 
 
-        $this->response->addContent(new \Rankster\View\Match\MatchHistory($rows, $game, $user, $rank));
+        //$this->response->addContent(new \Rankster\View\Match\MatchHistory($rows, $game, $user, $rank));
     }
 
 

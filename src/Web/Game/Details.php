@@ -6,6 +6,7 @@ namespace Rankster\Web\Game;
 use Rankster\Api\ClientException;
 use Rankster\Entity\Game as GameEntity;
 use Rankster\Entity\Match;
+use Rankster\View\GamePlate;
 use Rankster\View\History;
 use Rankster\View\Pagination;
 use Rankster\View\UserRankTable;
@@ -40,11 +41,16 @@ class Details extends Command
         if (!$game) {
             throw new ClientException("Game not found");
         }
-        $this->response->addContent(new Heading($game->name));
+
+        $this->response->addContent('<div class="row">');
+        $this->response->addContent(new GamePlate($game));
+        $this->response->addContent('</div>');
+
+        //$this->response->addContent(new Heading($game->name));
 
         $this->response->addContent('<div class="row">');
 
-        $perPage = 3;
+        $perPage = 10;
 
         $pages = ceil($game->playersCount / $perPage);
 

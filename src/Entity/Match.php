@@ -105,6 +105,8 @@ class Match extends Entity
         $rank1->save();
         $rank2->save();
         $this->save();
+
+        $rank1->updatePlaces();
         return $this;
     }
 

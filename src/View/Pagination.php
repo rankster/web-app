@@ -43,7 +43,7 @@ HTML;
 HTML;
         }
 
-        if ($page <= $pages) {
+        if ($page < $pages) {
             $state->$optionName = $page + 1;
             $url = $state->makeAnchor();
             $this->result .= <<<HTML

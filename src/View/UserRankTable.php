@@ -35,15 +35,16 @@ class UserRankTable extends Hardcoded
 
     protected function renderItem($i, $rank)
     {
-        if ($i == 0) {
+        $r = Rank::fromArray($rank);
+        $user = User::fromArray($rank);
+        $game = Game::findByPrimaryKey($r->gameId);
+
+        if ($r->place === 1) {
             $firstcol = '<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
         } else {
-            $firstcol = $i + 1;
+            $firstcol = $r->place;
         }
 
-        $user = User::fromArray($rank);
-        $r = Rank::fromArray($rank);
-        $game = Game::findByPrimaryKey($r->gameId);
 
         if ($this->user) {
             $image = $game->getFullUrl();

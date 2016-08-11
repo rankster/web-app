@@ -4,6 +4,8 @@ namespace Rankster\Entity;
 
 use Rankster\Elo\Alcalyn;
 use Rankster\Elo\Ranker;
+use Rankster\View\SubmitScore\Data;
+use Yaoi\Database;
 use Yaoi\Database\Definition\Column;
 use Yaoi\Database\Definition\Index;
 use Yaoi\Database\Entity;
@@ -18,6 +20,7 @@ class Rank extends Entity
     public $rank;
     public $lastUpdateTime;
     public $matches = 0;
+    public $place = 0;
 
     /**
      * @param \stdClass|static $columns
@@ -30,6 +33,7 @@ class Rank extends Entity
         $columns->rank = Column::FLOAT + Column::SIZE_8B;
         $columns->lastUpdateTime = Column::INTEGER + Column::USE_PHP_DATETIME;
         $columns->matches = Column::INTEGER;
+        $columns->place = Column::INTEGER + Column::NOT_NULL;
     }
 
     /**
@@ -52,7 +56,8 @@ class Rank extends Entity
     }
 
 
-    public static function findOrCreateByUserGame($userId, $gameId) {
+    public static function findOrCreateByUserGame($userId, $gameId)
+    {
         $rank = new Rank();
         $rank->userId = $userId;
         $rank->gameId = $gameId;
@@ -112,6 +117,7 @@ class Rank extends Entity
 
     /** @var Ranker */
     private static $ranker;
+
     public static function setRanker(Ranker $ranker)
     {
         self::$ranker = $ranker;
@@ -125,6 +131,28 @@ class Rank extends Entity
     public function show()
     {
         return round($this->rank);
+    }
+
+    public function updatePlaces()
+    {
+        $db = Database::getInstance();
+        $db->query('set @i=0');
+        $db->query(
+<<<SQL
+INSERT INTO :table (:id, :place)
+  (SELECT :id, @i := @i + 1 FROM :table WHERE :game_id = :game_id_val ORDER BY :rank DESC) 
+ON DUPLICATE KEY UPDATE :place = VALUES(:place)
+SQL
+            , array(
+                'table' => Rank::table(),
+                'id' => Rank::columns()->id,
+                'place' => Rank::columns()->place,
+                'game_id' => Rank::columns()->gameId,
+                'rank' => Rank::columns()->rank,
+                'game_id_val' => $this->gameId
+            )
+        )->execute();
+        return $this;
     }
 }
 
