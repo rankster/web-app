@@ -26,8 +26,7 @@ class Details extends Command
         $user = UserEntity::findByPrimaryKey($this->userId);
         $ranks = \Rankster\Entity\Rank::getRanksByUser($this->userId);
         $table = UserRankTable::create();
-        $table->name = $user->name;
-        $table->image = $user->getFullUrl();
+        $table->user = $user;
         $table->userRanks = $ranks;
         $this->response->addContent((string)$table);
     }

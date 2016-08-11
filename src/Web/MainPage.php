@@ -24,7 +24,6 @@ class MainPage extends Command
             $this->response->success("Successfully logged in!");
             $this->response->addContent('<script>setTimeout(function(){$(".alert-success").hide(500);}, 3000)</script>');
         }
-        $this->response->addContent(Output::process('Header'));
 
         $limit = 2;
         if ($user = AuthSession::getUser()) {
@@ -42,9 +41,7 @@ class MainPage extends Command
 
             $ranks = \Rankster\Entity\Rank::getRanks($game->id, 10);
             $table = UserRankTable::create();
-            $table->byUser = false;
-            $table->name = $game->name;
-            $table->image = $game->getFullUrl();
+            $table->game = $game;
             $table->userRanks = $ranks;
 
             $this->response->addContent((string)$table);

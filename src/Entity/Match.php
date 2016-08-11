@@ -42,8 +42,8 @@ class Match extends Entity
         $columns->winnerId = User::columns()->id;
         $columns->user1Delta = Column::INTEGER + Column::NOT_NULL;
         $columns->user2Delta = Column::INTEGER + Column::NOT_NULL;
-        $columns->user1Delta = Column::INTEGER + Column::NOT_NULL;
-        $columns->user2Delta = Column::INTEGER + Column::NOT_NULL;
+        $columns->user1NewRank = Column::INTEGER + Column::NOT_NULL;
+        $columns->user2NewRank = Column::INTEGER + Column::NOT_NULL;
         $columns->status = Column::STRING;
         $columns->eventTime = Column::INTEGER + Column::USE_PHP_DATETIME;
     }

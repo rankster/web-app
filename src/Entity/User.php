@@ -39,6 +39,9 @@ class User extends Entity
     
     public function downloadImage($url)
     {
+        var_dump($url);
+
+        /*
         $ch = curl_init($url);
         curl_setopt_array(
             $ch,
@@ -51,7 +54,14 @@ class User extends Entity
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         if (curl_errno($ch) || $httpCode != 200) {
+            var_dump(curl_error($ch));
             return false;
+        }
+        */
+
+        $response = file_get_contents($url);
+        if (!$response) {
+            return;
         }
 
         $md5 = md5($this->facebookId . 'FacebookHackathon2016');

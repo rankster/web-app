@@ -10,10 +10,27 @@
 }
 
 #game-req, #game-replay {
-    background-image: url("http://demo.qodeinteractive.com/bridge2/wp-content/uploads/2014/03/pixel.png");
+    background-image: url("/images/pixel.png");
 }
 
 .i20 {
     width: 20px;
     height: 20px;
+}
+
+.table.rank-table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.winner .rank {
+    background: seagreen;
+}
+
+
+.rank {
+    background: gray none repeat scroll 0 0;
+    border-radius: 10px;
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 10px;
 }

@@ -13,7 +13,10 @@ use Yaoi\View\Hardcoded;
 
 class UserRankTable extends Hardcoded
 {
-    public $byUser = true;
+    /** @var User */
+    public $user;
+    /** @var Game */
+    public $game;
 
     public $name;
     public $image;
@@ -42,7 +45,7 @@ class UserRankTable extends Hardcoded
         $r = Rank::fromArray($rank);
         $game = Game::findByPrimaryKey($r->gameId);
 
-        if ($this->byUser) {
+        if ($this->user) {
             $image = $game->getFullUrl();
             $title = <<<HTML
 <a href="/game/details/?game_id={$r->gameId}">{$game->name}</a><br/>
@@ -73,15 +76,15 @@ HTML;
         $result = <<<HTML
     <tr>
         <th scope="row">{$firstcol}</th>
-        <td><img class="img-circle" style="width:50px;height:50px" src="{$image}"/></td>
+        <td><img class="img-rounded" style="width:50px;height:50px" src="{$image}"/></td>
         <td>{$title}</td>
-        <td style="width:80px">
+        <td style="width:60px">
             {$r->show()}
-            <div id="r{$rank['id']}-{$r->gameId}" style="width:80px;height: 20px"></div>
+            <div id="r{$rank['id']}-{$r->gameId}" style="width:60px;height: 20px"></div>
             <script>
                 $("#r{$rank['id']}-{$r->gameId}").sparkline([{$history}], {
                     type: 'line',
-                    width: '80px',
+                    width: '60px',
                     height: '20px'
                 });
             </script>
@@ -101,7 +104,7 @@ HTML;
 HTML;
         }
 
-$result .= <<<HTML
+        $result .= <<<HTML
     </tr>
 HTML;
         return $result;
@@ -119,15 +122,30 @@ HTML;
             $rows .= $this->renderItem($i, $rank);
         }
 
+
+        if ($this->name && $this->image) {
+            $captionLink = $this->name;
+            $image = $this->image;
+        } else {
+            if ($this->game) {
+                $captionLink = "<a href=\"/game/details/?game_id={$this->game->id}\">{$this->game->name}</a>";
+                $image = $this->game->getFullUrl();
+            } else {
+                $captionLink = "<a href=\"/user/details/?user_id={$this->user->id}\">{$this->user->name}</a>";
+                $image = $this->user->getFullUrl();
+            }
+        }
+
+
         echo <<<HTML
 <div class="col-lg-6">
     <div class="card-box">
-        <h4 class="m-t-0 header-title" style="float: right"><b>{$this->name}</b></h4>
+        <h4 class="m-t-0 header-title" style="float: right"><b>{$captionLink}</b></h4>
         <p class="text-muted font-13 m-b-25">
-            <img class="img-circle" width="55" src="{$this->image}">
+            <img class="img-rounded" width="55" src="{$image}">
         </p>
 
-        <table class="table m-0">
+        <table class="table m-0 rank-table">
             <tbody>
             {$rows}
             </tbody>

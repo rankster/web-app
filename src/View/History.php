@@ -40,7 +40,7 @@ class History extends Hardcoded
         $user2 = User::findByPrimaryKey($match->user2Id);
 
         $w1 = $user1->id === $match->winnerId ? ' class="winner"' : '';
-        $w2 = $user1->id === $match->winnerId ? ' class="winner"' : '';
+        $w2 = $user2->id === $match->winnerId ? ' class="winner"' : '';
 
         $d1 = $match->user1Delta > 0 ? '+' . $match->user1Delta : $match->user1Delta;
         $d2 = $match->user2Delta > 0 ? '+' . $match->user2Delta : $match->user2Delta;
@@ -49,8 +49,8 @@ class History extends Hardcoded
     <tr>
         <td scope="row" style="width:90px">{$match->eventTime->format('Y-m-d H:i')}</td>
         <td><a href="/game/details/?game_id={$game->id}"><img class="i20" src="{$game->getFullUrl()}" title="{$game->name}" /></a></td>
-        <td{$w1}><img class="i20" src="{$user1->getFullUrl()}" /> <a href="/user/details/?user_id={$user1->id}">{$user1->name}</a> {$match->user1NewRank}({$d1})</td>
-        <td{$w2}><img class="i20" src="{$user2->getFullUrl()}" /> <a href="/user/details/?user_id={$user2->id}">{$user2->name}</a> {$match->user2NewRank}({$d2})</td>
+        <td{$w1}><img class="i20" src="{$user1->getFullUrl()}" /> <a href="/user/details/?user_id={$user1->id}">{$user1->name}</a><br /><span class="rank">{$match->user1NewRank}({$d1})</span></td>
+        <td{$w2}><img class="i20" src="{$user2->getFullUrl()}" /> <a href="/user/details/?user_id={$user2->id}">{$user2->name}</a><br /><span class="rank">{$match->user2NewRank}({$d2})</span></td>
     </tr>
 HTML;
         return $result;
