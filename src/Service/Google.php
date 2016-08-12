@@ -35,6 +35,8 @@ class Google extends Service
     }
 
 
+    private $accessToken;
+
     public function getToken($code) {
         $params = array(
             'code' => $code,
@@ -46,10 +48,15 @@ class Google extends Service
 
         $client = new Client();
         $client->post = $params;
-        $tokenResponse = $client->fetch('https://www.googleapis.com/oauth2/v4/token');
-        var_dump($tokenResponse);
+        $tokenResponse = json_decode($client->fetch('https://www.googleapis.com/oauth2/v4/token'),true);
+        $this->accessToken = $tokenResponse['access_token'];
+        return $this->accessToken;
+    }
 
-
+    public function getUserInfo() {
+        $url = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' . $this->accessToken;
+        $response = file_get_contents($url);
+        return json_decode($response, true);
     }
 
 }

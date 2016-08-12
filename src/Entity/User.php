@@ -29,8 +29,8 @@ class User extends Entity
             ->setUnique();
         $columns->googleId = Column::create(Column::STRING)->setUnique();
         $columns->login = Column::create(Column::STRING)->setUnique();
-        $columns->name = Column::STRING + Column::NOT_NULL;
-        $columns->email = Column::STRING + Column::NOT_NULL;
+        $columns->name = Column::create(Column::STRING + Column::NOT_NULL)->setDefault('');
+        $columns->email = Column::create(Column::STRING + Column::NOT_NULL)->setDefault('')->setUnique();
         $columns->picturePath = Column::STRING;
     }
 
@@ -39,34 +39,17 @@ class User extends Entity
         $table->setSchemaName('user');
     }
     
-    public function downloadImage($url)
+    public function downloadImage($url, $id = null)
     {
-        var_dump($url);
-
-        /*
-        $ch = curl_init($url);
-        curl_setopt_array(
-            $ch,
-            [
-                CURLOPT_RETURNTRANSFER  => true,
-            ]
-        );
-
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-        if (curl_errno($ch) || $httpCode != 200) {
-            var_dump(curl_error($ch));
-            return false;
-        }
-        */
-
         $response = file_get_contents($url);
         if (!$response) {
             return;
         }
 
-        $md5 = md5($this->facebookId . 'FacebookHackathon2016');
+        if (null === $id) {
+            $id = $this->facebookId;
+        }
+        $md5 = md5($id . 'FacebookHackathon2016');
         $dir = substr($md5, 0, 3);
 
         $imagesDirectory = DOC_ROOT . '/' . self::IMAGE_FOLDER . '/';

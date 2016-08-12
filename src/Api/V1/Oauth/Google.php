@@ -2,6 +2,8 @@
 
 namespace Rankster\Api\V1\Oauth;
 
+use Rankster\Entity\User;
+use Rankster\Service\AuthSession;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 
@@ -26,7 +28,31 @@ class Google extends Command
     {
         $google = \Rankster\Service\Google::getInstance();
         $token = $google->getToken($this->code);
-        var_dump($token);
+        $info = $google->getUserInfo();
+
+        if (empty($info['id'])) {
+            throw new \Exception('Bad response');
+        }
+
+        $user = new User();
+        $user->email = $info['email'];
+        if ($saved = $user->findSaved()) {
+            $user = $saved;
+            if (empty($user->googleId)) {
+                $user->googleId = $info['id'];
+                $user->save();
+            }
+        } else {
+            $user->name = $info['name'];
+            $user->googleId = $info['id'];
+            if (!empty($info['picture'])) {
+                $user->downloadImage($info['picture'], $user->googleId);
+            }
+            $user->save();
+        }
+        AuthSession::set($user->id);
+        header("Location: $this->state");
+        exit();
     }
 
 
