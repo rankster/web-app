@@ -13,6 +13,7 @@ class User extends Entity
 
     public $id;
     public $facebookId;
+    public $googleId;
     public $name;
     public $login;
     public $email;
@@ -23,9 +24,10 @@ class User extends Entity
     static function setUpColumns($columns)
     {
         $columns->id = Column::AUTO_ID;
-        $columns->facebookId = Column::create(Column::STRING + Column::NOT_NULL)
+        $columns->facebookId = Column::create(Column::STRING)
             ->setStringLength(50)
             ->setUnique();
+        $columns->googleId = Column::create(Column::STRING)->setUnique();
         $columns->login = Column::create(Column::STRING)->setUnique();
         $columns->name = Column::STRING + Column::NOT_NULL;
         $columns->email = Column::STRING + Column::NOT_NULL;

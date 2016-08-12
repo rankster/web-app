@@ -37,7 +37,9 @@ class Create extends Command
 
         //$this->response->addContent('<pre>' . print_r($_SESSION, 1) . '</pre>');
 
-        $match = MatchEntity::make($userId, $this->opponentId, $this->gameId, $this->result)->applyRanks();
+        $match = MatchEntity::make($userId, $this->opponentId, $this->gameId, $this->result);
+        //$match->save();
+        $match->applyRanks();
 
         $details = Details::createState();
         $details->matchId = $match->id;

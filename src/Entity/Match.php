@@ -8,8 +8,10 @@ use Yaoi\Database\Entity;
 
 class Match extends Entity
 {
-    const STATUS_ACCEPT = 'accepted';
-    const STATUS_REJECT = 'rejected';
+    const STATUS_NEW = 0;
+    const STATUS_ACCEPTED = 1;
+    const STATUS_ACCEPTED_AUTO = 2;
+    const STATUS_REJECTED = -1;
     const RESULT_LOSE = 'lose';
     const RESULT_DRAW = 'draw';
     const RESULT_WIN = 'win';
@@ -28,7 +30,7 @@ class Match extends Entity
     public $winnerId;
     /** @var \DateTime */
     public $eventTime;
-    public $status;
+    public $status = self::STATUS_NEW;
 
     /**
      * @param \stdClass|static $columns
@@ -44,7 +46,7 @@ class Match extends Entity
         $columns->user2Delta = Column::INTEGER + Column::NOT_NULL;
         $columns->user1NewRank = Column::INTEGER + Column::NOT_NULL;
         $columns->user2NewRank = Column::INTEGER + Column::NOT_NULL;
-        $columns->status = Column::STRING;
+        $columns->status = Column::INTEGER + Column::SIZE_1B + Column::NOT_NULL;
         $columns->eventTime = Column::INTEGER + Column::USE_PHP_DATETIME;
     }
 
@@ -118,7 +120,7 @@ class Match extends Entity
         $match->gameId = $gameId;
         $match->eventTime = new \DateTime();
 
-        $match->status = Match::STATUS_ACCEPT;
+        $match->status = Match::STATUS_NEW;
         if ($result === self::RESULT_DRAW) {
             $match->winnerId = null;
         } elseif ($result === self::RESULT_WIN) {

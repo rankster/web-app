@@ -43,7 +43,8 @@ class GameManager
     {
         $res = Match::statement()
             ->where('? = ?', Match::columns()->gameId, $gameId)
-            ->order('? ASC', Match::columns()->id)->query();
+            ->where('? > 0', Match::columns()->status)
+            ->order('? ASC', Match::columns()->eventTime)->query();
         /** @var Match $row */
         foreach ($res as $row) {
             $row->applyRanks();

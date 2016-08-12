@@ -7,6 +7,7 @@ use Rankster\Api\V1\AddUser;
 use Rankster\Api\V1\DeleteUser;
 use Rankster\Api\V1\Games;
 use Rankster\Api\V1\Login;
+use Rankster\Api\V1\Oauth\Oauth;
 use Rankster\Api\V1\RecalculateRank;
 use Rankster\Api\V1\ReloadFbAvatars;
 use Rankster\Api\V1\SeedMatches;
@@ -47,6 +48,7 @@ class V1 extends Command
             ->addToEnum(SeedMatches::definition(), 'seed-matches')
             ->addToEnum(DeleteUser::definition(), 'delete-user')
             ->addToEnum(ReloadFbAvatars::definition())
+            ->addToEnum(Oauth::definition())
             ->setIsUnnamed();
 
     }
