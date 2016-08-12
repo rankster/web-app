@@ -60,7 +60,7 @@ class User extends Entity
 
         $this->picturePath = '/' . $dir . '/' . substr($md5, 3) . '.jpg';
 
-        umask(0);
+        //umask(0);
         $f = fopen($imagesDirectory . $this->picturePath, 'w');
         fwrite($f, $response);
         fclose($f);

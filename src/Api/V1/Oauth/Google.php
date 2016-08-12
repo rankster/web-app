@@ -38,6 +38,8 @@ class Google extends Command
         $user->email = $info['email'];
         if ($saved = $user->findSaved()) {
             $user = $saved;
+            //$user->downloadImage($info['picture'], $user->googleId);
+            //$user->save();
             if (empty($user->googleId)) {
                 $user->googleId = $info['id'];
                 $user->save();
