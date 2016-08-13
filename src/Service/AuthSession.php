@@ -109,4 +109,27 @@ class AuthSession
         $session->userId = $userId;
         $session->save();
     }
+
+    public static function addSuccessMessage($message)
+    {
+        if (!isset($_SESSION['messages']['success'])) {
+            $_SESSION['messages']['success'] = [];
+        }
+        $_SESSION['messages']['success'][] = $message;
+    }
+
+    public static function getSuccessMessages($wipe = true)
+    {
+        if (!isset($_SESSION['messages']['success'])) {
+            return [];
+        }
+
+        $messages = $_SESSION['messages']['success'];
+        if ($wipe) {
+            $_SESSION['messages']['success'] = [];
+        }
+
+        return $messages;
+    }
+
 }

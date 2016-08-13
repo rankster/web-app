@@ -112,16 +112,16 @@ class Match extends Entity
 
     public static function make($user1Id, $user2Id, $gameId, $result)
     {
-        $match = new Match();
+        $match = new static();
         $match->user1Id = $user1Id;
         $match->user2Id = $user2Id;
         $match->gameId = $gameId;
         $match->eventTime = new \DateTime();
 
-        $match->status = Match::STATUS_ACCEPT;
-        if ($result === self::RESULT_DRAW) {
+        $match->status = static::STATUS_ACCEPT;
+        if ($result === static::RESULT_DRAW) {
             $match->winnerId = null;
-        } elseif ($result === self::RESULT_WIN) {
+        } elseif ($result === static::RESULT_WIN) {
             $match->winnerId = $match->user1Id;
         } else {
             $match->winnerId = $match->user2Id;

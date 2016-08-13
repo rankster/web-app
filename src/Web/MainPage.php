@@ -25,6 +25,13 @@ class MainPage extends Command
             $this->response->addContent('<script>setTimeout(function(){$(".alert-success").hide(500);}, 3000)</script>');
         }
 
+        $messages = AuthSession::getSuccessMessages();
+        if (!empty($messages)) {
+            foreach ($messages as $message) {
+                $this->response->success($message);
+            }
+        }
+
         $limit = 2;
         if ($user = AuthSession::getUser()) {
             $games = $user->getMostPlayedGames($limit);
