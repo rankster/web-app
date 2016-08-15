@@ -11,6 +11,7 @@ class Match extends Entity
     const STATUS_NEW = 0;
     const STATUS_ACCEPTED = 1;
     const STATUS_ACCEPTED_AUTO = 2;
+    const STATUS_ACCEPTED_SEED = 3;
     const STATUS_REJECTED = -1;
     const RESULT_LOSE = 'lose';
     const RESULT_DRAW = 'draw';
@@ -30,6 +31,8 @@ class Match extends Entity
     public $winnerId;
     /** @var \DateTime */
     public $eventTime;
+    /** @var \DateTime */
+    public $confirmedTime;
     public $status = self::STATUS_NEW;
 
     /**
@@ -48,6 +51,7 @@ class Match extends Entity
         $columns->user2NewRank = Column::INTEGER + Column::NOT_NULL;
         $columns->status = Column::INTEGER + Column::SIZE_1B + Column::NOT_NULL;
         $columns->eventTime = Column::INTEGER + Column::USE_PHP_DATETIME;
+        $columns->confirmedTime = Column::INTEGER + Column::USE_PHP_DATETIME;
     }
 
     /**
@@ -112,11 +116,11 @@ class Match extends Entity
         return $this;
     }
 
-    public static function make($user1Id, $user2Id, $gameId, $result)
+    public static function make($userId, $opponentId, $gameId, $result, $forceStatus = null)
     {
         $match = new Match();
-        $match->user1Id = $user1Id;
-        $match->user2Id = $user2Id;
+        $match->user1Id = $userId;
+        $match->user2Id = $opponentId;
         $match->gameId = $gameId;
         $match->eventTime = new \DateTime();
 
@@ -129,7 +133,20 @@ class Match extends Entity
             $match->winnerId = $match->user2Id;
         }
 
+        if (null === $forceStatus) {
+            $autoConfirm = new AutoConfirm();
+            $autoConfirm->userId = $userId;
+            $autoConfirm->opponentId = $opponentId;
+            $autoConfirm->gameId = $gameId;
+            if ($autoConfirm->findSaved()) {
+                $match->status = Match::STATUS_ACCEPTED_AUTO;
+                $match->confirmedTime = $match->eventTime;
+            }
+        } else {
+            $match->status = $forceStatus;
+            $match->confirmedTime = $match->eventTime;
+        }
+
         return $match;
     }
-
 }

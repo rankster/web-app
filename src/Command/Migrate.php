@@ -3,6 +3,7 @@
 namespace Rankster\Command;
 
 use Rankster\Entity\AdminUser;
+use Rankster\Entity\AutoConfirm;
 use Rankster\Entity\RankHistory;
 use Rankster\Entity\Session;
 use Yaoi\Command;
@@ -39,6 +40,7 @@ class Migrate extends Command
             Rank::table(),
             RankHistory::table(),
             AdminUser::table(),
+            AutoConfirm::table(),
         );
 
         $log = new Log('colored-stdout');
