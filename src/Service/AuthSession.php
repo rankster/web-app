@@ -112,6 +112,7 @@ class AuthSession
 
     public static function addSuccessMessage($message)
     {
+        // TODO: make it workable!
         if (!isset($_SESSION['messages']['success'])) {
             $_SESSION['messages']['success'] = [];
         }
@@ -120,6 +121,7 @@ class AuthSession
 
     public static function getSuccessMessages($wipe = true)
     {
+        // TODO: make it workable!
         if (!isset($_SESSION['messages']['success'])) {
             return [];
         }

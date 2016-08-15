@@ -139,12 +139,13 @@ class Rank extends Entity
         $db->query('set @i=0');
         $db->query(
 <<<SQL
-INSERT INTO :table (:id, :place)
-  (SELECT :id, @i := @i + 1 FROM :table WHERE :game_id = :game_id_val ORDER BY :rank DESC) 
+INSERT INTO :table (:id, :place, :game_id, :user_id)
+  (SELECT :id, @i := @i + 1, :game_id, :user_id FROM :table WHERE :game_id = :game_id_val ORDER BY :rank DESC) 
 ON DUPLICATE KEY UPDATE :place = VALUES(:place)
 SQL
             , array(
                 'table' => Rank::table(),
+                'user_id' => Rank::columns()->userId,
                 'id' => Rank::columns()->id,
                 'place' => Rank::columns()->place,
                 'game_id' => Rank::columns()->gameId,

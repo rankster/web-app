@@ -7,6 +7,7 @@ use Rankster\Command\AuthRequired;
 use Rankster\Web\Forms\SubmitScore;
 use Rankster\Web\Game\Game;
 use Rankster\Web\Match\Match;
+use Rankster\Web\MatchRequest\MatchRequest;
 use Rankster\Web\User\User;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
@@ -38,6 +39,7 @@ class Index extends Command
             ->addToEnum(User::definition())
             ->addToEnum(V1::definition(), 'v1')
             ->addToEnum(V1\Update::definition(), 'git-update')
+            ->addToEnum(MatchRequest::definition(), 'match-request')
         ;
 
         $definition->description = 'Ranking service';

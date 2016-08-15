@@ -138,4 +138,9 @@ class User extends Entity
 
         return $games;
     }
+
+    public function getMatchRequestNewCount()
+    {
+        return MatchRequest::getCountNew($this->id);
+    }
 }
