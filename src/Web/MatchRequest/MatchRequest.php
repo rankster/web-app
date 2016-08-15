@@ -94,6 +94,7 @@ class MatchRequest extends Command
         $whiteList->user1Id = $user->id;
         $whiteList->user2Id = $userId;
         $whiteList->gameId = $gameId;
+        $whiteList->eventTime = new \DateTime();
 
         $whiteList->findOrSave();
 
