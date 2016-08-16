@@ -26,8 +26,7 @@ class Session
                 return;
             }
 
-            self::$isStarted = true;
-            session_start();
+            self::start();
         }
     }
 
