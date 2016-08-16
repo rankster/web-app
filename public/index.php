@@ -12,5 +12,4 @@ define('DOC_ROOT', __DIR__);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../env/conf.php';
-session_start();
 Runner::create()->run(Index::definition());

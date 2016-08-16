@@ -2,11 +2,9 @@
 
 namespace Rankster\Web;
 
-
 use Rankster\Entity\Game;
-use Rankster\Entity\Rank;
 use Rankster\Service\AuthSession;
-use Rankster\Service\Output;
+use Rankster\Service\Session;
 use Rankster\View\SubmitScore\Data;
 use Rankster\View\UserRankTable;
 use Yaoi\Command;
@@ -25,7 +23,7 @@ class MainPage extends Command
             $this->response->addContent('<script>setTimeout(function(){$(".alert-success").hide(500);}, 3000)</script>');
         }
 
-        $messages = AuthSession::getSuccessMessages();
+        $messages = Session::getSuccessMessages();
         if (!empty($messages)) {
             foreach ($messages as $message) {
                 $this->response->success($message);

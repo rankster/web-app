@@ -2,7 +2,7 @@
 
 namespace Rankster\Service;
 
-use Rankster\Entity\Session;
+use Rankster\Entity\Session as SessionEntity;
 use Rankster\Entity\User;
 
 class AuthSession
@@ -32,7 +32,7 @@ class AuthSession
         if (null === self::$userId) {
             if (isset($_COOKIE[self::$token])) {
                 $token = $_COOKIE[self::$token];
-                $session = Session::findByPrimaryKey($token);
+                $session = SessionEntity::findByPrimaryKey($token);
 
                 if (!$session) {
                     setcookie(self::$token, "", time() - 3600, '/');
@@ -67,7 +67,7 @@ class AuthSession
     public static function clear()
     {
         if (isset($_COOKIE[self::$token])) {
-            Session::statement()->delete()->where('? = ?', Session::columns()->token, $_COOKIE[self::$token])
+            SessionEntity::statement()->delete()->where('? = ?', SessionEntity::columns()->token, $_COOKIE[self::$token])
                 ->query()->execute();
             setcookie(self::$token, "", time() - 3600, '/');
         }
@@ -88,19 +88,19 @@ class AuthSession
     public static function set($userId)
     {
         if (isset($_COOKIE[self::$token])) {
-            $session = Session::findByPrimaryKey($_COOKIE[self::$token]);
+            $session = SessionEntity::findByPrimaryKey($_COOKIE[self::$token]);
             if ($session) {
                 if ($session->userId === $userId) {
                     return;
                 }
             } else {
-                $session = new Session();
+                $session = new SessionEntity();
             }
         } else {
             do {
                 $token = self::makeRandomToken();
-            } while (Session::findByPrimaryKey($token));
-            $session = new Session();
+            } while (SessionEntity::findByPrimaryKey($token));
+            $session = new SessionEntity();
             setcookie(self::$token, $token, time() + 90 * 86400, '/');
             setcookie(self::$justLoggedIn, 1, null, '/');
             $session->token = $token;
@@ -109,29 +109,4 @@ class AuthSession
         $session->userId = $userId;
         $session->save();
     }
-
-    public static function addSuccessMessage($message)
-    {
-        // TODO: make it workable!
-        if (!isset($_SESSION['messages']['success'])) {
-            $_SESSION['messages']['success'] = [];
-        }
-        $_SESSION['messages']['success'][] = $message;
-    }
-
-    public static function getSuccessMessages($wipe = true)
-    {
-        // TODO: make it workable!
-        if (!isset($_SESSION['messages']['success'])) {
-            return [];
-        }
-
-        $messages = $_SESSION['messages']['success'];
-        if ($wipe) {
-            $_SESSION['messages']['success'] = [];
-        }
-
-        return $messages;
-    }
-
 }

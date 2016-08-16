@@ -2,6 +2,7 @@
 
 namespace Rankster\Twbs;
 
+use Rankster\Service\Session;
 use Rankster\Twbs\Response;
 use Rankster\View\Layout;
 use Yaoi\BaseClass;
@@ -37,6 +38,8 @@ class Runner extends BaseClass
             $response->error($exception->getMessage());
             $response->error('<pre>' . $exception->getTraceAsString() . '</pre>');
         }
+
+        Session::destroyEmpty();
 
         $layout->render();
     }

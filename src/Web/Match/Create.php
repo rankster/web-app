@@ -7,6 +7,7 @@ use Rankster\Entity\MatchRequest;
 use Rankster\Entity\Rank as RankEntity;
 use Rankster\Entity\WhiteList;
 use Rankster\Service\AuthSession;
+use Rankster\Service\Session;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 use Rankster\Entity\User as UserEntity;
@@ -49,7 +50,7 @@ class Create extends Command
             $mr->save();
 
             $opponent = UserEntity::findByPrimaryKey($this->opponentId);
-            AuthSession::addSuccessMessage(
+            Session::addSuccessMessage(
                 'Your match result is stored. Your rank will be changed once ' .
                 $opponent->name . ' confirms this match'
             );

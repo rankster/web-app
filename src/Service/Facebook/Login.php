@@ -5,6 +5,7 @@ namespace Rankster\Service\Facebook;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Rankster\Service\Facebook;
+use Rankster\Service\Session;
 use Yaoi\Service;
 
 
@@ -21,6 +22,8 @@ class Login extends Service
 
     public function callback()
     {
+        Session::start();
+
         $fb = Facebook::getInstance()->getSDK();
         $helper = $fb->getRedirectLoginHelper();
         try {
@@ -65,6 +68,8 @@ class Login extends Service
 
     public function getStoredAccessToken()
     {
+        Session::startIfExists();
+
         if (isset($_SESSION['fb_access_token'])) {
             return $_SESSION['fb_access_token'];
         }
