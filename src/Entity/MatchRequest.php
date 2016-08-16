@@ -49,9 +49,8 @@ class MatchRequest extends Entity
     {
         Column::cast($columns->winnerId)->setFlag(Column::NOT_NULL, false);
         Column::cast($columns->status)->setDefault(self::STATUS_NEW);
-        $table->setSchemaName('match_request');
-        // @TODO: how to add index?
-            //->addIndex(, $columns->user2Id, $columns->status);
+        $table->setSchemaName('match_request')
+            ->addIndex(Index::TYPE_KEY, $columns->user2Id, $columns->status);
     }
 
     public static function make($user1Id, $user2Id, $gameId, $result)
@@ -107,5 +106,13 @@ class MatchRequest extends Entity
             ->limit($perPage, $perPage * ($page - 1))
             ->query()
             ->fetchAll();
+    }
+
+    public function finalizeStatus($status)
+    {
+        $this->status = $status;
+        $this->eventTime = new \DateTime();
+        $this->save();
+        return $this;
     }
 }

@@ -118,12 +118,10 @@ class MatchRequest extends Command
     protected function processMatchRequest($mr)
     {
         if ($this->reject !== null) {
-            $mr->status = MatchRequestEntity::STATUS_REJECTED;
-            $mr->save();
-            return ;
+            $mr->finalizeStatus(MatchRequestEntity::STATUS_REJECTED);
+            return;
         }
-        $mr->status = MatchRequestEntity::STATUS_ACCEPTED;
-        $mr->save();
+        $mr->finalizeStatus(MatchRequestEntity::STATUS_ACCEPTED);
 
         $match = MatchEntity::make($mr->user1Id, $mr->user2Id, $mr->gameId, MatchEntity::RESULT_DRAW);
         $match->winnerId = $mr->winnerId;
