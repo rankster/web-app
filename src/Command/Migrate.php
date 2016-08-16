@@ -3,8 +3,10 @@
 namespace Rankster\Command;
 
 use Rankster\Entity\AdminUser;
+use Rankster\Entity\MatchRequest;
 use Rankster\Entity\RankHistory;
 use Rankster\Entity\Session;
+use Rankster\Entity\WhiteList;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 use Yaoi\Database\Definition\Table;
@@ -39,6 +41,8 @@ class Migrate extends Command
             Rank::table(),
             RankHistory::table(),
             AdminUser::table(),
+            WhiteList::table(),
+            MatchRequest::table(),
         );
 
         $log = new Log('colored-stdout');

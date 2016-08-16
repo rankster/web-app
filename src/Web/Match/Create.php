@@ -3,10 +3,14 @@
 namespace Rankster\Web\Match;
 
 use Rankster\Entity\Match as MatchEntity;
+use Rankster\Entity\MatchRequest;
 use Rankster\Entity\Rank as RankEntity;
+use Rankster\Entity\WhiteList;
 use Rankster\Service\AuthSession;
+use Rankster\Service\Session;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
+use Rankster\Entity\User as UserEntity;
 
 class Create extends Command
 {
@@ -35,15 +39,24 @@ class Create extends Command
             return;
         }
 
-        //$this->response->addContent('<pre>' . print_r($_SESSION, 1) . '</pre>');
+        if (WhiteList::isWhiteListed($userId, $this->opponentId, $this->gameId)) {
+            $match = MatchEntity::make($userId, $this->opponentId, $this->gameId, $this->result)->applyRanks();
+            $details = Details::createState();
+            $details->matchId = $match->id;
+            $url = (string)$this->io->makeAnchor($details);
+            header("Location: $url");
+        } else {
+            $mr = MatchRequest::make($userId, $this->opponentId, $this->gameId, $this->result);
+            $mr->save();
 
-        $match = MatchEntity::make($userId, $this->opponentId, $this->gameId, $this->result)->applyRanks();
+            $opponent = UserEntity::findByPrimaryKey($this->opponentId);
+            Session::addSuccessMessage(
+                'Your match result is stored. Your rank will be changed once ' .
+                $opponent->name . ' confirms this match'
+            );
 
-        $details = Details::createState();
-        $details->matchId = $match->id;
-        $url = (string)$this->io->makeAnchor($details);
-        header("Location: $url");
+            header('Location: /');
+        }
     }
-
 
 }

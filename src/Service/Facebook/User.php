@@ -40,4 +40,9 @@ class User extends Service
         $response = $fb->get('/me/friends?fields=id', $this->accessToken);
         var_dump($response);
     }
+
+    public static function getUserAvatarUrl($facebookId, $type = 'large')
+    {
+        return 'https://graph.facebook.com/' . $facebookId . '/picture?type=' . $type;
+    }
 }

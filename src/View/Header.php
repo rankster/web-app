@@ -22,7 +22,8 @@ class Header extends Hardcoded
                             <img src="<?= $currentUser->getFullUrl() ?>" class="img-responsive img-circle" alt="user">
                             <div class="wid-u-info">
                                 <h4 class="m-t-0 m-b-5"><?= $currentUser->name ?></h4>
-                                <p class="text-muted m-b-5 font-13"><?= $currentUser->email ?></p>
+                                <!--p class="text-muted m-b-5 font-13"><?= $currentUser->email ?></p-->
+                                <p class="text-muted m-b-5 font-13"><a href="/match-request">New match requests <span class="badge"><?= $currentUser->getMatchRequestNewCount() ?></span></a></p>
                                 <small class="text-success"><b>Rookie</b></small>
                                 <a href="/logout" class="btn btn-default btn-xs" style="float:right;margin-top:15px">Logout</a>
                             </div>

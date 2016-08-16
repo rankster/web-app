@@ -22,20 +22,18 @@ class Login extends Command
 
     public function performAction()
     {
-        session_start();
         $fbLogin = new Facebook\Login();
         try {
             $accessToken = $fbLogin->callback();
 
             $user = new Facebook\User($accessToken);
             $data = $user->getData('me', ['picture', 'name', 'email']);
-            $data->getPicture()->getUrl();
             $userEntity = new User();
             $userEntity->facebookId = $data->getId();
             if (!($found = $userEntity->findSaved())) {
                 $userEntity->name = $data->getName();
                 if ($data->getPicture() && $data->getPicture()->getUrl()) {
-                    $userEntity->downloadImage('https://graph.facebook.com/' . $userEntity->facebookId . '/picture?type=large');
+                    $userEntity->downloadImage(Facebook\User::getUserAvatarUrl($userEntity->facebookId));
                 }
                 $userEntity->email = $data->getEmail();
                 $userEntity->findOrSave();
