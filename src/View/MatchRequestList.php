@@ -113,19 +113,20 @@ HTML;
             {$rows}
             </tbody>
         </table>
-    </div>
-{$this->pagination}
 
 HTML;
 
         if (!$this->isOpponent && $this->rows) {
             $result .= <<<HTML
-<div class="well">"Auto confirm" is a sign of trust, if checked all matches (including pending confirmation) from this user and this game will be confirmed automatically</div>
+        <div class="well">"Auto confirm" is a sign of trust, if checked all matches (including pending confirmation) 
+        from this user and this game will be confirmed automatically</div>
 HTML;
         }
+
         $result .= <<<HTML
 
-
+    </div>
+{$this->pagination}
 </div>
 
 HTML;
