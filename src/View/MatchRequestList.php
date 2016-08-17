@@ -69,8 +69,8 @@ HTML;
                 <button name="accept" type="submit" class="btn btn-success confirm-button" autocomplete="off">Confirm</button>        
                 <button name="reject" type="submit" class="btn btn-danger reject-button" autocomplete="off">Reject</button>
                 <p>
-                    <label title="this action will process all requests from this user">
-                        <input type="checkbox" name="white_listed"> Always accept from <img title="{$user1->name}" class="i20" src="{$user1->getFullUrl()}" />
+                    <label>
+                        <input type="checkbox" name="white_listed"> Auto confirm
                     </label>
                 </p>
             </form>
@@ -103,7 +103,7 @@ HTML;
             $rows = '<tr><td>No data</td></tr>';
         }
 
-        echo <<<HTML
+        $result = <<<HTML
 <div class="col-lg-6">
     <div class="card-box">
         <h4 class="m-t-0 header-title" style="float: right"><b>{$this->title}</b></h4>
@@ -115,9 +115,22 @@ HTML;
         </table>
     </div>
 {$this->pagination}
+
+HTML;
+
+        if (!$this->isOpponent && $this->rows) {
+            $result .= <<<HTML
+<div class="well">"Auto confirm" is a sign of trust, if checked all matches (including pending confirmation) from this user and this game will be confirmed automatically</div>
+HTML;
+        }
+        $result .= <<<HTML
+
+
 </div>
 
 HTML;
+
+        echo $result;
 
     }
 
