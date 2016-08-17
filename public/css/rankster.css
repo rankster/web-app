@@ -36,7 +36,7 @@
 }
 
 
-.reject-button .confirm-button {
+.reject-button, .confirm-button {
     width: 85px;
     margin: 3px;
 }
