@@ -1,6 +1,7 @@
 <?php
 namespace Rankster\View;
 
+use Rankster\Service\Google;
 use Rankster\View\Match\ReplayForm;
 use Rankster\View\Match\RequestForm;
 use Yaoi\View\Hardcoded;
@@ -91,20 +92,27 @@ class Header extends Hardcoded
             </div>
 
             <?php
-ReplayForm::create()->render();
-RequestForm::create()->render();
-        } else { ?>
-            <div class="row">
+            ReplayForm::create()->render();
+            RequestForm::create()->render();
+        } else {
+
+            $google = Google::getInstance();
+            echo <<<HTML
+<div class="row">
                 <div class="col-sm-6 col-lg-3">
                     <div class="card-box">
                         <div>
                             <a href="/login" class="btn btn-block btn-social btn-facebook">
                                 <span class="fa fa-facebook"></span> Sign in with Facebook
                             </a>
+                            <a href="{$google->createAuthUrl()}" class="btn btn-block btn-social btn-google">
+                                <span class="fa fa-google"></span> Sign in with Google
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php }
+HTML;
+        }
     }
 }

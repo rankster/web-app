@@ -13,6 +13,7 @@ class User extends Entity
 
     public $id;
     public $facebookId;
+    public $googleId;
     public $name;
     public $login;
     public $email;
@@ -23,12 +24,13 @@ class User extends Entity
     static function setUpColumns($columns)
     {
         $columns->id = Column::AUTO_ID;
-        $columns->facebookId = Column::create(Column::STRING + Column::NOT_NULL)
+        $columns->facebookId = Column::create(Column::STRING)
             ->setStringLength(50)
             ->setUnique();
+        $columns->googleId = Column::create(Column::STRING)->setUnique();
         $columns->login = Column::create(Column::STRING)->setUnique();
-        $columns->name = Column::create(Column::STRING + Column::NOT_NULL)->setDefault("");
-        $columns->email = Column::create(Column::STRING + Column::NOT_NULL)->setDefault("");
+        $columns->name = Column::create(Column::STRING + Column::NOT_NULL)->setDefault('');
+        $columns->email = Column::create(Column::STRING + Column::NOT_NULL)->setDefault('')->setUnique();
         $columns->picturePath = Column::STRING;
     }
 
@@ -37,14 +39,17 @@ class User extends Entity
         $table->setSchemaName('user');
     }
     
-    public function downloadImage($url)
+    public function downloadImage($url, $id = null)
     {
         $response = file_get_contents($url);
         if (!$response) {
             return;
         }
 
-        $md5 = md5($this->facebookId . 'FacebookHackathon2016');
+        if (null === $id) {
+            $id = $this->facebookId;
+        }
+        $md5 = md5($id . 'FacebookHackathon2016');
         $dir = substr($md5, 0, 3);
 
         $imagesDirectory = DOC_ROOT . '/' . self::IMAGE_FOLDER . '/';
