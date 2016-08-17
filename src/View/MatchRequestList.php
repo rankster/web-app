@@ -70,7 +70,7 @@ HTML;
                 <button name="reject" type="submit" class="btn btn-danger reject-button" autocomplete="off">Reject</button>
                 <p>
                     <label title="this action will process all requests from this user">
-                        <input type="checkbox" name="white_listed"> Add <u>{$user1->name}</u> to white list
+                        <input type="checkbox" name="white_listed"> Always accept from <img title="{$user1->name}" class="i20" src="{$user1->getFullUrl()}" />
                     </label>
                 </p>
             </form>
