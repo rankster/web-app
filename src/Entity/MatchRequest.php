@@ -20,7 +20,9 @@ class MatchRequest extends Entity
     public $user2Id;
     public $winnerId;
     public $status;
+    /** @var \DateTime */
     public $eventTime;
+    /** @var \DateTime */
     public $actionTime;
 
     /**
@@ -84,8 +86,37 @@ class MatchRequest extends Entity
         return $cnt['cnt'];
     }
 
+    public static function getCountOpponentNew($userId)
+    {
+        $query = MatchRequest::statement()->select('count(*) as cnt')
+            ->where('? = ?', MatchRequest::columns()->user1Id, $userId)
+            ->where('? = ?', MatchRequest::columns()->status, MatchRequest::STATUS_NEW)
+            ->query();
+        $query->bindResultClass();
+        $cnt = $query->fetchRow();
+
+        return $cnt['cnt'];
+    }
+
+    public static function getCountRejected($userId)
+    {
+        $query = MatchRequest::statement()->select('count(*) as cnt')
+            ->where('? = ?', MatchRequest::columns()->user1Id, $userId)
+            ->where('? = ?', MatchRequest::columns()->status, MatchRequest::STATUS_REJECTED)
+            ->query();
+        $query->bindResultClass();
+        $cnt = $query->fetchRow();
+
+        return $cnt['cnt'];
+    }
+
+
     public static function getMatchRequestNewList($userId, $perPage = 20, $page = 1)
     {
+        if (empty($page)) {
+            $page = 1;
+        }
+
         return MatchRequest::statement()
             ->where('? = ?', MatchRequest::columns()->user2Id, $userId)
             ->where('? = ?', MatchRequest::columns()->status, MatchRequest::STATUS_NEW)
@@ -95,8 +126,43 @@ class MatchRequest extends Entity
             ->fetchAll();
     }
 
+    public static function getMatchRequestNewOpponentList($userId, $perPage = 20, $page = 1)
+    {
+        if (empty($page)) {
+            $page = 1;
+        }
+
+        return MatchRequest::statement()
+            ->where('? = ?', MatchRequest::columns()->user1Id, $userId)
+            ->where('? = ?', MatchRequest::columns()->status, MatchRequest::STATUS_NEW)
+            ->order('? DESC', MatchRequest::columns()->eventTime)
+            ->limit($perPage, $perPage * ($page - 1))
+            ->query()
+            ->fetchAll();
+    }
+
+    public static function getMatchRequestRejectedList($userId, $perPage = 20, $page = 1)
+    {
+        if (empty($page)) {
+            $page = 1;
+        }
+
+        return MatchRequest::statement()
+            ->where('? = ?', MatchRequest::columns()->user1Id, $userId)
+            ->where('? = ?', MatchRequest::columns()->status, MatchRequest::STATUS_REJECTED)
+            ->order('? DESC', MatchRequest::columns()->eventTime)
+            ->limit($perPage, $perPage * ($page - 1))
+            ->query()
+            ->fetchAll();
+    }
+
+
     public static function getMatchRequestNewListForUserAndGame($userId, $userOpponent, $gameId, $perPage = 20, $page = 1)
     {
+        if (empty($page)) {
+            $page = 1;
+        }
+
         return MatchRequest::statement()
             ->where('? = ?', MatchRequest::columns()->user1Id, $userOpponent)
             ->where('? = ?', MatchRequest::columns()->user2Id, $userId)

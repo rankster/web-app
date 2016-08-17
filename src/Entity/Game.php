@@ -60,4 +60,16 @@ class Game extends Entity
         return $r['c'];
     }
 
+
+    public static function findByPrimaryKey($id)
+    {
+        static $cache = array();
+        if (isset($cache[$id])) {
+            return $cache[$id];
+        }
+
+        $game = parent::findByPrimaryKey($id);
+        $cache[$id] = $game;
+        return $game;
+    }
 }

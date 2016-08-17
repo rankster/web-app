@@ -25,6 +25,8 @@ class MatchRequestList extends Hardcoded
 
     public $hideGameColumn = false;
 
+    public $isOpponent = false;
+
     /**
      * History constructor.
      * @param MatchRequest[] $rows
@@ -45,8 +47,8 @@ class MatchRequestList extends Hardcoded
             $w = ' class="winner"';
             $status = ' wins ';
         } else {
-            $w = ' class="looser"';
-            $status = ' loses ';
+            $w = ' class="loser"';
+            $status = ' loses to ';
         }
 
         $result = <<<HTML
@@ -55,6 +57,10 @@ class MatchRequestList extends Hardcoded
         <td><a href="/game/details/?game_id={$game->id}"><img class="i20" src="{$game->getFullUrl()}" title="{$game->name}" /></a></td>
         <td{$w}><img class="i20" src="{$user1->getFullUrl()}" /> <a href="/user/details/?user_id={$user1->id}">{$user1->name}</a> {$status}
         <img class="i20" src="{$user2->getFullUrl()}" /> <a href="/user/details/?user_id={$user2->id}">{$user2->name}</a></td>
+
+HTML;
+        if (!$this->isOpponent) {
+            $result .= <<<HTML
         <td>
             <form method="post" action="/match-request">
                 <input type="hidden" name="action" value="process">
@@ -69,7 +75,12 @@ class MatchRequestList extends Hardcoded
                 </p>
             </form>
         </td>
+
+HTML;
+        }
+        $result .= <<<HTML
     </tr>
+
 HTML;
         return $result;
 
@@ -88,8 +99,12 @@ HTML;
             $rows .= $this->renderItem($match);
         }
 
+        if (!$rows) {
+            $rows = '<tr><td>No data</td></tr>';
+        }
+
         echo <<<HTML
-<div>
+<div class="col-lg-6">
     <div class="card-box">
         <h4 class="m-t-0 header-title" style="float: right"><b>{$this->title}</b></h4>
 

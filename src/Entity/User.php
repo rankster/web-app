@@ -143,4 +143,16 @@ class User extends Entity
     {
         return MatchRequest::getCountNew($this->id);
     }
+
+    public static function findByPrimaryKey($id)
+    {
+        static $cache = array();
+        if (isset($cache[$id])) {
+            return $cache[$id];
+        }
+
+        $entity = parent::findByPrimaryKey($id);
+        $cache[$id] = $entity;
+        return $entity;
+    }
 }

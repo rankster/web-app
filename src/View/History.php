@@ -70,6 +70,10 @@ HTML;
             $rows .= $this->renderItem($match);
         }
 
+        if (!$rows) {
+            $rows = "<tr><td>No data</td></tr>";
+        }
+
         echo <<<HTML
 <div class="col-lg-6">
     <div class="card-box">

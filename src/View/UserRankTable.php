@@ -123,6 +123,11 @@ HTML;
             $rows .= $this->renderItem($i, $rank);
         }
 
+        if (!$rows) {
+            $rows = "<tr><td>No data</td></tr>";
+        }
+
+        $secondaryLink = '';
 
         if ($this->name && $this->image) {
             $captionLink = $this->name;
@@ -137,11 +142,18 @@ HTML;
             }
         }
 
+        if ($this->game) {
+            $secondaryLink = '<a href="/game/items">Other games</a>';
+        }
+
 
         echo <<<HTML
 <div class="col-lg-6">
     <div class="card-box">
-        <h4 class="m-t-0 header-title" style="float: right"><b>{$captionLink}</b></h4>
+        <div style="float:right">
+            <h4 class="m-t-0 header-title"><b>{$captionLink}</b></h4>
+            {$secondaryLink}
+        </div>
         <p class="text-muted font-13 m-b-25">
             <img class="img-rounded" width="55" src="{$image}">
         </p>
