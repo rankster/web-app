@@ -34,3 +34,9 @@
     padding: 2px 8px;
     font-size: 10px;
 }
+
+
+.reject-button, .confirm-button {
+    width: 80px;
+    margin: 1px;
+}

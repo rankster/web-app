@@ -59,7 +59,7 @@ class MatchHistory extends Command
         $commandState = self::createState($this->io);
 
         $perPage = 12;
-        $pages = ceil($game->matchesCount / $perPage);
+        $pages = ceil($rank->matches / $perPage);
 
         if ($this->historyPage > $pages) {
             $this->historyPage = $pages;
@@ -71,6 +71,7 @@ class MatchHistory extends Command
 
         $matches = Match::statement()
             ->where('? = ?', Match::columns()->gameId, $this->gameId)
+            ->where('? IN (?, ?)', $this->userId, Match::columns()->user1Id, Match::columns()->user2Id)
             ->order('? DESC', Match::columns()->eventTime)
             ->limit($perPage, $perPage * ($this->historyPage - 1))
             ->query()

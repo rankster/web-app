@@ -59,6 +59,11 @@
         $("#game-replay").modal();
     }
 
+    function newGameDialog() {
+        $("#game-req").modal();
+    }
+
+
     function eventHandler () {
         $('#game').select2({
             ajax: {
@@ -141,6 +146,7 @@
         formatParticipant: formatParticipant,
         formatParticipantSelection: formatParticipantSelection,
         gameReplayDialog: gameReplayDialog,
+        newGameDialog: newGameDialog,
         eventHandler: eventHandler,
         setUserGameInfo: function setUserGameInfo(u, g) {
             users = u;

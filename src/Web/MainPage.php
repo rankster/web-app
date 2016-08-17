@@ -31,13 +31,10 @@ class MainPage extends Command
         }
 
         $limit = 2;
-        if ($user = AuthSession::getUser()) {
-            $games = $user->getMostPlayedGames($limit);
-        } else {
+        if ((!$user = AuthSession::getUser()) || !$games = $user->getMostPlayedGames($limit)) {
             $games = Game::statement()
                 ->order('? DESC', Game::columns()->playersCount)
                 ->limit($limit)->query()->fetchAll();
-
         }
 
         $this->response->addContent('<div class="row">');

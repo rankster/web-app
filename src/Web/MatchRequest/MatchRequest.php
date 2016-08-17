@@ -16,11 +16,14 @@ use Yaoi\Io\Content\Heading;
 class MatchRequest extends Command
 {
     public $page;
+    public $pageRejected;
+    public $pageOpponent;
     public $whiteListed;
     public $accept;
     public $reject;
     public $action;
     public $mrId;
+
     /**
      * Required setup option types in provided options object
      * @param $definition Definition
@@ -29,6 +32,8 @@ class MatchRequest extends Command
     static function setUpDefinition(Definition $definition, $options)
     {
         $options->page = Command\Option::create()->setType();
+        $options->pageOpponent = Command\Option::create()->setType();
+        $options->pageRejected = Command\Option::create()->setType();
         $options->action = Command\Option::create()->setType();
         $options->whiteListed = Command\Option::create()->setType();
         $options->mrId = Command\Option::create()->setType();
@@ -41,7 +46,7 @@ class MatchRequest extends Command
         $user = AuthSession::getUser();
         if (!$user) {
             header('Location: /');
-            return ;
+            return;
         }
 
         if ($this->action == 'process') {
@@ -54,18 +59,45 @@ class MatchRequest extends Command
         }
 
         $commandState = self::createState($this->io);
-        $pages = ceil($user->getMatchRequestNewCount() / $perPage);
 
-        $list = MatchRequestEntity::getMatchRequestNewList($user->id, $perPage, $this->page);
-        $mrList = new MatchRequestList($list);
-        $mrList->title = 'Match Request List';
-        $mrList->setPagination(new Pagination($commandState, self::options()->page, $pages));
+        $confirmationList = new MatchRequestList(
+            MatchRequestEntity::getMatchRequestNewList($user->id, $perPage, $this->page)
+        );
+        $confirmationList->title = 'Pending your confirmation';
+        $confirmationList->setPagination(new Pagination(
+            $commandState,
+            self::options()->page,
+            ceil($user->getMatchRequestNewCount() / $perPage)
+        ));
 
-        $this->response->addContent(new Heading('Match Request List'));
+        $opponentList = new MatchRequestList(
+            MatchRequestEntity::getMatchRequestNewOpponentList($user->id, $perPage, $this->pageOpponent)
+        );
+        $opponentList->title = 'Pending opponent confirmation';
+        $opponentList->isOpponent = true;
+        $opponentList->setPagination(new Pagination(
+            $commandState,
+            self::options()->pageOpponent,
+            ceil(MatchRequestEntity::getCountOpponentNew($user->id) / $perPage)
+        ));
+
+        $rejectedList = new MatchRequestList(
+            MatchRequestEntity::getMatchRequestRejectedList($user->id, $perPage, $this->pageRejected)
+        );
+        $rejectedList->title = 'Rejected';
+        $rejectedList->isOpponent = true;
+        $rejectedList->setPagination(new Pagination(
+            $commandState,
+            self::options()->pageRejected,
+            ceil(MatchRequestEntity::getCountRejected($user->id) / $perPage)
+        ));
+
+        $this->response->addContent(new Heading('Matches'));
         $this->response->addContent('<div class="row">');
-        $this->response->addContent($mrList);
+        $this->response->addContent($confirmationList);
+        $this->response->addContent($opponentList);
+        $this->response->addContent($rejectedList);
         $this->response->addContent('</div>');
-
     }
 
     protected function processAction()
@@ -100,7 +132,7 @@ class MatchRequest extends Command
 
         $page = 1;
         $perPage = 50;
-        
+
         do {
             $list = MatchRequestEntity::getMatchRequestNewListForUserAndGame($user->id, $userId, $gameId, $perPage, $page);
             /** @var MatchRequestEntity $mr */
