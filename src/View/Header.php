@@ -24,7 +24,9 @@ class Header extends Hardcoded
                             <div class="wid-u-info">
                                 <h4 class="m-t-0 m-b-5"><?= $currentUser->name ?></h4>
                                 <!--p class="text-muted m-b-5 font-13"><?= $currentUser->email ?></p-->
-                                <p class="text-muted m-b-5 font-13"><a href="/match-request">Pending your confirmation <span class="badge"><?= $currentUser->getMatchRequestNewCount() ?></span></a></p>
+                                <p class="text-muted m-b-5 font-13"><a href="/match-request">Pending your confirmation
+                                        <span class="badge"><?= $currentUser->getMatchRequestNewCount() ?></span></a>
+                                </p>
                                 <small class="text-success"><b>Rookie</b></small>
                                 <a href="/logout" class="btn btn-default btn-xs" style="float:right;margin-top:15px">Logout</a>
                             </div>
@@ -48,7 +50,8 @@ class Header extends Hardcoded
                 </div>
 
                 <div class="col-sm-6 col-lg-3">
-                    <div class="widget-simple-chart text-right card-box" style="min-height: 123px;text-align: center;padding-top:40px">
+                    <div class="widget-simple-chart text-right card-box"
+                         style="min-height: 123px;text-align: center;padding-top:40px">
                         <button title="Submit score" class="btn btn-lg btn-danger waves-effect waves-light m-b-5"
                                 onclick='Rankster.newGameDialog()'>
                             <i style="color: #fff;" class="glyphicon glyphicon-new-window m-r-5"></i>
@@ -57,20 +60,21 @@ class Header extends Hardcoded
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-lg-3">
-                    <div class="widget-simple-chart text-right card-box" style="min-height: 123px;text-align: center;">
-                        <?php
-                        $rematch = $currentUser->findLastMatch();
-                        if ($rematch) {
-                            /** @var \Rankster\Entity\User $user */
-                            $user = $rematch['user'];
-                            /** @var \Rankster\Entity\Game $game */
-                            $game = $rematch['game'];
+                <?php
+                $rematch = $currentUser->findLastMatch();
+                if ($rematch) {
+                    /** @var \Rankster\Entity\User $user */
+                    $user = $rematch['user'];
+                    /** @var \Rankster\Entity\Game $game */
+                    $game = $rematch['game'];
 
-                            Data::getInstance()->addUserInfo($user);
-                            Data::getInstance()->addGameInfo($game);
+                    Data::getInstance()->addUserInfo($user);
+                    Data::getInstance()->addGameInfo($game);
 
-                            ?>
+                    ?>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="widget-simple-chart text-right card-box"
+                             style="min-height: 123px;text-align: center;">
                             <img class="img-circle" width="50px" src="<?= $game->getFullUrl() ?>">
 
                             <span title="Submit score" class="btn btn-xs btn-danger waves-effect waves-light m-b-5"
@@ -82,12 +86,12 @@ class Header extends Hardcoded
                                 src="/images/versus-icon-vs-icon-315x400.jpg"
                                 width="50"/>
                             <img class="img-circle" width="50px" src="<?= $user->getFullUrl() ?>">
-                            <?php
-                        }
-                        ?>
-
+                        </div>
                     </div>
-                </div>
+
+                    <?php
+                }
+                ?>
 
             </div>
 
