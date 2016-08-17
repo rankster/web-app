@@ -42,12 +42,12 @@ class V1 extends Command
             ->addToEnum(Games::definition(), 'games')
             ->addToEnum(Users::definition(), 'users')
             ->addToEnum(SubmitScore::definition(), 'submit-score')
-            ->addToEnum(WipeRank::definition(), 'wipe-rank')
-            ->addToEnum(RecalculateRank::definition(), 'recalculate-rank')
-            ->addToEnum(AddUser::definition(), 'add-user')
-            ->addToEnum(SeedMatches::definition(), 'seed-matches')
-            ->addToEnum(DeleteUser::definition(), 'delete-user')
-            ->addToEnum(ReloadFbAvatars::definition())
+            //->addToEnum(WipeRank::definition(), 'wipe-rank')
+            //->addToEnum(RecalculateRank::definition(), 'recalculate-rank')
+            //->addToEnum(AddUser::definition(), 'add-user')
+            //->addToEnum(SeedMatches::definition(), 'seed-matches')
+            //->addToEnum(DeleteUser::definition(), 'delete-user')
+            //->addToEnum(ReloadFbAvatars::definition())
             ->addToEnum(Oauth::definition())
             ->setIsUnnamed();
 
