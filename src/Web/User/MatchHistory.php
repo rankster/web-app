@@ -27,7 +27,7 @@ class MatchHistory extends Command
      */
     static function setUpDefinition(Definition $definition, $options)
     {
-        $options->gameId = Command\Option::create()->setType()->setIsRequired();
+        $options->gameId = Command\Option::create()->setType();
         $options->userId = Command\Option::create()->setType()->setIsRequired();
         $options->historyPage = Command\Option::create()->setType();
     }
@@ -70,10 +70,15 @@ class MatchHistory extends Command
         }
 
         $matches = Match::statement()
-            ->where('? = ?', Match::columns()->gameId, $this->gameId)
             ->where('? IN (?, ?)', $this->userId, Match::columns()->user1Id, Match::columns()->user2Id)
             ->order('? DESC', Match::columns()->eventTime)
-            ->limit($perPage, $perPage * ($this->historyPage - 1))
+            ->limit($perPage, $perPage * ($this->historyPage - 1));
+
+        if ($this->gameId) {
+            $matches->where('? = ?', Match::columns()->gameId, $this->gameId);
+        }
+
+        $matches = $matches
             ->query()
             ->fetchAll();
 

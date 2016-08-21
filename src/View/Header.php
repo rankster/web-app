@@ -44,7 +44,7 @@ class Header extends Hardcoded
                              data-width="5" data-fontsize="14" data-percent="<?php echo $userStats["percents"]; ?>"
                              data-fgcolor="#5fbeaa" data-bgcolor="#ebeff2" style="width: 90px;">
                         </div>
-                        <h3 class="text-success counter"><?php echo $userStats["total"]; ?></h3>
+                        <h3 class="text-success counter"><a href="/user/match-history?user_id=<?=$currentUser->id?>"><?php echo $userStats["total"]; ?></a></h3>
                         <p class="text-muted">Total Games This Week</p>
                     </div>
                 </div>
