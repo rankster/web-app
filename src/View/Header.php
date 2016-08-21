@@ -46,7 +46,7 @@ class Header extends Hardcoded
                         </div>
                         <h3 class="text-success counter"><?php echo $userStats["total"]; ?></h3>
                         <p class="text-muted"><a href="/user/match-history?user_id=<?= $currentUser->id ?>">Total Games</a>
-                            This Week</p>
+                            Last 7 Days</p>
                     </div>
                 </div>
 
