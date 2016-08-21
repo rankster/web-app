@@ -56,7 +56,7 @@ class MatchHistory extends Command
             $gamePlate = new GamePlate($game);
             $info = 'Rank: ' . $rank->show();
         } else {
-            $info = 'Total matches:' . $user->matchesCount;
+            $info = 'Total matches: ' . $user->matchesCount;
             $pages = ceil($user->matchesCount / $perPage);
         }
 
