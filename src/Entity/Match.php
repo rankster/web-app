@@ -64,6 +64,7 @@ class Match extends Entity
 
         $stat = Match::statement()
             ->select('COUNT(1) AS total, SUM(IF(? = ?, 1, 0)) AS wins', $mCols->winnerId, $userId)
+            ->where('? > ?', $mCols->eventTime, time() - 7 * 86400)
             ->where("? IN (?, ?)", $userId, $mCols->user1Id, $mCols->user2Id)->bindResultClass()
             ->query()->fetchRow();
 
