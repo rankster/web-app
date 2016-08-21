@@ -34,11 +34,8 @@ class MatchHistory extends Command
 
     public function performAction()
     {
-        $game = Game::findByPrimaryKey($this->gameId);
-        if (!$game) {
-            $this->response->error("Game not found");
-            return;
-        }
+
+        $perPage = 12;
 
         $user = UserEntity::findByPrimaryKey($this->userId);
         if (!$user) {
@@ -46,7 +43,24 @@ class MatchHistory extends Command
             return;
         }
 
-        $rank = Rank::findOrCreateByUserGame($this->userId, $this->gameId);
+
+        if ($this->gameId) {
+            $game = Game::findByPrimaryKey($this->gameId);
+            if (!$game) {
+                $this->response->error("Game not found");
+                return;
+            }
+            $rank = Rank::findOrCreateByUserGame($this->userId, $this->gameId);
+            $pages = ceil($rank->matches / $perPage);
+
+            $gamePlate = new GamePlate($game);
+            $info = 'Rank: ' . $rank->show();
+        } else {
+            $info = 'Total matches:' . $user->matchesCount;
+            $pages = ceil($user->matchesCount / $perPage);
+        }
+
+
 
         /*
         $rows = Match::statement()
@@ -58,8 +72,6 @@ class MatchHistory extends Command
 
         $commandState = self::createState($this->io);
 
-        $perPage = 12;
-        $pages = ceil($rank->matches / $perPage);
 
         if ($this->historyPage > $pages) {
             $this->historyPage = $pages;
@@ -86,12 +98,12 @@ class MatchHistory extends Command
         $history->title = 'Match History';
         $history->setPagination(new Pagination($commandState, self::options()->historyPage, $pages));
 
-        $gamePlate = new GamePlate($game);
-        $info = 'Rank: ' . $rank->show();
         $userPlate = new UserPlate($user, $info);
 
         $this->response->addContent('<div class="row">');
-        $this->response->addContent($gamePlate);
+        if (isset($gamePlate)) {
+            $this->response->addContent($gamePlate);
+        }
         $this->response->addContent($userPlate);
         $this->response->addContent('</div>');
 
