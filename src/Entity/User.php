@@ -18,6 +18,8 @@ class User extends Entity
     public $login;
     public $email;
     public $picturePath;
+    public $matchesCount;
+
     /**
      * @param \stdClass|static $columns
      */
@@ -28,6 +30,7 @@ class User extends Entity
             ->setStringLength(50)
             ->setUnique();
         $columns->googleId = Column::create(Column::STRING)->setUnique();
+        $columns->matchesCount = Column::create(Column::INTEGER + Column::NOT_NULL)->setDefault(0);
         $columns->login = Column::create(Column::STRING)->setUnique();
         $columns->name = Column::create(Column::STRING + Column::NOT_NULL)->setDefault('');
         $columns->email = Column::create(Column::STRING + Column::NOT_NULL)->setDefault('')->setUnique();

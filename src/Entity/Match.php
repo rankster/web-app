@@ -102,6 +102,14 @@ class Match extends Entity
         $game->matchesCount++;
         $game->save();
 
+        $user1 = User::findByPrimaryKey($this->user1Id);
+        $user1->matchesCount++;
+        $user1->save();
+
+        $user2 = User::findByPrimaryKey($this->user2Id);
+        $user2->matchesCount++;
+        $user2->save();
+
         $rank1->save();
         $rank2->save();
         $this->save();

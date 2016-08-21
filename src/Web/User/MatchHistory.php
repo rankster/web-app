@@ -27,18 +27,15 @@ class MatchHistory extends Command
      */
     static function setUpDefinition(Definition $definition, $options)
     {
-        $options->gameId = Command\Option::create()->setType()->setIsRequired();
+        $options->gameId = Command\Option::create()->setType();
         $options->userId = Command\Option::create()->setType()->setIsRequired();
         $options->historyPage = Command\Option::create()->setType();
     }
 
     public function performAction()
     {
-        $game = Game::findByPrimaryKey($this->gameId);
-        if (!$game) {
-            $this->response->error("Game not found");
-            return;
-        }
+
+        $perPage = 12;
 
         $user = UserEntity::findByPrimaryKey($this->userId);
         if (!$user) {
@@ -46,7 +43,24 @@ class MatchHistory extends Command
             return;
         }
 
-        $rank = Rank::findOrCreateByUserGame($this->userId, $this->gameId);
+
+        if ($this->gameId) {
+            $game = Game::findByPrimaryKey($this->gameId);
+            if (!$game) {
+                $this->response->error("Game not found");
+                return;
+            }
+            $rank = Rank::findOrCreateByUserGame($this->userId, $this->gameId);
+            $pages = ceil($rank->matches / $perPage);
+
+            $gamePlate = new GamePlate($game);
+            $info = 'Rank: ' . $rank->show();
+        } else {
+            $info = 'Total matches: ' . $user->matchesCount;
+            $pages = ceil($user->matchesCount / $perPage);
+        }
+
+
 
         /*
         $rows = Match::statement()
@@ -58,8 +72,6 @@ class MatchHistory extends Command
 
         $commandState = self::createState($this->io);
 
-        $perPage = 12;
-        $pages = ceil($rank->matches / $perPage);
 
         if ($this->historyPage > $pages) {
             $this->historyPage = $pages;
@@ -70,10 +82,15 @@ class MatchHistory extends Command
         }
 
         $matches = Match::statement()
-            ->where('? = ?', Match::columns()->gameId, $this->gameId)
             ->where('? IN (?, ?)', $this->userId, Match::columns()->user1Id, Match::columns()->user2Id)
             ->order('? DESC', Match::columns()->eventTime)
-            ->limit($perPage, $perPage * ($this->historyPage - 1))
+            ->limit($perPage, $perPage * ($this->historyPage - 1));
+
+        if ($this->gameId) {
+            $matches->where('? = ?', Match::columns()->gameId, $this->gameId);
+        }
+
+        $matches = $matches
             ->query()
             ->fetchAll();
 
@@ -81,12 +98,12 @@ class MatchHistory extends Command
         $history->title = 'Match History';
         $history->setPagination(new Pagination($commandState, self::options()->historyPage, $pages));
 
-        $gamePlate = new GamePlate($game);
-        $info = 'Rank: ' . $rank->show();
         $userPlate = new UserPlate($user, $info);
 
         $this->response->addContent('<div class="row">');
-        $this->response->addContent($gamePlate);
+        if (isset($gamePlate)) {
+            $this->response->addContent($gamePlate);
+        }
         $this->response->addContent($userPlate);
         $this->response->addContent('</div>');
 
