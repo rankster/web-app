@@ -9,6 +9,7 @@ use Yaoi\Database;
 use Yaoi\Database\Definition\Column;
 use Yaoi\Database\Definition\Index;
 use Yaoi\Database\Entity;
+use Yaoi\Migration\ClosureMigration;
 
 class Rank extends Entity
 {
@@ -17,6 +18,7 @@ class Rank extends Entity
     public $id;
     public $gameId;
     public $userId;
+    public $groupId;
     public $rank;
     public $lastUpdateTime;
     public $matches = 0;
@@ -30,6 +32,7 @@ class Rank extends Entity
         $columns->id = Column::AUTO_ID;
         $columns->gameId = Game::columns()->id;
         $columns->userId = User::columns()->id;
+        $columns->groupId = Group::columns()->id;
         $columns->rank = Column::FLOAT + Column::SIZE_8B;
         $columns->lastUpdateTime = Column::INTEGER + Column::USE_PHP_DATETIME;
         $columns->matches = Column::INTEGER;
@@ -42,7 +45,9 @@ class Rank extends Entity
      */
     static function setUpTable(\Yaoi\Database\Definition\Table $table, $columns)
     {
-        $table->setSchemaName('rank')->addIndex(Index::TYPE_UNIQUE, $columns->gameId, $columns->userId);
+        $table->setSchemaName('rank')
+            ->addIndex(Index::TYPE_UNIQUE, $columns->gameId, $columns->userId, $columns->groupId);
+        Column::cast($columns->groupId)->setDefault(0);
     }
 
     public function draw(Rank $opponent)
@@ -56,18 +61,17 @@ class Rank extends Entity
     }
 
 
-    public static function findOrCreateByUserGame($userId, $gameId)
+    public static function findOrCreateByUserGame($userId, $gameId, $groupId)
     {
         $rank = new Rank();
         $rank->userId = $userId;
         $rank->gameId = $gameId;
+        $rank->groupId = $groupId;
         if ($saved = $rank->findSaved()) {
             return $saved;
         } else {
             $rank->rank = self::DEFAULT_RANK;
-            $game = Game::findByPrimaryKey($rank->gameId);
-            $game->playersCount++;
-            $game->save();
+            GameGroup::incrementPlayersCount($rank->gameId, $rank->groupId);
         }
 
         $rank->save();
@@ -138,8 +142,8 @@ class Rank extends Entity
         $db = Database::getInstance();
         $db->query('set @i=0');
         $db->query(
-<<<SQL
-INSERT INTO :table (:id, :place, :game_id, :user_id)
+            <<<SQL
+            INSERT INTO :table (:id, :place, :game_id, :user_id)
   (SELECT :id, @i := @i + 1, :game_id, :user_id FROM :table WHERE :game_id = :game_id_val ORDER BY :rank DESC) 
 ON DUPLICATE KEY UPDATE :place = VALUES(:place)
 SQL
@@ -155,6 +159,36 @@ SQL
         )->execute();
         return $this;
     }
+
+
+    public static function mig1ration()
+    {
+        $migration = parent::migration();
+        return new ClosureMigration(
+            'noid',
+            function () use ($migration) {
+                Rank::statement()
+                    ->update('? = 0', Rank::columns()->groupId)
+                    ->where('? IS NULL')
+                    ->query()
+                    ->execute();
+                $migration->apply();
+                $globalGroup = new Group();
+                $globalGroup->name = 'global';
+                $globalGroup->title = 'Global';
+                $globalGroup->findOrSave();
+                Group::statement()->update()
+                    ->set('? = 0', Group::columns()->id)
+                    ->where('? = ?', Group::columns()->name, 'global')
+                    ->query()->execute();
+            },
+            function () use ($migration) {
+                $migration->rollback();
+            },
+            true
+        );
+    }
+
 }
 
 Rank::setRanker(new Alcalyn());

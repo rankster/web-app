@@ -10,9 +10,12 @@ use Yaoi\View\Hardcoded;
 
 class MatchDetails extends Hardcoded
 {
-    public function __construct(Match $match)
+    private $groupId;
+
+    public function __construct(Match $match, $groupId)
     {
         $this->match = $match;
+        $this->groupId = $groupId;
     }
 
     public $match;
@@ -23,8 +26,8 @@ class MatchDetails extends Hardcoded
         $user1 = User::findByPrimaryKey($match->user1Id);
         $user2 = User::findByPrimaryKey($match->user2Id);
 
-        $rank1 = Rank::findOrCreateByUserGame($user1->id, $match->gameId);
-        $rank2 = Rank::findOrCreateByUserGame($user2->id, $match->gameId);
+        $rank1 = Rank::findOrCreateByUserGame($user1->id, $match->gameId, $this->groupId);
+        $rank2 = Rank::findOrCreateByUserGame($user2->id, $match->gameId, $this->groupId);
 
         $gamePlate = (string)GamePlate::create(Game::findByPrimaryKey($match->gameId));
         $user1Info = $rank1->show() . ' (' . ($match->user1Delta > 0 ? '+' : '') . round($match->user1Delta) . ')';

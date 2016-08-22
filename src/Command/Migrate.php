@@ -3,9 +3,11 @@
 namespace Rankster\Command;
 
 use Rankster\Entity\AdminUser;
+use Rankster\Entity\Group;
 use Rankster\Entity\MatchRequest;
 use Rankster\Entity\RankHistory;
 use Rankster\Entity\Session;
+use Rankster\Entity\UserGroup;
 use Rankster\Entity\WhiteList;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
@@ -15,6 +17,7 @@ use Rankster\Entity\Game;
 use Rankster\Entity\User;
 use Rankster\Entity\Match;
 use Rankster\Entity\Rank;
+use Yaoi\Migration\Migration;
 
 class Migrate extends Command
 {
@@ -31,29 +34,36 @@ class Migrate extends Command
 
     public function performAction()
     {
-        /** @var Table[] $tables */
-        $tables = array(
+        /** @var Migration[] $migrations */
+        $migrations = array(
             // put your tables here
-            Session::table(),
-            User::table(),
-            Game::table(),
-            Match::table(),
-            Rank::table(),
-            RankHistory::table(),
-            AdminUser::table(),
-            WhiteList::table(),
-            MatchRequest::table(),
+            Session::migration(),
+            User::migration(),
+            Group::migration(),
+            UserGroup::migration(),
+            Game::migration(),
+            Match::migration(),
+            Rank::migration(),
+            RankHistory::migration(),
+            AdminUser::migration(),
+            WhiteList::migration(),
+            MatchRequest::migration(),
         );
 
         $log = new Log('colored-stdout');
         if ($this->wipe) {
-            foreach ($tables as $table) {
-                $table->migration()->setLog($log)->setDryRun($this->dryRun)->rollback();
+            foreach ($migrations as $migration) {
+                $migration->setLog($log)->setDryRun($this->dryRun)->rollback();
             }
         }
-        foreach ($tables as $table) {
-            $table->migration()->setLog($log)->setDryRun($this->dryRun)->apply();
+        foreach ($migrations as $migration) {
+            $migration->setLog($log)->setDryRun($this->dryRun)->apply();
         }
+
+        $globalGroup = new Group();
+        $globalGroup->id = 0;
+        $globalGroup->title = 'Global';
+        $globalGroup->findOrSave();
 
         // Fixtures Generator
         $game = new Game();

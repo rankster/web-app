@@ -14,7 +14,9 @@ class Game extends Entity
     public $id;
     public $name;
     public $picturePath;
+    /** @deprecated */
     public $playersCount;
+    /** @deprecated */
     public $matchesCount;
 
     /**
@@ -46,18 +48,6 @@ class Game extends Entity
     public static function patchToUrl($path)
     {
         return '//' . $_SERVER['HTTP_HOST'] . '/' . self::IMAGE_FOLDER . $path;
-    }
-
-    /**
-     * @return mixed
-     * @deprecated
-     */
-    public function countPlayers()
-    {
-        $r = Rank::statement()->select('COUNT(1) AS c')->where("? = ?", Rank::columns()->gameId, $this->id)
-            ->bindResultClass()
-            ->query()->fetchRow();
-        return $r['c'];
     }
 
 
