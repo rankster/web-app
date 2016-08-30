@@ -50,10 +50,10 @@ class Group extends Entity
                 $globalGroup->name = 'global';
                 $globalGroup->title = 'Global';
                 $globalGroup->findOrSave();
-                Group::statement()->update()
-                    ->set('? = 0', Group::columns()->id)
-                    ->where('? = ?', Group::columns()->name, 'global')
-                    ->query()->execute();
+                if (0 !== $globalGroup->id) {
+                    $globalGroup->id = 0;
+                    $globalGroup->save();
+                }
             },
             function () use ($migration) {
                 $migration->rollback();
