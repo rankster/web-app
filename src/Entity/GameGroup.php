@@ -45,4 +45,16 @@ class GameGroup extends Entity
             ->execute();
     }
 
+    public static function incrementMatchesCount($gameId, $groupId)
+    {
+        $cols = static::columns();
+        Database::getInstance()
+            ->query("INSERT INTO ? (?, ?, ?) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE ? = VALUES(?)",
+                static::table(), $cols->gameId . $cols->groupId, $cols->matchesCount,
+                $gameId, $groupId,
+                $cols->matchesCount, $cols->matchesCount
+            )
+            ->execute();
+    }
+
 }

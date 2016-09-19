@@ -32,15 +32,18 @@ class UserGroup extends Entity
             ->setPrimaryKey($columns->userId, $columns->groupId);
     }
 
-    public static function getCommonGroups($user1Id, $user2Id)
+    public static function getCommonGroupIds($user1Id, $user2Id)
     {
         $t2 = self::table('t2');
         $c1 = self::columns();
         $c2 = self::columns($t2);
-        static::statement()
+        $result = static::statement()
+            ->select('?', $c1->groupId)
             ->innerJoin('? ON ? = ? AND ? = ?', $t2, $c1->groupId, $c2->groupId, $c2->userId, $user2Id)
             ->where('? = ?', $c1->userId, $user1Id)
             ->query()
-            ->fetchAll();
+            ->fetchAll($c1->groupId);
+
+        return $result;
     }
 }

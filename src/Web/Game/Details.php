@@ -20,6 +20,8 @@ class Details extends Command
     public $gameId;
     /** @var int|Command\Option */
     public $rankPage = 0;
+
+    public $groupId = 0;
     /** @var int|Command\Option */
     public $historyPage = 0;
 
@@ -31,6 +33,7 @@ class Details extends Command
     {
         $options->gameId = Command\Option::create()->setType()->setIsRequired()->setDescription('Game ID');
         $options->rankPage = Command\Option::create()->setType()->setDescription('Rank page number');
+        $options->groupId = Command\Option::create()->setType()->setDescription('Group ID, 0 for global');
         $options->historyPage = Command\Option::create()->setType()->setDescription('History page number');
     }
 

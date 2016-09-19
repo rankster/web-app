@@ -60,11 +60,6 @@ class Migrate extends Command
             $migration->setLog($log)->setDryRun($this->dryRun)->apply();
         }
 
-        $globalGroup = new Group();
-        $globalGroup->id = 0;
-        $globalGroup->title = 'Global';
-        $globalGroup->findOrSave();
-
         // Fixtures Generator
         $game = new Game();
         $game->name = 'Ping Pong';

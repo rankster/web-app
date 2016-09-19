@@ -76,8 +76,20 @@ class Match extends Entity
 
     public function applyRanks()
     {
-        $rank1 = Rank::findOrCreateByUserGame($this->user1Id, $this->gameId);
-        $rank2 = Rank::findOrCreateByUserGame($this->user2Id, $this->gameId);
+        $groupIds = UserGroup::getCommonGroupIds($this->user1Id, $this->user2Id);
+        $this->applyRanksByGroup(0);
+        foreach ($groupIds as $groupId) {
+            if ($groupId) {
+                $this->applyRanksByGroup($groupId);
+            }
+        }
+        return $this;
+    }
+
+    public function applyRanksByGroup($groupId = 0)
+    {
+        $rank1 = Rank::findOrCreateByUserGame($this->user1Id, $this->gameId, $groupId);
+        $rank2 = Rank::findOrCreateByUserGame($this->user2Id, $this->gameId, $groupId);
 
         $r1 = $rank1->rank;
         $r2 = $rank2->rank;
@@ -99,9 +111,7 @@ class Match extends Entity
         $rank1->matches++;
         $rank2->matches++;
 
-        $game = Game::findByPrimaryKey($this->gameId);
-        $game->matchesCount++;
-        $game->save();
+        GameGroup::incrementMatchesCount($this->gameId, $groupId);
 
         $user1 = User::findByPrimaryKey($this->user1Id);
         $user1->matchesCount++;

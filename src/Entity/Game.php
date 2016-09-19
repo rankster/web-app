@@ -14,9 +14,9 @@ class Game extends Entity
     public $id;
     public $name;
     public $picturePath;
-    /** @deprecated */
+    /** @deprecated moved to groups */
     public $playersCount;
-    /** @deprecated */
+    /** @deprecated moved to groups */
     public $matchesCount;
 
     /**

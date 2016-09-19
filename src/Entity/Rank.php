@@ -171,19 +171,12 @@ SQL
             'noid',
             function () use ($migration) {
                 Rank::statement()
-                    ->update('? = 0', Rank::columns()->groupId)
-                    ->where('? IS NULL')
+                    ->update()
+                    ->set('? = 0', Rank::columns()->groupId)
+                    ->where('? IS NULL', Rank::columns()->groupId)
                     ->query()
                     ->execute();
                 $migration->apply();
-                $globalGroup = new Group();
-                $globalGroup->name = 'global';
-                $globalGroup->title = 'Global';
-                $globalGroup->findOrSave();
-                Group::statement()->update()
-                    ->set('? = 0', Group::columns()->id)
-                    ->where('? = ?', Group::columns()->name, 'global')
-                    ->query()->execute();
             },
             function () use ($migration) {
                 $migration->rollback();
