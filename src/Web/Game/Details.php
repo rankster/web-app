@@ -92,7 +92,7 @@ class Details extends Command
             ->query()
             ->fetchAll();
 
-        $history = new History($matches);
+        $history = new History($matches, $this->io);
         $history->title = 'Match History';
         $history->setPagination(new Pagination($commandState, self::options()->historyPage, $pages));
         $this->response->addContent($history);
