@@ -19,6 +19,7 @@ class User extends Entity
     public $email;
     public $picturePath;
     public $matchesCount;
+    public $defaultGroupId;
 
     /**
      * @param \stdClass|static $columns
@@ -26,6 +27,7 @@ class User extends Entity
     static function setUpColumns($columns)
     {
         $columns->id = Column::AUTO_ID;
+        $columns->defaultGroupId = Group::columns()->id;
         $columns->facebookId = Column::create(Column::STRING)
             ->setStringLength(50)
             ->setUnique();
