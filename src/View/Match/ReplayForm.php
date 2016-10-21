@@ -31,6 +31,9 @@ class ReplayForm extends Hardcoded
                     </div>
                     <div class="form-group" style="text-align:center">
                         <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-lg">Matches:
+                                <input type="text" value="1" name="count" style="width: 27px; text-align: center;" />
+                            </label>
                             <label class="btn btn-lg btn-success active">
                                 <input type="radio" name="result" id="option1" autocomplete="off" value="win" checked>WIN
                             </label>
