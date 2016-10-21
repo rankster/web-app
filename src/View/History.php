@@ -6,6 +6,8 @@ use Rankster\Entity\Game;
 use Rankster\Entity\Match;
 use Rankster\Entity\User;
 use Rankster\Service\AuthSession;
+use Rankster\Web;
+use Yaoi\Command\Io;
 use Yaoi\View\Hardcoded;
 
 class History extends Hardcoded
@@ -28,10 +30,20 @@ class History extends Hardcoded
      * History constructor.
      * @param Match[] $rows
      */
-    public function __construct($rows)
+    public function __construct($rows, Io $io)
     {
         $this->rows = $rows;
+        $this->matchDetails = Web\Match\Details::createState($io);
+        $this->gameDetails = Web\Game\Details::createState($io);
+        $this->userDetails = Web\User\Details::createState($io);
     }
+
+    /** @var \Yaoi\Command\State|Web\Match\Details  */
+    private $matchDetails;
+    /** @var \Yaoi\Command\State|Web\Game\Details */
+    private $gameDetails;
+    /** @var \Yaoi\Command\State|Web\User\Details */
+    private $userDetails;
 
     public function renderItem(Match $match)
     {
@@ -45,12 +57,20 @@ class History extends Hardcoded
         $d1 = $match->user1Delta > 0 ? '+' . $match->user1Delta : $match->user1Delta;
         $d2 = $match->user2Delta > 0 ? '+' . $match->user2Delta : $match->user2Delta;
 
+        $this->matchDetails->matchId = $match->id;
+        $this->gameDetails->gameId = $game->id;
+        $this->userDetails->userId = $user1->id;
+        $user1Details = $this->userDetails->makeAnchor();
+
+        $this->userDetails->userId = $user2->id;
+        $user2Details = $this->userDetails->makeAnchor();
+
         $result = <<<HTML
     <tr>
-        <td scope="row" style="width:90px">{$match->eventTime->format('Y-m-d H:i')}</td>
-        <td><a href="/game/details/?game_id={$game->id}"><img class="i20" src="{$game->getFullUrl()}" title="{$game->name}" /></a></td>
-        <td{$w1}><img class="i20" src="{$user1->getFullUrl()}" /> <a href="/user/details/?user_id={$user1->id}">{$user1->name}</a><br /><span class="rank">{$match->user1NewRank}({$d1})</span></td>
-        <td{$w2}><img class="i20" src="{$user2->getFullUrl()}" /> <a href="/user/details/?user_id={$user2->id}">{$user2->name}</a><br /><span class="rank">{$match->user2NewRank}({$d2})</span></td>
+        <td scope="row" style="width:90px"><a href="{$this->matchDetails->makeAnchor()}">{$match->eventTime->format('Y-m-d H:i')}</a></td>
+        <td><a href="{$this->gameDetails->makeAnchor()}"><img class="i20" src="{$game->getFullUrl()}" title="{$game->name}" /></a></td>
+        <td{$w1}><img class="i20" src="{$user1->getFullUrl()}" /> <a href="{$user1Details}">{$user1->name}</a><br /><span class="rank">{$match->user1NewRank}({$d1})</span></td>
+        <td{$w2}><img class="i20" src="{$user2->getFullUrl()}" /> <a href="{$user2Details}">{$user2->name}</a><br /><span class="rank">{$match->user2NewRank}({$d2})</span></td>
     </tr>
 HTML;
         return $result;
