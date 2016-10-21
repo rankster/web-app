@@ -44,6 +44,7 @@ class HeadScripts extends Hardcoded
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery.sparkline.min.js"></script>
+    <script src="/js/jstz.min.js"></script>
     
     
     <script src="/js/rankster.js"></script>

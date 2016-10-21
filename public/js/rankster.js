@@ -152,6 +152,12 @@
             users = u;
             games = g;
         }
+    };
+
+    if (document.cookie.indexOf("tz") >= 0) {
+    }
+    else {
+        document.cookie = "tz=" + jstz.determine();
     }
 })();
 
