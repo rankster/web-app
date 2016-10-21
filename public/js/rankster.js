@@ -157,7 +157,7 @@
     if (document.cookie.indexOf("tz") >= 0) {
     }
     else {
-        document.cookie = "tz=" + jstz.determine();
+        document.cookie = "tz=" + jstz.determine().name();
     }
 })();
 
