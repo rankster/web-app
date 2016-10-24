@@ -63,8 +63,83 @@
         $("#game-req").modal();
     }
 
+    function decorateSpins() {
+        $('[data-type="spin"]').each(function (index, element) {
+            var parentElement = $(element);
+            $('.btn-number', parentElement).click(function (e) {
+                e.preventDefault();
+
+                var button = e.currentTarget || e.delegateTarget;
+                var type = $(button).attr('data-type');
+                var input = $('input[data-type="spin-input"]', this);
+                var minVal = parseInt(input.attr('min'));
+                var maxVal = parseInt(input.attr('max'));
+                var currentVal = parseInt(input.val());
+                if (isNaN(currentVal)) {
+                    input.val(1);
+                    return;
+                }
+
+                if (type == 'minus') {
+                    if (currentVal > minVal) {
+                        input.val(currentVal - 1).change();
+                    }
+                    if (parseInt(input.val()) <= minVal) {
+                        $(button).attr('disabled', true);
+                    }
+                } else if (type == 'plus') {
+                    if (currentVal < maxVal) {
+                        input.val(currentVal + 1).change();
+                    }
+
+                    if (parseInt(input.val()) >= maxVal) {
+                        $(button).attr('disabled', true);
+                    }
+                }
+            }.bind(parentElement));
+
+            $('input[data-type="spin-input"]', parentElement).focusin(function(){
+                $(this).data('oldValue', $(this).val());
+            });
+            $('input[data-type="spin-input"]', parentElement).change(function() {
+
+                var input = $('input[data-type="spin-input"]', this);
+                var minValue =  parseInt(input.attr('min'));
+                var maxValue =  parseInt(input.attr('max'));
+                var valueCurrent = parseInt(input.val());
+
+                if (valueCurrent >= minValue) {
+                    $(".btn-number[data-type='minus']", this).removeAttr('disabled');
+                } else {
+                    input.val(input.data('oldValue'));
+                }
+                if(valueCurrent <= maxValue) {
+                    $(".btn-number[data-type='plus']", this).removeAttr('disabled');
+                } else {
+                    input.val(input.data('oldValue'));
+                }
+            }.bind(parentElement));
+
+            $('input[data-type="spin-input"]', parentElement).keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+        });
+    }
 
     function eventHandler () {
+        decorateSpins();
         $('#game').select2({
             ajax: {
                 url: '/v1/games',
@@ -160,5 +235,3 @@
         document.cookie = "tz=" + jstz.determine().name();
     }
 })();
-
-
