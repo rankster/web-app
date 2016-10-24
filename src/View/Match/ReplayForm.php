@@ -33,18 +33,19 @@ class ReplayForm extends Hardcoded
                         <div class="btn-group" data-toggle="buttons">
                             <div class="btn-group" data-toggle="buttons">
                             Matches
-                            <div class="input-group matches-count" data-type="spin">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-number" data-type="minus">
-                                        <span class="glyphicon glyphicon-minus"></span>
-                                    </button>
-                                </span>
-                                <input type="text" name="count" data-type="spin-input" class="form-control input-number" value="1" min="1" max="100">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-number" data-type="plus">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                </span>
+                                <div class="input-group matches-count" data-type="spin">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-number" data-type="minus">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </button>
+                                    </span>
+                                    <input type="text" name="count" data-type="spin-input" class="form-control input-number" value="1" min="1" max="100">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-number" data-type="plus">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
                             <label class="btn btn-lg btn-success active">
                                 <input type="radio" name="result" id="option1" autocomplete="off" value="win" checked>WIN
