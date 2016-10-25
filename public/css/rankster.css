@@ -40,3 +40,9 @@
     width: 80px;
     margin: 1px;
 }
+
+.matches-count {
+    width: 150px;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
