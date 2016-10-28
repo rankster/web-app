@@ -61,7 +61,7 @@ class Rank extends Entity
     }
 
 
-    public static function findOrCreateByUserGame($userId, $gameId, $groupId)
+    public static function findOrCreateByUserGame($userId, $gameId, $groupId = 0)
     {
         $rank = new Rank();
         $rank->userId = $userId;
