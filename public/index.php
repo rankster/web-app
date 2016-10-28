@@ -12,4 +12,7 @@ define('DOC_ROOT', __DIR__);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../env/conf.php';
+if (isset($_COOKIE['tz'])) {
+    date_default_timezone_set($_COOKIE['tz']);
+}
 Runner::create()->run(Index::definition());

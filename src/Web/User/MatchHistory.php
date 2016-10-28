@@ -2,7 +2,6 @@
 
 namespace Rankster\Web\User;
 
-
 use Rankster\Entity\Game;
 use Rankster\Entity\Match;
 use Rankster\Entity\Rank;
@@ -83,7 +82,7 @@ class MatchHistory extends Command
 
         $matches = Match::statement()
             ->where('? IN (?, ?)', $this->userId, Match::columns()->user1Id, Match::columns()->user2Id)
-            ->order('? DESC', Match::columns()->eventTime)
+            ->order('? DESC', Match::columns()->id)
             ->limit($perPage, $perPage * ($this->historyPage - 1));
 
         if ($this->gameId) {
@@ -94,7 +93,7 @@ class MatchHistory extends Command
             ->query()
             ->fetchAll();
 
-        $history = new History($matches);
+        $history = new History($matches, $this->io);
         $history->title = 'Match History';
         $history->setPagination(new Pagination($commandState, self::options()->historyPage, $pages));
 
