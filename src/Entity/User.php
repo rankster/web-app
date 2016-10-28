@@ -19,7 +19,7 @@ class User extends Entity
     public $email;
     public $picturePath;
     public $matchesCount;
-    //public $defaultGroupId;
+    public $defaultGroupId;
 
     /**
      * @param \stdClass|static $columns
