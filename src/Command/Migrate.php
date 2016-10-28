@@ -3,6 +3,7 @@
 namespace Rankster\Command;
 
 use Rankster\Entity\AdminUser;
+use Rankster\Entity\GameGroup;
 use Rankster\Entity\Group;
 use Rankster\Entity\MatchRequest;
 use Rankster\Entity\RankHistory;
@@ -42,6 +43,7 @@ class Migrate extends Command
             Group::migration(),
             UserGroup::migration(),
             Game::migration(),
+            GameGroup::migration(),
             Match::migration(),
             Rank::migration(),
             RankHistory::migration(),
