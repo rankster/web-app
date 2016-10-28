@@ -5,6 +5,7 @@ namespace Rankster;
 use Rankster\Service\Facebook;
 use Rankster\Service\Google;
 use Yaoi\Database;
+use Yaoi\Http\Auth;
 use Yaoi\Log;
 
 if (isset($_COOKIE['tz'])) {
@@ -36,3 +37,12 @@ Google::register(function () {
     $settings->redirectUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/v1/oauth/google';
     return $settings;
 });
+
+Auth::register(function () {
+    $settings = new Auth\Settings();
+    $settings->users = array(
+        'user' => 'password-hash',
+    );
+    $settings->title = 'Admin restricted area';
+    return $settings;
+}, 'admin');

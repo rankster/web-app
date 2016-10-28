@@ -1,8 +1,8 @@
 <?php
 namespace Rankster;
 
-use Rankster\Api\V1\RecalculateRank;
-use Rankster\Api\V1\ReloadFbAvatars;
+use Rankster\Api\Admin\RecalculateRank;
+use Rankster\Api\Admin\ReloadFbAvatars;
 use Rankster\Command\Migrate;
 use Yaoi\Command\Application;
 use Yaoi\Command\Definition;

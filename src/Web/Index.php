@@ -2,6 +2,7 @@
 
 namespace Rankster\Web;
 
+use Rankster\Api\Admin;
 use Rankster\Api\V1;
 use Rankster\Command\AuthRequired;
 use Rankster\Web\Forms\SubmitScore;
@@ -37,10 +38,10 @@ class Index extends Command
             ->addToEnum(Game::definition())
             ->addToEnum(Match::definition())
             ->addToEnum(User::definition())
-            ->addToEnum(V1::definition(), 'v1')
-            ->addToEnum(V1\Update::definition(), 'git-update')
             ->addToEnum(MatchRequest::definition(), 'match-request')
-        ;
+            ->addToEnum(V1::definition(), 'v1')
+            ->addToEnum(Admin::definition(), 'admin')
+            ->addToEnum(V1\Update::definition(), 'git-update');
 
         $definition->description = 'Ranking service';
     }

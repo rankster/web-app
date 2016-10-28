@@ -1,6 +1,6 @@
 <?php
 
-namespace Rankster\Api\V1;
+namespace Rankster\Api\Admin;
 
 
 use Rankster\Entity\Game;

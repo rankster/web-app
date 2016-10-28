@@ -1,19 +1,22 @@
 <?php
 
-namespace Rankster\Api\V1;
+namespace Rankster\Api\Admin;
 
 
 use Rankster\Entity\Game;
-use Rankster\Entity\RankHistory;
 use Rankster\Manager\GameManager;
 use Yaoi\Command;
 use Yaoi\Command\Definition;
 use Yaoi\Database;
 
-class RecalculateRank extends Command
+class WipeRank extends Command
 {
-    public $gameId;
+    public $gameId = 0;
 
+    /**
+     * @param Definition $definition
+     * @param \stdClass|static $options
+     */
     static function setUpDefinition(Definition $definition, $options)
     {
         $options->gameId = Command\Option::create()->setType();
@@ -27,7 +30,7 @@ class RecalculateRank extends Command
             $gameIds = Game::statement()->bindResultClass()->query()->fetchAll(null, 'id');
         }
 
-        GameManager::rebuildRanks($gameIds);
+        GameManager::wipeMatches($gameIds);
 
         return "done";
     }
