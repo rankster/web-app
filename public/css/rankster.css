@@ -18,7 +18,7 @@
     height: 20px;
 }
 
-.table.rank-table > tbody > tr > td {
+.table.rank-table > tbody > tr > td, .table.rank-table > tbody > tr > th {
     vertical-align: middle;
 }
 
