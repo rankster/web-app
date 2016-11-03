@@ -38,7 +38,7 @@ class GameGroup extends Entity
         $cols = static::columns();
         Database::getInstance()
             ->query("INSERT INTO ? (?, ?, ?) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE ? = VALUES(?)",
-                static::table(), $cols->gameId . $cols->groupId, $cols->playersCount,
+                static::table(), $cols->gameId, $cols->groupId, $cols->playersCount,
                 $gameId, $groupId,
                 $cols->playersCount, $cols->playersCount
             )
