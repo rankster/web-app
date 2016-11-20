@@ -1,0 +1,22 @@
+web:
+    image: nginx:latest
+    ports:
+        - "8080:80"
+    volumes:
+        - ./code:/code
+        - ./site.conf:/etc/nginx/conf.d/site.conf
+    links:
+        - php
+php:
+    image: php:7-fpm
+    volumes:
+        - ./code:/code
+    links:
+        - mysql
+mysql:
+    image: mariadb:latest
+    environment:
+        - MYSQL_ROOT_PASSWORD=password
+        - MYSQL_DATABASE=rankster
+    volumes:
+        - ../database:/var/lib/mysql

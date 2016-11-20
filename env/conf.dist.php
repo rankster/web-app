@@ -12,7 +12,7 @@ if (isset($_COOKIE['tz'])) {
 }
 
 Database::register(function () {
-    $config = new Database\Settings('mysqli://root@localhost/rankster2');
+    $config = new Database\Settings('mysqli://root:password@localhost/rankster');
     if (isset($_COOKIE['tz'])) {
         $config->timezone = $_COOKIE['tz'];
     }
