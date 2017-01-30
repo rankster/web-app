@@ -3,14 +3,16 @@ web:
     ports:
         - "8080:80"
     volumes:
-        - ./code:/code
-        - ./site.conf:/etc/nginx/conf.d/site.conf
+        - .:/code
+        - ./env/site.conf:/etc/nginx/conf.d/site.conf
+        - ../logs:/var/log/rankster
     links:
         - php
 php:
-    image: php:7-fpm
+    build: .
+    dockerfile: docker/Dockerfile-php
     volumes:
-        - ./code:/code
+        - .:/code
     links:
         - mysql
 mysql:
@@ -20,3 +22,11 @@ mysql:
         - MYSQL_DATABASE=rankster
     volumes:
         - ../database:/var/lib/mysql
+cli:
+    build: .
+    dockerfile: docker/Dockerfile-php-cli
+    volumes:
+        - .:/code
+    links:
+        - mysql
+    command: /code/bin/tool migrate
