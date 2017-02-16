@@ -65,47 +65,52 @@ class Migrate extends Command
         // Fixtures Generator
         $game = new Game();
         $game->name = 'Ping Pong';
-        $game->picturePath = '/../images/pingpong.png';
+        $game->picturePath = '/images/pingpong.png';
         $game->findOrSave();
 
         $game = new Game();
         $game->name = 'Battroborg Thumb War';
-        $game->picturePath = '/../images/robots256x256.jpg';
+        $game->picturePath = '/images/robots256x256.jpg';
         $game->findOrSave();
 
         $game = new Game();
         $game->name = 'Soccer Table';
-        $game->picturePath = '/../images/soccertable256x256';
+        $game->picturePath = '/images/soccertable256x256';
         $game->findOrSave();
 
         $game = new Game();
         $game->name = 'Co Tuong';
-        $game->picturePath = '/../images/vietchess256x256';
+        $game->picturePath = '/images/vietchess256x256';
         $game->findOrSave();
 
         $game = new Game();
         $game->name = 'Paper Rock Cissor';
-        $game->picturePath = '/../images/ShiFuMi256x256.png';
+        $game->picturePath = '/images/ShiFuMi256x256.png';
         $game->findOrSave();
 
         $game = new Game();
         $game->name = 'Street Fighter V';
-        $game->picturePath = '/../images/HelloSfv256x256.png';
+        $game->picturePath = '/images/HelloSfv256x256.png';
         $game->findOrSave();
 
         $game = new Game();
         $game->name = 'Fifa 16';
-        $game->picturePath = '/../images/fifa16.png';
+        $game->picturePath = '/images/fifa16.png';
         $game->findOrSave();
 
         $game = new Game();
         $game->name = 'Mortal Kombat X';
-        $game->picturePath = '/../images/mkx.jpg';
+        $game->picturePath = '/images/mkx.jpg';
         $game->findOrSave();
 
         $game = new Game();
         $game->name = 'PES 2016';
-        $game->picturePath = '/../images/pes2016.png';
+        $game->picturePath = '/images/pes2016.png';
+        $game->findOrSave();
+
+        $game = new Game();
+        $game->name = 'Archery';
+        $game->picturePath = '/images/256z256bb.jpg';
         $game->findOrSave();
 
 
